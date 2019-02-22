@@ -1,21 +1,22 @@
 <?php
 
-namespace App;
+namespace App\Model\Backend;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
-class User extends Authenticatable
+class UserAdmin extends Authenticatable
 {
     use Notifiable;
-
+    protected $table = 'admin_users';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-       'email', 'password',
+        'email', 'password',
     ];
 
     /**
@@ -26,4 +27,5 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
 }
