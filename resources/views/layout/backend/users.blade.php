@@ -4,6 +4,7 @@
     <div class="header-page">
         <div class="add-user">
            <a href="{{url('/adduser/')}}"> <span>Add User</span></a>
+            <button type="submit"  class="donate_now btn btn-default-border-blk generalDonation" data-toggle="modal"  data-backdrop="static" data-keyboard="false" data-target="#myModalHorizontal">Add User</button>
         </div>
     </div>
 
@@ -37,14 +38,17 @@
                 <td> {{$user->phone}}</td>
                 <td> {{$user->created_at}}</td>
                 <td> {{$user->updated_at}}</td>
-                <td><a>Edit</a></td>
+                <td><a class="show-btn" href="#" data-id="{{$user->id}}">Edit</a></td>
                 <td><a>Delete</a></td>
             </tr>
         @endforeach
         @endif
         </table>
     </div>
+    @extends('layout.backend.adduser')
 @endsection
+
+
 <style>
     .header-page .add-user{
         padding: 16px 32px;
@@ -83,5 +87,4 @@
     }
 
 </style>
-
 
