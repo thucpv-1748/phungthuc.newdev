@@ -14,7 +14,7 @@ class AddColumnUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('phone')->nullable();
+            $table->string('phone')->nullable();
             $table->integer('level');
             $table->date('birth_of_date')->nullable();
         });

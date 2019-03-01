@@ -245,3 +245,95 @@ p {
   -webkit-animation-name: swing;
   animation-name: swing;
 }
+
+ul.nav.pull-right.top-menu>li>a{
+  position: relative;
+  display: block;
+  padding: 0px 15px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  background: white;
+  margin-right: 0;
+  color: #666666;
+  font-size: 16px;
+  border: 2px solid #000000 !important;
+  height: 50px;
+}
+.header {
+  background: #ececec;
+}
+.header #menu-action .fa-bars:before{
+  color: black;
+}
+.header .logo{
+  width: 200px;
+  float: left;
+  color:black;
+}
+
+ul.nav.pull-right.top-menu>li>a:hover{
+  background:black ;
+  color: white;
+}
+.header .top-nav{
+  max-width: 300px;
+  float:right;
+}
+.header #menu-action.active span{
+  color:black;
+}
+.profile-admin{
+  width: 70%;
+  margin: 0 auto;
+}
+.header .top-nav .dropdown .dropdown-menu{
+  right: 0;
+  left: unset;
+}
+
+.form-category .header-page .add-category,.form-store .header-page .add-store{
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  border: 2px solid #555555;
+  float: right;
+  margin-right: 50px;
+}
+.form-category .header-page .add-category a,.form-store .header-page .add-store a{
+  color: black;
+  text-decoration: unset;
+}
+.form-category  .header-page .add-category:hover,.form-store  .header-page .add-store:hover{
+  background-color: #555555;
+  color: white;
+}
+.form-category  .header-page .add-category:hover a,.form-store .header-page .add-store:hover a{
+  color: white;
+}
+.form-category .frm-category,.form-store .frm-store,.frm-room{
+  max-width: 300px;
+  margin: 0 auto;
+}
+.frm-room .form-group label{
+  float: left;
+  width: 100%;
+}
+.frm-room .form-group  .form-control{
+  max-width: 200px;
+  float: left;
+}
+.frm-room .form-group{
+  overflow: hidden;
+}
+.frm-room .form-group .remove_field{
+  padding-left: 5px;
+  line-height: 35px;
+}

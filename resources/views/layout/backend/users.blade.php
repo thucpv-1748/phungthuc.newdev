@@ -1,10 +1,20 @@
 @extends('layout.backend.admin')
 @section('title','User')
 @section('content')
+
+    @if(session()->has('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+    @endif
+    @if(session()->has('error'))
+        <div class="alert alert-danger">
+            {{ session()->get('error') }}
+        </div>
+    @endif
     <div class="header-page">
-        <div class="add-user">
-           <a href="{{url('/adduser/')}}"> <span>Add User</span></a>
-            <button type="submit"  class="donate_now btn btn-default-border-blk generalDonation" data-toggle="modal"  data-backdrop="static" data-keyboard="false" data-target="#myModalHorizontal">Add User</button>
+        <div class="add-user" data-toggle="modal"  data-backdrop="static" data-keyboard="false" data-target="#myModalHorizontal">
+           <a href="#" > <span>Add User</span></a>
         </div>
     </div>
 
@@ -39,7 +49,7 @@
                 <td> {{$user->created_at}}</td>
                 <td> {{$user->updated_at}}</td>
                 <td><a class="show-btn" href="#" data-id="{{$user->id}}">Edit</a></td>
-                <td><a>Delete</a></td>
+                <td><a href="{{url('admin/deleteuser/'.$user->id)}}">Delete</a></td>
             </tr>
         @endforeach
         @endif
