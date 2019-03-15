@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\User;
+use App\Model\Role;
 
 class addAdmin extends Seeder
 {
@@ -11,12 +13,14 @@ class addAdmin extends Seeder
      */
     public function run()
     {
-        //
-        DB::table('users')->insert([
-            'name' => 'admin',
-            'email' => 'admin@gmail.com',
-            'password' => bcrypt('admin123'),
-            'level'=>1,
-        ]);
+
+        $role_manager  = Role::where('name', 'admin')->first();
+
+        $manager = new User();
+        $manager->name = 'Admin Name';
+        $manager->email = 'admin@gmail.com';
+        $manager->password = bcrypt('admin123');
+        $manager->save();
+        $manager->roles()->attach($role_manager);
     }
 }

@@ -29,7 +29,7 @@ class LoginController extends Controller
             'password'           => 'required',
         ]);
         $data =['email'=>$request->email,'password'=>$request->password];
-        if (Auth::attempt($data)){
+        if (Auth::attempt($data,true)){
             return redirect('/admin/dashboard')->with('success','Login success!');
         }else{
             return redirect()->back()->with('error','Incorrect email or password!');

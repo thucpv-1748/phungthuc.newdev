@@ -11,11 +11,29 @@
     },
     "devDependencies": {
         "axios": "^0.17",
-        "bootstrap-sass": "^3.3.7",
-        "cross-env": "^5.1",
-        "jquery": "^3.2",
-        "laravel-mix": "^1.0",
+        "babel-loader": "^8.0.5",
+        "cross-env": "^5.2.0",
+        "laravel-mix": "^4.0.14",
         "lodash": "^4.17.4",
-        "vue": "^2.5.7"
+        "resolve-url-loader": "^2.3.1",
+        "sass": "^1.17.1",
+        "sass-loader": "^7.1.0",
+        "vue-loader": "^15.6.4",
+        "vue-template-compiler": "^2.6.6",
+        "webpack": "^4.29.5",
+        "webpack-cli": "^3.2.3"
+    },
+    "dependencies": {
+        "angular": "^1.7.7",
+        "angular-animate": "^1.7.7",
+        "angular-aria": "^1.7.7",
+        "angular-material": "^1.1.12",
+        "bootstrap": "^4.3.1",
+        "bootstrap-sass": "^3.4.1",
+        "file-loader": "^3.0.1",
+        "jquery": "^3.3.1",
+        "node-sass": "^4.11.0",
+        "url-loader": "^1.1.2",
+        "vue": "^2.6.6"
     }
 }

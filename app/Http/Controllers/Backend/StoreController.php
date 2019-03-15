@@ -4,15 +4,31 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\Store as Model;
+use App\Model\Store;
 class StoreController extends Controller
 {
     //
+
+    /**
+     * @var Store
+     */
+    protected $_model;
+
+    /**
+     * StoreController constructor.
+     * @param Store $model
+     */
+    public function __construct(Store $model)
+    {
+
+        $this->_model = $model;
+    }
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getStore(){
-        $store = Model::paginate(15);
+        $store = $this->_model->paginate(15);
         $data['store']= $store;
         return view('layout/backend/store',$data);
     }
@@ -33,7 +49,7 @@ class StoreController extends Controller
      */
     public function saveStore(Request $request)
     {
-        $store = new Model;
+        $store =$this->_model;
         $id = $request->id;
         if($id){
             $store = $store::find($id);
@@ -59,7 +75,7 @@ class StoreController extends Controller
      */
     public function editStore($id)
     {
-        $store = new Model;
+        $store = $this->_model;
          $store = $store::find($id);
          if($store){
              $data['store'] = $store;
@@ -76,7 +92,7 @@ class StoreController extends Controller
      */
     public function deleteStore($id)
     {
-        $store = new Model;
+        $store =$this->_model;
         $store = $store::find($id);
         if ($store) {
             $store->delete();

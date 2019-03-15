@@ -14,12 +14,46 @@ class RoomController extends Controller
     //
 
     /**
-     *
+     * @var Room
+     */
+
+    protected $_model;
+    /**
+     * @var Store
+     */
+    protected $_store;
+    /**
+     * @var Seat
+     */
+    protected $_seat;
+
+
+    /**
+     * RoomController constructor.
+     * @param Room $model
+     * @param Store $store
+     * @param Seat $seat
+     */
+    public function __construct(
+        Room $model,
+        Store $store,
+        Seat $seat
+    )
+    {
+        $this->_model=$model;
+        $this->_store = $store;
+        $this->_seat = $seat;
+
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getRoom()
     {
-       $room = Room::paginate(15);
-       return view('layout/backend');
+       $room = $this->_model->with('store')->paginate(15);
+       $data['room'] = $room;
+       return view('layout/backend/room',$data);
 
     }
 
@@ -30,13 +64,18 @@ class RoomController extends Controller
 
     public function saveRoom(Request $request)
     {
-        $room = new Room;
+        $request->validate([
+            'name'           => 'required',
+            'id_store'           => 'required',
+            'row.*'           =>'required|min:1',
+        ]);
+        $room =$this->_model;
         $id = $request->id;
         if($id){
             $room = $room::find($id);
         }
         $room->name = $request-> name;
-        $room->id_store = $request->id_store;
+        $room->store_id = $request->id_store;
         try{
             if($room->save()){
                 $this->saveSeatByRoom($room->id,$request->row);
@@ -48,7 +87,7 @@ class RoomController extends Controller
             // insert query
         return redirect()->back()->with('error', $e->getMessage());
         }
-        
+
     }
 
     /**
@@ -58,19 +97,16 @@ class RoomController extends Controller
      */
 
     public function saveSeatByRoom($id_room,$SeatRequest){
-        $seat = new Seat;
-        $seat = $seat::where('id_room',$id_room);
-        if($seat){
-            $seat->delete();
-        }
+        $seat = $this->_seat;
+        $seat->where('room_id',$id_room)->delete();
         try{
             if(count($SeatRequest) > 0)
             {
                 foreach ($SeatRequest as $key => $value){
-                    $seat = new Seat;
+                    $seat =new seat;
                     $seat->row = $key;
-                    $seat->number = $value;
-                    $seat->id_room = $id_room;
+                    $seat->col = ($value > 0)?$value:1;
+                    $seat->room_id = $id_room;
                     $seat->save();
                 }
             }else{
@@ -91,12 +127,51 @@ class RoomController extends Controller
      */
     public function addRoom()
     {
-        $store = Store::all();
+        $store = $this->_store->all();
         $data['store'] = $store;
+        $data['seat'] = [];
         return view('layout/backend/addroom',$data);
     }
 
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function editRoom($id){
+        $NameRow = array(
+            'A', 'B', 'C', 'D', 'E',
+            'F', 'G', 'H', 'I', 'K',
+            'K', 'L', 'M', 'N', 'O',
+            'P', 'Q', 'R', 'S', 'T',
+            'U', 'V', 'W', 'X', 'Y',
+            'Z'
+        );
+        $store =  $this->_store->all();
+        $room =  $this->_model->find($id);
+        $data['room']=$room;
+        $data['seat']=$room->seat->sortBy('row')->toArray();
+        $data['store'] = $store;
+        $data['namerow'] = $NameRow;
+
+        return view('layout/backend/addroom',$data);
+    }
+
+    public function deleteRoom($id)
+    {
+        $seat =  $this->_seat;
+        $room =  $this->_model;
+        $room = $room::find($id);
+        $seat::where('room_id',$id)->delete();
+        if($room->delete())
+        {
+            return redirect('admin/room')->with('success','delete successful!');
+        }else{
+            return redirect()->back()->with('error','delete save!');
+        }
+
+
+    }
 
 
 }

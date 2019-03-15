@@ -11,11 +11,26 @@ class CategoryController extends Controller
     //
 
     /**
+     * @var Category
+     */
+    protected $_model;
+
+    /**
+     * CategoryController constructor.
+     * @param Category $model
+     */
+    public function __construct(Category $model)
+    {
+        $this -> _model = $model;
+
+    }
+
+    /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getCategory()
     {
-        $data['category'] = Category::paginate(15);
+        $data['category'] = $this->_model->paginate(15);
         return view('layout/backend/category',$data);
 
     }
@@ -35,13 +50,14 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function updateCategory(Request $request){
-        $Category = new Category;
+        $Category = $this->_model;
         $id = $request->id_category;
         if($id){
             $Category = $Category::find($id);
         }
         try{
-            $Category->name_category = $request->name_category;
+            $Category->title = $request->name;
+            $Category->description = $request->description;
             if($Category->save()){
                 return redirect('admin/category')->with('success','save successful!');
             }else{
@@ -62,7 +78,7 @@ class CategoryController extends Controller
      */
     public function editCategory($id)
     {
-        $Category = new Category;
+        $Category = $this->_model;
         if ($id) {
             $Category = $Category::find($id)->toArray();
             $data['category'] = $Category;
@@ -78,7 +94,7 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function deleteCategory($id){
-            $Category = new Category;
+            $Category = $this->_model;
             $Category = $Category::find($id);
             if ($Category) {
                 $Category->delete();

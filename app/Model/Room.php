@@ -6,16 +6,35 @@ use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
-    //
-    protected $table = 'room';
+
+    /**
+     * @var string
+     */
+    protected $table = 'rooms';
+    /**
+     * @var bool
+     */
     public $timestamps = false;
 
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
 
-//    public function Store()
-//    {
-//        return $this->hasMany('App\Model\Store');
-//    }
-//
+    public function store()
+    {
+        return $this->belongsTo('App\Model\Store', 'store_id');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function seat()
+    {
+     return $this->hasMany('App\Model\Seat');
+    }
+
+
 
 }

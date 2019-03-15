@@ -4,24 +4,57 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User as Modeluser;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
+use App\Model\Role;
 
 class UsersController extends Controller
 {
     //
 
     /**
+     * @var User
+     */
+    protected $_model;
+
+    /**
+     * @var
+     */
+    protected $_role;
+
+    /**
+     * UsersController constructor.
+     * @param User $model
+     */
+    public function __construct
+    (
+        User $model,
+        Role $role
+    )
+    {
+        $this->_model = $model;
+        $this->_role = $role;
+    }
+
+    /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * get all user
      */
     public function getUsers(){
-        $data['users'] =   Modeluser::paginate(15);
-       return view('layout/backend/users',$data);
+        $data['users'] =   $this->_model->paginate(15);
+       return view('layout.backend.users',$data);
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function addUser(){
+        $model = $this->_role->all();
+        $data['role'] = $model;
+        return view('layout/backend/userform',$data);
+    }
 
     /**
      * @param Request $request
@@ -29,11 +62,11 @@ class UsersController extends Controller
      * create and update user
      */
 
-    public function addUser(Request $request){
+    public function saveUser(Request $request){
         $new_password = $request->password;
-        $Modeluser =new Modeluser;
+        $Modeluser =$this->_model;
         if($request->id_user){
-            $Modeluser =$Modeluser::find($request->id_user);
+            $Modeluser =$Modeluser->find($request->id_user);
             $current_password = $Modeluser->password;
             $this->checkPassword($current_password,$new_password,$Modeluser);
         }else{
@@ -41,13 +74,18 @@ class UsersController extends Controller
         }
         $Modeluser->name = $request->name;
         $Modeluser->email = $request->email;
-        $Modeluser->level=$request->level;
         $Modeluser->birth_of_date = $request->birth_of_date;
         $Modeluser->phone = $request->phone;
-        $Modeluser->save();
-        $data['users'] =   Modeluser::paginate(15);
-        return view('layout/backend/users',$data);
-
+        try{
+            if($Modeluser->save()){
+                return redirect('admin/users')->with('success','save successful!');
+            }else{
+                return redirect()->back()->with('error','save error!');
+            }
+        }catch(\Exception $e){
+            // insert query
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -57,8 +95,8 @@ class UsersController extends Controller
      */
     public function ajaxGetUser(Request $request){
         $user_id = $request->id;
-        $Modeluser =new Modeluser;
-        $data = $Modeluser::find($user_id);
+        $Modeluser =$this->_model;
+        $data = $Modeluser->find($user_id);
         if($data){
             $password = $data->password;
             $data = $data->toArray();
@@ -91,7 +129,7 @@ class UsersController extends Controller
      * delete user
      */
     public function deleteUsers($id){
-        $ModelUser =new Modeluser;
+        $ModelUser =$this->_model;
         $ModelUser=$ModelUser::find($id);
         if($ModelUser){
             $ModelUser->delete();
@@ -128,7 +166,7 @@ class UsersController extends Controller
         ]);
         $id_user = $request->id_user;
         $new_password = $request->password;
-        $Modeluser = new Modeluser;
+        $Modeluser = $this->_model;
         $Modeluser = $Modeluser::find($id_user);
 
         try{

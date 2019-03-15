@@ -1,7 +1,7 @@
 @extends('layout.backend.admin')
 
-
 @section('title','Profile')
+
 @section('content')
     <div class="profile-admin">
         @if(session()->has('success'))

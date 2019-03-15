@@ -1,6 +1,7 @@
 @extends('layout.backend.admin')
 
 @section('title','Form Store')
+
 @section('content')
     <div class="form-store">
         <form id="frm-store" name="frm-store" class="frm-store" method="post">
@@ -21,6 +22,5 @@
                 </div>
             </div>
         </form>
-
     </div>
 @endsection

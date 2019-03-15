@@ -7,8 +7,14 @@
         <form id="frm-category" name="frm-category" class="frm-category" method="post">
             <div class="form-group">
                 <label for="name">Name:</label>
-                <input type="text" class="form-control" id="name" name="name_category" value="{{isset($category['name_category']) ? $category['name_category'] : ''}}">
-                <input hidden="hidden" name="id_category" value="{{isset($category['id']) ? $category['id'] : ''}}">
+                <input type="text" class="form-control" id="name" name="name" value="{{isset($category['name']) ? $category['name'] : ''}}">
+                <input hidden="hidden" name="id" value="{{isset($category['id']) ? $category['id'] : ''}}">
+            </div>
+            <div class="form-group">
+                <label for="name">Description:</label>
+                <textarea type="text" class="form-control" name="description" rows="10">
+                    {{isset($category['description']) ? $category['description'] : ''}}
+                </textarea>
             </div>
             {{csrf_field()}}
             <input hidden="hidden" name="base_url" value="{{url('/')}}">

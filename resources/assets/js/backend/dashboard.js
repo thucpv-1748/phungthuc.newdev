@@ -69,7 +69,7 @@ $( document ).ready(function() {
     var max_fields      = 10; //maximum input boxes allowed
     var wrapper   		= $(".form-room .frm-room .row-form"); //Fields wrapper
     var add_button      = $(".add_field_button"); //Add button ID
-    var x = 1; //initlal text box count
+    var x = $('.row-form .form-group').length; //initlal text box count
     $(add_button).click(function(e){ //on add input button click
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
@@ -77,7 +77,7 @@ $( document ).ready(function() {
             $(wrapper).append('' +
                 '<div class="form-group">'+
                  '<label for="name">Seats in row '+ x +':</label>'+
-                 '<input type="text" class="form-control" name="row[]" value="">' +
+                 '<input type="number" class="form-control" name="row[]" value="" required="required">' +
                 '<a href="#" class="remove_field"><i class="fa fa-minus"></i></a>' +
                 '</div>'); //add input box
         }

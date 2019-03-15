@@ -16,4 +16,6 @@ mix.js('resources/assets/js/app.js', 'public/js')
 
 mix.sass('resources/assets/css/backend/login.scss','public/css/backend');
 mix.copy('resources/assets/css/backend/dashboard.css','public/css/backend');
+mix.copy('resources/assets/css/backend/user.css','public/css/backend');
 mix.js('resources/assets/js/backend/dashboard.js', 'public/js/backend');
+mix.copy('resources/assets/img/','public/img');

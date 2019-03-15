@@ -9,10 +9,12 @@ use Illuminate\Support\Facades\Auth;
 class LogoutController extends Controller
 {
     //
+    /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
 
-   public  function getLogout(){
+   public function getLogout(){
             Auth::logout();
            return redirect('/admin/login');
-
    }
 }

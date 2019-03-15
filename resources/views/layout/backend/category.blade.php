@@ -30,6 +30,7 @@
             <tr id="tbl-first-row">
                 <td>ID</td>
                 <td>Name</td>
+                <td>Description</td>
                 <td>Created At</td>
                 <td>Updated At</td>
                 <td>Edit</td>
@@ -39,7 +40,8 @@
                 @foreach($category as $key => $value)
                     <tr>
                         <td>{{$value->id}}</td>
-                        <td> {{$value->name_category}}</td>
+                        <td> {{$value->title}}</td>
+                        <td> {{$value->description}}</td>
                         <td> {{$value->created_at}}</td>
                         <td> {{$value->updated_at}}</td>
                         <td><a class="show-btn" href="{{url('admin/edit-category/'.$value->id)}}">Edit</a></td>

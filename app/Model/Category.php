@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     //
-    protected $table = 'category';
+    protected $table = 'categories';
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -15,6 +15,6 @@ class Category extends Model
 
     public function getFilm()
     {
-        return $this->hasMany('App\model\ListFilm');
+        return $this->hasMany('App\Model\Film');
     }
 }
