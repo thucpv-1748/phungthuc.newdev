@@ -44468,6 +44468,17 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/assets/css/frontend/custom.scss":
+/*!***************************************************!*\
+  !*** ./resources/assets/css/frontend/custom.scss ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/assets/js/app.js":
 /*!************************************!*\
   !*** ./resources/assets/js/app.js ***!
@@ -44634,15 +44645,16 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 0:
-/*!*********************************************************************************************************************!*\
-  !*** multi ./resources/assets/js/app.js ./resources/assets/sass/app.scss ./resources/assets/css/backend/login.scss ***!
-  \*********************************************************************************************************************/
+/*!*****************************************************************************************************************************************************************!*\
+  !*** multi ./resources/assets/js/app.js ./resources/assets/sass/app.scss ./resources/assets/css/backend/login.scss ./resources/assets/css/frontend/custom.scss ***!
+  \*****************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /opt/lampp/htdocs/phungthuc.newdev/resources/assets/js/app.js */"./resources/assets/js/app.js");
 __webpack_require__(/*! /opt/lampp/htdocs/phungthuc.newdev/resources/assets/sass/app.scss */"./resources/assets/sass/app.scss");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/phungthuc.newdev/resources/assets/css/backend/login.scss */"./resources/assets/css/backend/login.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/phungthuc.newdev/resources/assets/css/backend/login.scss */"./resources/assets/css/backend/login.scss");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/phungthuc.newdev/resources/assets/css/frontend/custom.scss */"./resources/assets/css/frontend/custom.scss");
 
 
 /***/ })

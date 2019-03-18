@@ -83,5 +83,6 @@ route::namespace('Backend')->group(function (){
 
 
 Auth::routes();
+Route::get('home','Frontend\HomeController@index');
+Route::get('step1','Frontend\BookController@getStep1');
 
-Route::get('/home', 'HomeController@index')->name('home');
