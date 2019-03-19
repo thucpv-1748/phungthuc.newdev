@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRoomsTable extends Migration
+class CreateCouponTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,15 @@ class CreateRoomsTable extends Migration
      */
     public function up()
     {
-        Schema::create('rooms', function (Blueprint $table) {
+        Schema::create('coupons', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable();
-            $table->unsignedInteger('store_id')->nullable();
-            $table->foreign('store_id')->references('id')->on('stores');
+            $table->string('coupon_code')->nullable();
+            $table->string('status')->nullable();
+            $table->string('type')->nullable();
+            $table->decimal('price',6,3)->nullable();
+            $table->integer('percent')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -28,9 +32,6 @@ class CreateRoomsTable extends Migration
      */
     public function down()
     {
-        Schema::table('seats', function (Blueprint $table) {
-            $table->dropForeign('rooms_store_id_foreign');
-        });
-        Schema::dropIfExists('rooms');
+        Schema::dropIfExists('coupons');
     }
 }

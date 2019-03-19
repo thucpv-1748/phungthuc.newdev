@@ -29,6 +29,9 @@ class CreateSeatsTable extends Migration
      */
     public function down()
     {
+        Schema::table('seats', function (Blueprint $table) {
+            $table->dropForeign('seats_room_id_foreign');
+        });
         Schema::dropIfExists('seats');
     }
 }

@@ -19,8 +19,8 @@ class CreateTimeShowsTable extends Migration
             $table->unsignedInteger('room_id')->nullable();
             $table->string('status')->nullable();
             $table->dateTime('time_show')->nullable();
-            $table->DECIMAL('price',6,3)->nullable();
-            $table->DECIMAL('sale_price',6,3)->nullable();
+            $table->decimal('price',6,3)->nullable();
+            $table->decimal('sale_price',6,3)->nullable();
             $table->foreign('room_id')->references('id')->on('rooms');
             $table->foreign('film_id')->references('id')->on('films');
         });
@@ -33,6 +33,10 @@ class CreateTimeShowsTable extends Migration
      */
     public function down()
     {
+        Schema::table('time_shows', function (Blueprint $table) {
+            $table->dropForeign('time_shows_room_id_foreign');
+            $table->dropForeign('time_shows_film_id_foreign');
+        });
         Schema::dropIfExists('time_shows');
     }
 }

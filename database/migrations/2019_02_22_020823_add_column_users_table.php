@@ -28,7 +28,6 @@ class AddColumnUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
             $table->dropColumn('phone');
             $table->dropColumn('level');
             $table->dropColumn('birth_of_date');
