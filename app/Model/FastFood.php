@@ -17,5 +17,4 @@ class FastFood extends Model
      */
     protected $table = 'fast_foods';
 
-
 }

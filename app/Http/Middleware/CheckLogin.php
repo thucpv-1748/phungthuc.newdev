@@ -16,7 +16,7 @@ class CheckLogin
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check() && Auth::user()->level == 1 ){
+        if(Auth::check() && Auth::user()->load('Roles')->roles->first()->name == 'admin' ){
             return redirect()->intended('admin/dashboard');
         }
         return $next($request);

@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    //
-
+    /**
+     * @var string
+     */
     protected $table = 'orders';
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

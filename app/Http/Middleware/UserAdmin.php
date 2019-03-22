@@ -19,7 +19,7 @@ class UserAdmin
     {
         if(Auth::guest()){
             return redirect()->intended('admin/login');
-        }else if( @Auth::user()->load('Roles')->roles->toArray()['0']['name'] == 'admin'){
+        }else if(Auth::user()->load('Roles')->roles->first()->name == 'admin'){
             return $next($request);
         }
         return redirect()->intended('admin/login');

@@ -74,7 +74,7 @@
                 <h2>Demo</h2>
                @foreach($seat as $value)
                    <ul>
-                       <p>{{$namerow[$value['row']]}}</p>
+                       <p>{{ $namerow[$value['row']] }}</p>
                        @for($x = 0;$x < $value['col'];$x++)
                            <li>
                                 {{$x+1}}

@@ -407,52 +407,52 @@
         $('.swiper-slide-active').css({'marginLeft': '-2px'});
         //media swipe visible slide
         //Onload detect
-        if ($(window).width() > 1930) {
-            mySwiper.params.slidesPerView = 13;
-            mySwiper.resizeFix();
-        } else if ($(window).width() > 993 & $(window).width() < 1199) {
-            mySwiper.params.slidesPerView = 6;
-            mySwiper.resizeFix();
-        } else if ($(window).width() > 768 & $(window).width() < 992) {
-            mySwiper.params.slidesPerView = 5;
-            mySwiper.resizeFix();
-        } else if ($(window).width() < 767 & $(window).width() > 481) {
-            mySwiper.params.slidesPerView = 4;
-            mySwiper.resizeFix();
-
-        } else if ($(window).width() < 480) {
-            mySwiper.params.slidesPerView = 2;
-            mySwiper.resizeFix();
-        } else {
-            mySwiper.params.slidesPerView = 10;
-            mySwiper.resizeFix();
-        }
+        // if ($(window).width() > 1930) {
+        //     mySwiper.params.slidesPerView = 13;
+        //     mySwiper.resizeFix();
+        // } else if ($(window).width() > 993 & $(window).width() < 1199) {
+        //     mySwiper.params.slidesPerView = 6;
+        //     mySwiper.resizeFix();
+        // } else if ($(window).width() > 768 & $(window).width() < 992) {
+        //     mySwiper.params.slidesPerView = 5;
+        //     mySwiper.resizeFix();
+        // } else if ($(window).width() < 767 & $(window).width() > 481) {
+        //     mySwiper.params.slidesPerView = 4;
+        //     mySwiper.resizeFix();
+        //
+        // } else if ($(window).width() < 480) {
+        //     mySwiper.params.slidesPerView = 2;
+        //     mySwiper.resizeFix();
+        // } else {
+        //     mySwiper.params.slidesPerView = 10;
+        //     mySwiper.resizeFix();
+        // }
 
         //Resize detect
-        $(window).resize(function () {
-            if ($(window).width() > 1930) {
-                mySwiper.params.slidesPerView = 13;
-                mySwiper.reInit();
-            }
-
-            if ($(window).width() > 993 & $(window).width() < 1199) {
-                mySwiper.params.slidesPerView = 6;
-                mySwiper.reInit();
-            } else if ($(window).width() > 768 & $(window).width() < 992) {
-                mySwiper.params.slidesPerView = 5;
-                mySwiper.reInit();
-            } else if ($(window).width() < 767 & $(window).width() > 481) {
-                mySwiper.params.slidesPerView = 4;
-                mySwiper.reInit();
-
-            } else if ($(window).width() < 480) {
-                mySwiper.params.slidesPerView = 2;
-                mySwiper.reInit();
-            } else {
-                mySwiper.params.slidesPerView = 10;
-                mySwiper.reInit();
-            }
-        });
+        // $(window).resize(function () {
+        //     if ($(window).width() > 1930) {
+        //         mySwiper.params.slidesPerView = 13;
+        //         mySwiper.reInit();
+        //     }
+        //
+        //     if ($(window).width() > 993 & $(window).width() < 1199) {
+        //         mySwiper.params.slidesPerView = 6;
+        //         mySwiper.reInit();
+        //     } else if ($(window).width() > 768 & $(window).width() < 992) {
+        //         mySwiper.params.slidesPerView = 5;
+        //         mySwiper.reInit();
+        //     } else if ($(window).width() < 767 & $(window).width() > 481) {
+        //         mySwiper.params.slidesPerView = 4;
+        //         mySwiper.reInit();
+        //
+        //     } else if ($(window).width() < 480) {
+        //         mySwiper.params.slidesPerView = 2;
+        //         mySwiper.reInit();
+        //     } else {
+        //         mySwiper.params.slidesPerView = 10;
+        //         mySwiper.reInit();
+        //     }
+        // });
 
         //4. Dropdown init
         //select
@@ -506,7 +506,7 @@
 
             //data element init
             var chooseTime = $(this).attr('data-time');
-            $('.choose-indector--time').find('.choosen-area').text(chooseTime);
+            $('.choose-indector--time').find('.choosen-area').text($(this).text());
 
             //data element init
             var chooseCinema = $(this).parent().parent().find('.time-select__place').text();
@@ -595,28 +595,17 @@
         $('.sits__place').click(function (e) {
             e.preventDefault();
             var place = $(this).attr('data-place');
-            var ticketPrice = $(this).attr('data-price');
+            var ticketPrice = parseFloat($(this).attr('data-price'));
 
             if (!$(e.target).hasClass('sits-state--your')) {
 
                 if (!$(this).hasClass('sits-state--not')) {
                     $(this).addClass('sits-state--your');
 
-                    $('.checked-place').prepend('<span class="choosen-place ' + place + '">' + place + '</span>');
+                    $('.checked-place').prepend('<span class="choosen-place ' + place + '" data-place="'+ place +'">' + $(this).text() + '</span>');
 
-                    switch (ticketPrice) {
-                        case '10':
-                            sum += 10;
-                            cheap += 1;
-                            break;
-                        case '20':
-                            sum += 20;
-                            middle += 1;
-                            break;
-                        case '30':
-                            sum += 30;
-                            expansive += 1;
-                            break;
+                    if (ticketPrice) {
+                            sum += ticketPrice;
                     }
 
                     $('.checked-result').text('$' + sum);
@@ -626,39 +615,21 @@
 
                 $('.' + place + '').remove();
 
-                switch (ticketPrice) {
-                    case '10':
-                        sum -= 10;
-                        cheap -= 1;
-                        break;
-                    case '20':
-                        sum -= 20;
-                        middle -= 1;
-                        break;
-                    case '30':
-                        sum -= 30;
-                        expansive -= 1;
-                        break;
+                if (ticketPrice) {
+                    sum -= ticketPrice;
                 }
 
-                $('.checked-result').text('$' + sum)
+                $('.checked-result').text(sum)
             }
 
-            //data element init
-            var number = $('.checked-place').children().length;
 
-            //data element set
-            numberTicket.val(number);
             sumTicket.val(sum);
-            cheapTicket.val(cheap);
-            middleTicket.val(middle);
-            expansiveTicket.val(expansive);
 
 
             //data element init
             var chooseSits = '';
-            $('.choosen-place').each(function () {
-                chooseSits += ', ' + $(this).text();
+            $('.sits-area .checked-place .choosen-place').each(function () {
+                chooseSits += ', ' + $(this).attr('data-place');
             });
 
             //data element set
@@ -746,27 +717,13 @@
 
             $('.sits-area--mobile .checked-place').prepend('<span class="choosen-place" data-sit="' + ch_sits + '">' + ch_sits + '</span>');
 
-            if (row == "A" || row == "B" || row == "C" || row == "D") {
-                ticketPrice = 10;
-            } else if (row == "E" || row == "F" || row == "G" || row == "I") {
-                ticketPrice = 20;
-            } else if (row == "J" || row == "K" || row == "L") {
-                ticketPrice = 30;
+            ticketPrice = parseFloat($('.price-ticket').val());
+
+            if (ticketPrice) {
+                sum += ticketPrice;
             }
 
-            switch (ticketPrice) {
-                case 10:
-                    sum += 10;
-                    break;
-                case 20:
-                    sum += 20;
-                    break;
-                case 30:
-                    sum += 30;
-                    break;
-            }
-
-            $('.checked-result').text('$' + sum);
+            $('.checked-result').text(sum);
 
 
             $(this).removeClass('btn--warning').unbind('click', ChoosePlace);
@@ -786,30 +743,14 @@
                     activeSit.remove();
                     $(this).parent().remove();
 
-                    if (row == "A" || row == "B" || row == "C" || row == "D") {
-                        ticketPrice = 10;
-                    } else if (row == "E" || row == "F" || row == "G" || row == "I") {
-                        ticketPrice = 20;
-                    } else if (row == "J" || row == "K" || row == "L") {
-                        ticketPrice = 30;
+                    ticketPrice = parseFloat($('.price-ticket').val());
+
+                    if (ticketPrice) {
+                            sum -= ticketPrice;
                     }
 
-                    switch (ticketPrice) {
-                        case 10:
-                            sum -= 10;
-                            break;
-                        case 20:
-                            sum -= 20;
-                            break;
-                        case 30:
-                            sum -= 30;
-                            break;
-                    }
-
-                    $('.checked-result').text('$' + sum);
+                    $('.checked-result').text(sum);
                 }
-
-
             })
         }
 
@@ -1764,7 +1705,7 @@
         $('.score').raty({
             width: 130,
             score: 0,
-            path: 'images/rate/',
+            url: 'images/rate/',
             starOff: 'star-off.svg',
             starOn: 'star-on.svg'
         });

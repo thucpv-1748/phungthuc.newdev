@@ -20,14 +20,16 @@ route::namespace('Backend')->group(function (){
     Route::get('admin/login','LoginController@getLogin')->middleware('CheckLogin');
     Route::post('admin/login','LoginController@postLogin');
     Route::prefix('admin')->middleware('UserAdmin')->group(function () {
-        Route::get('users','UsersController@getUsers');
-        Route::get('add-user','UsersController@addUser');
-        Route::post('add-user','UsersController@saveUser') ;
-        Route::get('deleteuser/{id}','UsersController@deleteUsers');
+        Route::get('users','UserController@getUsers');
+        Route::get('add-user','UserController@addUser');
+        Route::post('add-user','UserController@saveUser');
+        Route::get('edit-user/{id}','UserController@editUser');
+        Route::post('edit-user/{id}','UserController@saveUser') ;
+        Route::get('deleteuser/{id}','UserController@deleteUsers');
         Route::get('dashboard','DashboardController@getDashboard') ;
         Route::get('logout','LogoutController@getLogout');
-        Route::get('user','UsersController@getProfile') ;
-        Route::post('user','UsersController@editProfile') ;
+        Route::get('user','UserController@getProfile') ;
+        Route::post('user','UserController@saveUser') ;
         Route::get('category','CategoryController@getCategory') ;
         Route::get('form-category','CategoryController@getFormCategory') ;
         Route::post('form-category','CategoryController@updateCategory') ;
@@ -78,11 +80,30 @@ route::namespace('Backend')->group(function (){
         Route::get('edit-order/{id}','OrderController@editOrder');
         Route::post('edit-order/{id}','OrderController@saveOrder');
         Route::get('order','OrderController@getOrder');
+        Route::get('add-role','UserController@addRole');
+        Route::post('add-role','UserController@saveRole');
+        Route::get('role','UserController@getRole');
+        Route::get('edit-role/{id}','UserController@editRole');
+        Route::post('edit-role/{id}','UserController@saveRole');
+
     });
 });
 
 
-Auth::routes();
-Route::get('home','Frontend\HomeController@index');
-Route::get('step1','Frontend\BookController@getStep1');
+    Auth::routes();
+    Route::get('home','Frontend\HomeController@index');
+    Route::get('step1/{id}','Frontend\BookController@getStep1');
+    Route::post('step1/{id}','Frontend\BookController@postStep1');
+    Route::get('step2/{id}','Frontend\BookController@getStep2');
+    Route::post('step2/{id}','Frontend\BookController@postStep2');
+    Route::get('step3','Frontend\BookController@getStep3');
+    Route::get('film/{id}','Frontend\FilmController@getFilm');
+    Route::get('category/{id}','Frontend\FilmController@getCategory');
+    //ajax find  in category
+    Route::post('get-data','Frontend\FilmController@getData');
+    Route::post('check-coupon','Frontend\BookController@getCoupon');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

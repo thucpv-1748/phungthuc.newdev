@@ -1,4 +1,4 @@
-@extends('layout.frontend.fontend_master')
+@extends('layout.frontend.frontend_master')
 
 @section('page','Home Page')
 
@@ -255,7 +255,7 @@
                                          <p>38 comments</p>
                                      </li>
                                      <li class="last-block">
-                                         <a href="movie-page-left.html" class="slide__link">more</a>
+                                         <a href="{{ url('film/'.$film->id) }}" class="slide__link">more</a>
                                      </li>
                                  </ul>
                              </div>
@@ -389,13 +389,13 @@
                             <!-- Movie variant with time -->
                                 <div class="movie movie--test movie--test--dark movie--test--left">
                                     <div class="movie__images">
-                                        <a href="movie-page-left.html" class="movie-beta__link">
+                                        <a href="{{ url('film/'.$film->id) }}" class="movie-beta__link">
                                             <img alt='' src="{{ url($film->img) }}">
                                         </a>
                                     </div>
 
                                     <div class="movie__info">
-                                        <a href='movie-page-left.html' class="movie__title">{{ $film->title}}</a>
+                                        <a href='{{ url('film/'.$film->id) }}' class="movie__title">{{ $film->title}}</a>
 
                                         <p class="movie__time">{{ $film->time }}</p>
 
@@ -412,13 +412,13 @@
                              <!-- Movie variant with time -->
                                 <div class="movie movie--test movie--test--light movie--test--right">
                                     <div class="movie__images">
-                                        <a href="movie-page-left.html" class="movie-beta__link">
+                                        <a href="{{ url('film/'.$film->id) }}" class="movie-beta__link">
                                             <img alt='' src="{{ url($film->img) }}">
                                         </a>
                                     </div>
 
                                     <div class="movie__info">
-                                        <a href='movie-page-left.html' class="movie__title">{{ $film->title }}</a>
+                                        <a href='{{ url('film/'.$film->id) }}' class="movie__title">{{ $film->title }}</a>
 
                                         <p class="movie__time">{{ $film->time}}</p>
 

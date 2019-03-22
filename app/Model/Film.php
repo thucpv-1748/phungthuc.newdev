@@ -26,4 +26,13 @@ class Film extends Model
     {
         return $this->belongsTo('App\Model\Category','category_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function timeShow()
+    {
+        return $this->hasMany('App\Model\TimeShow');
+    }
+
 }

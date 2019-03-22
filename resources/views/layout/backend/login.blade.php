@@ -2,10 +2,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login Admin</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <title>{{ __('Login Admin') }}</title>
+    <link href="{{ URL::asset('bootstrap-3.3.5/dist/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ URL::asset('css/backend/login.css') }}" rel="stylesheet" type="text/css">
-
 </head>
 
 <div class="form-login-admin">
@@ -24,10 +23,12 @@
                     {{ session()->get('error') }}
                 </div>
             @endif
-        <h1>Login Admin</h1>
-        <input placeholder="Email" name="email" type="text" required="required">
-        <input placeholder="Password" name="password" type="password" required="required">
-        <button>Submit</button>
-        {{csrf_field()}}
+        <h1>{{ __('Login Admin') }}</h1>
+        <input placeholder="{{ __('Email') }}" name="email" type="text" required="required">
+        <input placeholder="{{ __('Password') }}" name="password" type="password" required="required">
+        <input name="remember" type="checkbox" id="remember" value="on">
+        <label for="remember">{{ __('remember me') }}</label>
+        <button>{{ __('Submit') }}</button>
+        {{ csrf_field() }}
     </form>
 </div>

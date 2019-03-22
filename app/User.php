@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Model\Role;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -16,7 +17,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-       'email', 'password',
+        'email',
+        'password',
+        'name',
+        'phone',
+        'level',
+        'date_of_birth'
     ];
 
     /**
@@ -27,6 +33,17 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * @param $value
+     */
+
+    public function setPasswordAttribute($value)
+    {
+        if ($value) {
+            $this->attributes['password'] = app('hash')->needsRehash($value) ? Hash::make($value) : $value;
+        }
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -44,10 +61,10 @@ class User extends Authenticatable
     {
         if (is_array($roles)) {
             return $this->hasAnyRole($roles) ||
-                abort(401, 'This action is unauthorized.');
+                abort(401, __('This action is unauthorized.'));
         }
         return $this->hasRole($roles) ||
-            abort(401, 'This action is unauthorized.');
+            abort(401, __('This action is unauthorized.'));
     }
     /**
      * Check multiple roles

@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    //
+    /**
+     * @var string
+     */
     protected $table = 'categories';
 
     /**
@@ -17,4 +19,5 @@ class Category extends Model
     {
         return $this->hasMany('App\Model\Film');
     }
+
 }

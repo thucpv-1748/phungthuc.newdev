@@ -27,31 +27,35 @@
         <form id="frm-profile" name="frm-profile" method="post">
             <div class="form-group">
                 <label for="name">Name:</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{$user->name}}">
-                <input hidden="hidden" name="id_user" value="{{$user->id}}">
+                <input type="text" class="form-control" id="name" name="name" value="{{ @$user->name }}" required>
+                <input hidden="hidden" name="id" value="{{$user->id}}">
             </div>
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" name="email" value="{{$user->email}}" required="required">
+                <input type="email" class="form-control" id="email" name="email" value="{{ @$user->email}}" required="required">
             </div>
             <div class="form-group">
                 <label for="pwd">Password:</label>
-                <input type="password" class="form-control" id="pwd" name="password" value="{{$user->password}}" required="required">
+                <input type="password" class="form-control" id="pwd" name="password" value="{{ @$user->password }}" required="required">
             </div>
             <div class="form-group">
-                <label for="level">Level:</label>
-                <select class="form-control" name="level">
-                    <option value="1" {{$user->level != 2 ? 'selected="selected"':'' }} >Admin</option>
-                    <option value="2" {{$user->level == 2 ? 'selected="selected"':'' }}>Customer</option>
+                <label for="level">Role:</label>
+                <select class="form-control" name="role" required>
+                    <option value="" selected="selected" >Select</option>
+                    @if($role)
+                        @foreach($role as $value)
+                            <option value="{{ $value->id }}" {{ (@$user->roles->first()->id == @$value->id)? 'selected="selected"' :'' }}>{{ $value->name }}</option>
+                        @endforeach
+                    @endif
                 </select>
             </div>
             <div class="form-group">
-                <label for="birth_of_date">Birth of date:</label>
-                <input type="date" class="form-control" id="birth_of_date" name="birth_of_date" value="{{date('Y-m-d',strtotime($user->birth_of_date))}}">
+                <label for="birth_of_date">Date of Birth:</label>
+                <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" value="{{ date('Y-m-d',strtotime($user->date_of_birth)) }}">
             </div>
             <div class="form-group">
                 <label for="phone">Phone:</label>
-                <input type="number" class="form-control" id="phone" name="phone" value="{{$user->phone}}">
+                <input type="number" class="form-control" id="phone" name="phone" value="{{ @$user->phone }}">
             </div>
             {{csrf_field()}}
             <input hidden="hidden" name="base_url" value="{{url('/')}}">

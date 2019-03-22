@@ -16,7 +16,6 @@ class Room extends Model
      */
     public $timestamps = false;
 
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -26,7 +25,6 @@ class Room extends Model
         return $this->belongsTo('App\Model\Store', 'store_id');
     }
 
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -34,7 +32,5 @@ class Room extends Model
     {
      return $this->hasMany('App\Model\Seat');
     }
-
-
 
 }

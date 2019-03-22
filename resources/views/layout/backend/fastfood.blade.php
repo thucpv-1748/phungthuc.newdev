@@ -24,7 +24,7 @@
             @endif
         <div class="header-page">
             <div class="add-store">
-                <a href="{{url('admin/add-coupon')}}" > <span>Add Fast Food</span></a>
+                <a href="{{url('admin/add-fast-food')}}" > <span>Add Fast Food</span></a>
             </div>
         </div>
 

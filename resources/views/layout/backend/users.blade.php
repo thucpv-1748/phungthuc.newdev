@@ -18,41 +18,39 @@
         </div>
     @endif
     <div class="header-page">
-        <div class="add-user" data-toggle="modal"  data-backdrop="static" data-keyboard="false" data-target="#myModalHorizontal">
-           <a href="#" > <span>Add User</span></a>
+        <div class="add-user">
+           <a href="{{ url('/add-user') }}"><span>{{ __('Add User') }}</span></a>
         </div>
     </div>
 
     <div class="users-list">
         <div>
-           <h2>
-               List Users
-           </h2>
+           <h2>{{ __('List Users') }}</h2>
         </div>
         <table border="1px" class="table table-striped">
              <tr id="tbl-first-row">
-                <td>STT</td>
-                <td>Email</td>
-                <td>Name</td>
-                <td>Roles</td>
-                <td>Phone</td>
-                <td>Created At</td>
-                <td>Updated At</td>
-                <td>Edit</td>
-                <td>Delete</td>
+                <td>{{ __('ID') }}</td>
+                <td>{{ __('Email') }}</td>
+                <td>{{ __('Name') }}</td>
+                <td>{{ __('Roles') }}</td>
+                <td>{{ __('Phone') }}</td>
+                <td>{{ __('Created At') }}</td>
+                <td>{{ __('Updated At') }}</td>
+                <td>{{ __('Edit') }}</td>
+                <td>{{ __('Delete') }}</td>
             </tr>
-             @if(count($users)>0)
-                @foreach($users as $key => $user)
+             @if (count($users)>0)
+                @foreach ($users as $key => $user)
                      <tr>
                         <td> {{ @$user->id }}</td>
                         <td> {{ @$user->email }}</td>
                         <td> {{ @$user->name }}</td>
-                        <td> {{ @$user->role->name }}</td>
+                        <td> {{ @$user->roles->first()->name }}</td>
                         <td> {{ @$user->phone }}</td>
                         <td> {{ @$user->created_at }}</td>
                         <td> {{ @$user->updated_at }}</td>
-                        <td><a class="show-btn" href="#" data-id="{{ $user->id }}">Edit</a></td>
-                        <td><a href="{{ url('admin/delete-user/'.$user->id) }}">Delete</a></td>
+                        <td><a href="{{ url('admin/edit-user/'.$user->id) }}">{{ __('Edit') }}</a></td>
+                        <td><a href="{{ url('admin/delete-user/'.$user->id) }}">{{ __('Delete') }}</a></td>
                     </tr>
                 @endforeach
              @endif

@@ -8,8 +8,6 @@ use App\User;
 class Role extends Model
 {
 
-
-
     /**
      * @var string
      */

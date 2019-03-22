@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class TimeShow extends Model
 {
-    //
     /**
      * @var string
      */
@@ -33,7 +32,6 @@ class TimeShow extends Model
     {
         return $this->belongsTo('App\Model\Room', 'room_id');
     }
-
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Film;
-use App\Model\TimeShow;
+use App\Model\Category;
 
 
 
@@ -14,14 +14,16 @@ class HomeController extends Controller
 
     public $_film;
 
-    public $_timeshow;
+    public $_category;
 
     public function __construct
     (
-        Film $film
+        Film $film,
+        Category $category
     )
     {
         $this->_film = $film;
+        $this->_category = $category;
     }
 
     public function index()

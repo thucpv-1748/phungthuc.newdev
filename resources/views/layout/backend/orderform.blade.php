@@ -23,7 +23,7 @@
                     <option value="" >Select</option>
                     @if($coupon)
                         @foreach($coupon as $value)
-                            <option value="{{$value->id}}" {{@$order['coupon_id'] == $value->id ? 'selected ="selected"' : ''}}>{{$value->name}}</option>
+                            <option value="{{$value->id}}" {{ @$order['coupon_id'] == $value->id ? 'selected ="selected"' : ''}}>{{ $value->name }}</option>
                         @endforeach
                     @endif
                 </select>
@@ -34,7 +34,7 @@
                     <option value="" >Select</option>
                     @if($timeShow)
                         @foreach($timeShow as $value)
-                            <option value="{{$value->id}}" {{(@$order['time_show_id'] == $value->id) ? 'selected ="selected"' : ''}}>{{$value->film->title}}</option>
+                            <option value="{{$value->id}}" {{( @$order['time_show_id'] == $value->id) ? 'selected ="selected"' : ''}}>{{ $value->film->title }}</option>
                         @endforeach
                     @endif
                 </select>

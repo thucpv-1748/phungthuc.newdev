@@ -6,8 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Store extends Model
 {
-    //
+    /**
+     * @var string
+     */
     protected $table = 'stores';
-    public $timestamps = false;
 
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
 }

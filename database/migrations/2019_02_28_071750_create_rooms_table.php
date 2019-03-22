@@ -28,7 +28,7 @@ class CreateRoomsTable extends Migration
      */
     public function down()
     {
-        Schema::table('seats', function (Blueprint $table) {
+        Schema::table('rooms', function (Blueprint $table) {
             $table->dropForeign('rooms_store_id_foreign');
         });
         Schema::dropIfExists('rooms');

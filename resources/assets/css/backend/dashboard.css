@@ -348,3 +348,14 @@ ul.nav.pull-right.top-menu>li>a:hover{
   height: 40px;
   line-height: 40px;
 }
+
+.top-nav{
+  height: 50px;
+  position: relative;
+}
+.nav.pull-right.top-menu{
+  height: 50px;
+}
+.dropdown{
+  height: 50px;
+}
