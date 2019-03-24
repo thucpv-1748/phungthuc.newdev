@@ -61,33 +61,18 @@ class UserController extends Controller
 
     public function saveUser(Request $request)
     {
-        $newpassword = $request->password;
         $modeluser = $this->model;
-        if ($request->id) {
-            $modeluser = $modeluser->findOrFail($request->id);
-            $currentpassword = $modeluser->password;
-            $this->checkPassword($currentpassword, $newpassword, $modeluser);
-        } else {
-            $modeluser->password = bcrypt($newpassword);
-        }
-        $modeluser->name = $request->name;
-        $modeluser->email = $request->email;
-        $modeluser->date_of_birth = $request->date_of_birth;
-        $modeluser->phone = $request->phone;
         try {
-            if ($modeluser->save()) {
-                $modeluser->roles()
-                            ->attach($this->role->findOrFail($request->role));
+            $modeluser->updateOrCreate($request->only('id', 'email', 'password', 'name', 'phone', 'date_of_birth'));
+            $modeluser->roles()->attach($this->role->findOrFail($request->role));
 
-                return redirect('admin/users')->with('success', __('save successful!'));
-            } else {
-                return redirect()->back()->with('error', __('save error!'));
-            }
+            return redirect('admin/users')->with('success', __('save successful!'));
         } catch (\Exception $e) {
             // insert query
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
+
 
     /**
      * @param $id

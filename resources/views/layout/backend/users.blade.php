@@ -19,7 +19,7 @@
     @endif
     <div class="header-page">
         <div class="add-user">
-           <a href="{{ url('/add-user') }}"><span>{{ __('Add User') }}</span></a>
+           <a href="{{ url('admin/add-user') }}"><span>{{ __('Add User') }}</span></a>
         </div>
     </div>
 
@@ -42,13 +42,13 @@
              @if (count($users)>0)
                 @foreach ($users as $key => $user)
                      <tr>
-                        <td> {{ @$user->id }}</td>
-                        <td> {{ @$user->email }}</td>
-                        <td> {{ @$user->name }}</td>
-                        <td> {{ @$user->roles->first()->name }}</td>
-                        <td> {{ @$user->phone }}</td>
-                        <td> {{ @$user->created_at }}</td>
-                        <td> {{ @$user->updated_at }}</td>
+                        <td> {{ $user->id }}</td>
+                        <td> {{ $user->email }}</td>
+                        <td> {{ $user->name }}</td>
+                        <td> {{ dd($user->roles->first->name) }}</td>
+                        <td> {{ $user->phone }}</td>
+                        <td> {{ $user->created_at }}</td>
+                        <td> {{ $user->updated_at }}</td>
                         <td><a href="{{ url('admin/edit-user/'.$user->id) }}">{{ __('Edit') }}</a></td>
                         <td><a href="{{ url('admin/delete-user/'.$user->id) }}">{{ __('Delete') }}</a></td>
                     </tr>

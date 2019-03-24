@@ -21,7 +21,6 @@ class User extends Authenticatable
         'password',
         'name',
         'phone',
-        'level',
         'date_of_birth'
     ];
 
@@ -38,11 +37,9 @@ class User extends Authenticatable
      * @param $value
      */
 
-    public function setPasswordAttribute($value)
+    public function setPasswordAttribute($password)
     {
-        if ($value) {
-            $this->attributes['password'] = app('hash')->needsRehash($value) ? Hash::make($value) : $value;
-        }
+        $this->attributes['password'] = bcrypt($password);
     }
 
     /**
