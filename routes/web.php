@@ -22,9 +22,9 @@ route::namespace('Backend')->group(function (){
     Route::prefix('admin')->middleware('UserAdmin')->group(function () {
         Route::get('users','UserController@getUsers');
         Route::get('add-user','UserController@addUser');
-        Route::post('add-user','UserController@saveUser');
+        Route::post('add-user','UserController@createUser');
         Route::get('edit-user/{id}','UserController@editUser');
-        Route::post('edit-user/{id}','UserController@saveUser') ;
+        Route::post('edit-user/{id}','UserController@updateUser') ;
         Route::get('deleteuser/{id}','UserController@deleteUsers');
         Route::get('dashboard','DashboardController@getDashboard') ;
         Route::get('logout','LogoutController@getLogout');
@@ -81,10 +81,10 @@ route::namespace('Backend')->group(function (){
         Route::post('edit-order/{id}','OrderController@saveOrder');
         Route::get('order','OrderController@getOrder');
         Route::get('add-role','UserController@addRole');
-        Route::post('add-role','UserController@saveRole');
+        Route::post('add-role','UserController@createRole');
         Route::get('role','UserController@getRole');
         Route::get('edit-role/{id}','UserController@editRole');
-        Route::post('edit-role/{id}','UserController@saveRole');
+        Route::post('edit-role/{id}','UserController@updateRole');
 
     });
 });

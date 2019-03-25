@@ -7,11 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Seat extends Model
 {
     /**
-     * @var string
-     */
-    protected $table = 'seats';
-    /**
      * @var bool
      */
     public $timestamps = false;
+
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'row',
+        'col',
+        'room_id',
+    ];
 }

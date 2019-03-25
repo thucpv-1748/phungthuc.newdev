@@ -45,7 +45,7 @@
                         <td> {{ $user->id }}</td>
                         <td> {{ $user->email }}</td>
                         <td> {{ $user->name }}</td>
-                        <td> {{ dd($user->roles->first->name) }}</td>
+                        <td> {{ $user->roles->first()->name }}</td>
                         <td> {{ $user->phone }}</td>
                         <td> {{ $user->created_at }}</td>
                         <td> {{ $user->updated_at }}</td>

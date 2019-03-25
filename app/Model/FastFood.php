@@ -11,10 +11,12 @@ class FastFood extends Model
      * @var bool
      */
     public $timestamps = false;
-
     /**
-     * @var string
+     * @var array
      */
-    protected $table = 'fast_foods';
-
+    protected $fillable = [
+        'name',
+        'description',
+        'price',
+    ];
 }

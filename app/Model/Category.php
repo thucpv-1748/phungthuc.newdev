@@ -7,9 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     /**
-     * @var string
+     * @var array
      */
-    protected $table = 'categories';
+    protected $fillable = [
+        'title',
+        'description',
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -19,5 +22,4 @@ class Category extends Model
     {
         return $this->hasMany('App\Model\Film');
     }
-
 }

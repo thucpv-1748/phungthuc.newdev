@@ -4,28 +4,28 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Repositories\Contracts\UserInterface;
+use App\Repositories\Contracts\RoleInterface;
 use Illuminate\Support\Facades\Auth;
-use App\Model\Role;
 
 class UserController extends Controller
 {
     /**
-     * @var User
+     * @var UserInterface
      */
     protected $model;
 
     /**
-     * @var Role
+     * @var RoleRepository|RoleInterface
      */
     protected $role;
 
     /**
      * UserController constructor.
-     * @param User $model
-     * @param Role $role
+     * @param UserInterface $model
+     * @param RoleRepository $role
      */
-    public function __construct(User $model, Role $role)
+    public function __construct(UserInterface $model, RoleInterface $role)
     {
         $this->model = $model;
         $this->role = $role;
@@ -37,9 +37,9 @@ class UserController extends Controller
      */
     public function getUsers()
     {
-        $data['users'] = $this->model->paginate(15);
+        $users = $this->model->paginate(config('setting.paginate'));
 
-        return view('layout.backend.users', $data);
+        return view('layout.backend.users', compact('users'));
     }
 
     /**
@@ -47,10 +47,9 @@ class UserController extends Controller
      */
     public function addUser()
     {
-        $model = $this->role->all();
-        $data['role'] = $model;
+        $role = $this->role->all();
 
-        return view('layout/backend/userform', $data);
+        return view('layout/backend/userform', compact('role'));
     }
 
     /**
@@ -59,12 +58,30 @@ class UserController extends Controller
      * create and update user
      */
 
-    public function saveUser(Request $request)
+    public function createUser(Request $request)
     {
         $modeluser = $this->model;
         try {
-            $modeluser->updateOrCreate($request->only('id', 'email', 'password', 'name', 'phone', 'date_of_birth'));
-            $modeluser->roles()->attach($this->role->findOrFail($request->role));
+            $modeluser->createUser($request);
+
+            return redirect('admin/users')->with('success', __('save successful!'));
+        } catch (\Exception $e) {
+            // insert query
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * create and update user
+     */
+
+    public function updateUser(Request $request)
+    {
+        $modeluser = $this->model;
+        try {
+            $modeluser->updateUser($request);
 
             return redirect('admin/users')->with('success', __('save successful!'));
         } catch (\Exception $e) {
@@ -80,30 +97,14 @@ class UserController extends Controller
      */
     public function editUser($id)
     {
-        $model = $this -> model;
-        $model = $model->findOrFail($id);
-
+        $model = $this->model->findOrFail($id);
         if ($model) {
-            $data['user'] = $model;
-            $data['role'] = $this->role->all();
+            $user = $model;
+            $role = $this->role->all();
 
-            return view('layout/backend/userform', $data);
+            return view('layout/backend/userform', compact('user', 'role'));
         } else {
             return redirect()->back()->with('error', __('Not found! please check User!'));
-        }
-    }
-    /**
-     * @param $currentpassword
-     * @param $newpassword
-     * @param $modeluser
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function checkPassword($currentpassword, $newpassword, $modeluser)
-    {
-        if ($newpassword !== $currentpassword) {
-            $modeluser->password = bcrypt($newpassword);
-
-            return $modeluser;
         }
     }
 
@@ -114,8 +115,7 @@ class UserController extends Controller
      */
     public function deleteUsers($id)
     {
-        $modeluser = $this->model;
-        $modeluser = $modeluser->findOrFail($id);
+        $modeluser = $this->model->findOrFail($id);
         if ($modeluser) {
             $modeluser->delete();
 
@@ -131,10 +131,10 @@ class UserController extends Controller
 
     public function getProfile()
     {
-        $data['user'] = Auth::user();
-        $data['role'] = $this->role->all();
+        $user = Auth::user();
+        $role = $this->role->all();
 
-        return view('layout/backend/profile', $data);
+        return view('layout/backend/profile', compact('user', 'role'));
     }
 
     /**
@@ -150,21 +150,28 @@ class UserController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function saveRole(Request $request)
+    public function createRole(Request $request)
     {
-        $role = $this->role;
-        $id = $request->id;
-        if ($id) {
-            $role = $role->findOrFail($id);
-        }
         try {
-            $role->name = $request->name;
-            $role->description = $request->description;
-            if ($role->save()) {
-                return redirect('admin/role')->with('success', __('save successful!'));
-            } else {
-                return redirect()->back()->with('error', __('save error!'));
-            }
+            $this->role->create($request->all());
+
+            return redirect('admin/role')->with('success', __('save successful!'));
+        } catch (\Exception $e) {
+            // insert query
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateRole(Request $request)
+    {
+        try {
+            $this->role->update($request->id, $request->all());
+
+            return redirect('admin/role')->with('success', __('save successful!'));
         } catch (\Exception $e) {
             // insert query
             return redirect()->back()->with('error', $e->getMessage());
@@ -176,9 +183,9 @@ class UserController extends Controller
      */
     public function getRole()
     {
-        $data['role'] = $this->role->paginate(15);
+        $role = $this->role->paginate(config('setting.paginate'));
 
-        return view('layout.backend.role', $data);
+        return view('layout.backend.role', compact('role'));
     }
 
     /**
@@ -188,8 +195,8 @@ class UserController extends Controller
 
     public function editRole($id)
     {
-        $data['role'] = $this->role->findOrFail($id);
+        $role = $this->role->findOrFail($id);
 
-        return view('layout.backend.roleform', $data);
+        return view('layout.backend.roleform', compact('role'));
     }
 }

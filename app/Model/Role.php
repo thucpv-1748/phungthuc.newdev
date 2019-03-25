@@ -9,14 +9,12 @@ class Role extends Model
 {
 
     /**
-     * @var string
+     * @var array
      */
-    protected $table = 'roles';
-
-    /**
-     * @var bool
-     */
-    public $timestamps = false;
+    protected $fillable = [
+        'name',
+        'description',
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

@@ -6,10 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Coupon extends Model
 {
-
     /**
-     * @var string
+     * @var array
      */
-    protected $table = 'coupons';
-
+    protected $fillable = [
+        'name',
+        'coupon_code',
+        'status',
+        'type',
+        'price',
+        'percent',
+    ];
 }

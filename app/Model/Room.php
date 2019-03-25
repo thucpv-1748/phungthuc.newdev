@@ -6,15 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
-
-    /**
-     * @var string
-     */
-    protected $table = 'rooms';
     /**
      * @var bool
      */
     public $timestamps = false;
+
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'store_id',
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -30,7 +33,6 @@ class Room extends Model
      */
     public function seat()
     {
-     return $this->hasMany('App\Model\Seat');
+        return $this->hasMany('App\Model\Seat');
     }
-
 }

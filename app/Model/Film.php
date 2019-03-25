@@ -6,17 +6,27 @@ use Illuminate\Database\Eloquent\Model;
 
 class Film extends Model
 {
-    //
     /**
      * @var bool
      */
     public $timestamps = false;
 
-
     /**
-     * @var string
+     * @var array
      */
-    protected $table = 'films';
+    protected $fillable = [
+        'title',
+        'img',
+        'description',
+        'language',
+        'subtitle',
+        'status',
+        'time',
+        'fist_show',
+        'director',
+        'actor',
+        'category_id',
+    ];
 
 
     /**
@@ -24,7 +34,7 @@ class Film extends Model
      */
     public function category()
     {
-        return $this->belongsTo('App\Model\Category','category_id');
+        return $this->belongsTo('App\Model\Category', 'category_id');
     }
 
     /**
@@ -34,5 +44,4 @@ class Film extends Model
     {
         return $this->hasMany('App\Model\TimeShow');
     }
-
 }

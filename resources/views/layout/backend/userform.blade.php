@@ -26,7 +26,7 @@
             </div>
             <div class="form-group">
                 <label for="pwd">{{ __('Password') }}:</label>
-                <input type="password" class="form-control" id="pwd" name="password" value="" required>
+                <input type="password" class="form-control" id="pwd" name="password" value="{{ isset($user) ? $user->password : ''}}" {{ isset($user) ? '' : 'required'}}>
             </div>
             <div class="form-group">
                 <label for="level">{{ __('Role') }}:</label>
@@ -34,7 +34,7 @@
                     <option value="" selected="selected" >{{ __('Select') }}</option>
                     @if($role)
                         @foreach($role as $value)
-                            <option value="{{ $value->id }}" {{ ( isset($user) ? $user->roles->first()->id : '' == $value->id) ? 'selected="selected"' :'' }}>{{ $value->name }}</option>
+                            <option value="{{ $value->id }}" {{ ( (isset($user)) ? ($user->roles->first()->id == $value->id) ? 'selected="selected"' : '' : '' ) }}>{{ $value->name }}</option>
                         @endforeach
                     @endif
                 </select>

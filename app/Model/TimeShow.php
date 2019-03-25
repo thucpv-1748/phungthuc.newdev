@@ -16,6 +16,18 @@ class TimeShow extends Model
     public $timestamps = false;
 
     /**
+     * @var array
+     */
+    protected $fillable = [
+        'film_id',
+        'room_id',
+        'status',
+        'time_show',
+        'price',
+        'sale_price',
+    ];
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
 
@@ -38,6 +50,6 @@ class TimeShow extends Model
      */
     public function order()
     {
-        return $this->hasMany('App\Model\Order','time_show_id');
+        return $this->hasMany('App\Model\Order', 'time_show_id');
     }
 }
