@@ -1,0 +1,18 @@
+.form-coupon .form-group {
+    label {
+        width: 100%;
+    }
+    &.coupon {
+        #coupon_code {
+            width: 80%;
+            float: left;
+        }
+        i {
+            font-size: 24px;
+            float: left;
+            margin-left: 10px;
+            line-height: 30px;
+            cursor: pointer;
+        }
+    }
+}

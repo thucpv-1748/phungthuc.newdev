@@ -4,33 +4,32 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\Store;
+use App\Repositories\Contracts\StoreInterface;
+
 class StoreController extends Controller
 {
-    //
-
     /**
-     * @var Store
+     * @var Store|StoreRepository
      */
-    protected $_model;
+    protected $model;
 
     /**
      * StoreController constructor.
-     * @param Store $model
+     * @param StoreRepository $model
      */
-    public function __construct(Store $model)
+    public function __construct(StoreInterface $model)
     {
-
-        $this->_model = $model;
+        $this->model = $model;
     }
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getStore(){
-        $store = $this->_model->paginate(15);
-        $data['store']= $store;
-        return view('layout/backend/store',$data);
+    public function getStore()
+    {
+        $store = $this->model->paginate(config('setting.paginate'));
+
+        return view('layout/backend/store', compact('store'));
     }
 
     /**
@@ -40,30 +39,36 @@ class StoreController extends Controller
     public function addStore()
     {
         return view('layout/backend/storeform');
-
     }
 
     /**
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function saveStore(Request $request)
+    public function createStore(Request $request)
     {
-        $store =$this->_model;
-        $id = $request->id;
-        if($id){
-            $store = $store::find($id);
-        }
-        try{
-            $store->name = $request->name;
-            $store->description = $request->description;
-            if($store->save()){
-                return redirect('admin/store')->with('success','save successful!');
-            }else{
-                return redirect()->back()->with('error','save error!');
-            }
+        try {
+            $this->model->create($request->all());
 
-        }catch(\Exception $e){
+            return redirect('admin/store')->with('success', __('save successful!'));
+        } catch (\Exception $e) {
+            // insert query
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateStore(Request $request)
+    {
+        try {
+            $this->model->update($request->id, $request->all());
+
+            return redirect('admin/store')->with('success', __('save successful!'));
+        } catch (\Exception $e) {
             // insert query
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -75,14 +80,12 @@ class StoreController extends Controller
      */
     public function editStore($id)
     {
-        $store = $this->_model;
-         $store = $store::find($id);
-         if($store){
-             $data['store'] = $store;
-             return view('layout/backend/storeform', $data);
-         }else{
-             return redirect()->back()->with('error', 'Not found! please check Store!');
-         }
+        $store = $this->model->findOrFail($id);
+        if ($store) {
+            return view('layout/backend/storeform', compact('store'));
+        } else {
+            return redirect()->back()->with('error', __('Not found! please check Store!'));
+        }
     }
 
 
@@ -92,15 +95,13 @@ class StoreController extends Controller
      */
     public function deleteStore($id)
     {
-        $store =$this->_model;
-        $store = $store::find($id);
+        $store = $this->model->findOrFail($id);
         if ($store) {
             $store->delete();
-            return redirect()->back()->with('success', 'delete successful!');
+
+            return redirect()->back()->with('success', __('delete successful!'));
         } else {
-            return redirect()->back()->with('error', 'Not found! please check store!');
+            return redirect()->back()->with('error', __('Not found! please check store!'));
         }
     }
-
-
 }

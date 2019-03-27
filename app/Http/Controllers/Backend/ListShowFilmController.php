@@ -4,69 +4,69 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\TimeShow;
-use App\Model\Film;
-use App\Model\Room;
+use App\Repositories\Contracts\TimeShowInterface;
+use App\Repositories\Contracts\FilmInterface;
+use App\Repositories\Contracts\RoomInterface;
 
 class ListShowFilmController extends Controller
 {
-    //
+    /**
+     * @var ListShowFilm|TimeShowInterface
+     */
+    public $model;
 
     /**
-     * @var ListShowFilm
+     * @var ListFilm|FilmInterface
      */
-    public $_model;
+    public $listfilm;
 
     /**
-     * @var ListFilm
+     * @var Room|RoomInterface
      */
-    public $_listfilm;
-
-    /**
-     * @var Room
-     */
-    public $_room;
+    public $room;
 
     /**
      * ListShowFilmController constructor.
-     * @param ListShowFilm $model
-     * @param ListFilm $listfilm
-     * @param Room $room
+     * @param TimeShowInterface $model
+     * @param FilmInterface $listfilm
+     * @param RoomInterface $room
      */
     public function __construct(
-        TimeShow $model,
-        Film $listfilm,
-        Room $room
+        TimeShowInterface $model,
+        FilmInterface $listfilm,
+        RoomInterface $room
     )
     {
-        $this->_model = $model;
-        $this->_listfilm = $listfilm;
-        $this->_room = $room;
+        $this->model = $model;
+        $this->listfilm = $listfilm;
+        $this->room = $room;
     }
 
     /**
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function saveListShowFilm(Request $request){
-
-
-        $model = $this->_model;
-        if ($request->id){
-            $model = $model->find($request->id);
-        }
-        $model->film_id = $request->film_id;
-        $model->room_id = $request->room_id;
-        $model->status = $request->status;
-        $model->time_show = $request->time_show;
-        $model->price = $request->price;
-        $model->sale_price = $request->sale_price;
+    public function createListShowFilm(Request $request)
+    {
         try{
-            if($model->save()){
-                return redirect('admin/time-show')->with('success','save successful!');
-            }else{
-                return redirect()->back()->with('error','error save!');
-            }
+            $this->model->create($request->all());
+
+            return redirect('admin/time-show')->with('success', __('save successful!'));
+        }catch (\Exception $e){
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateListShowFilm(Request $request)
+    {
+        try{
+            $this->model->update($request->id, $request->all());
+
+            return redirect('admin/time-show')->with('success', __('save successful!'));
         }catch (\Exception $e){
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -78,9 +78,10 @@ class ListShowFilmController extends Controller
      */
     public function addTimeShow()
     {
-        $data['rooms']= $this->_room->all();
-        $data['listfilms'] = $this -> _listfilm ->all();
-        return view('layout.backend.listshowform',$data);
+        $rooms = $this->room->all();
+        $listfilms = $this->listfilm->all();
+
+        return view('layout.backend.listshowform', compact('rooms', 'listfilms'));
     }
 
 
@@ -91,15 +92,15 @@ class ListShowFilmController extends Controller
 
     public function editTimeShow($id)
     {
-       $model = $this->_model->find($id);
-       if($model)
-       {
-           $data['timeshow'] = $model;
-           $data['rooms']= $this->_room->all();
-           $data['listfilms'] = $this -> _listfilm ->all();
-           return view('layout.backend.listshowform',$data);
-       }else{
-           return redirect()->back()->with('error','not found!');
+       $model = $this->model->findOrFail($id);
+       if ($model) {
+           $timeshow = $model;
+           $rooms = $this->room->all();
+           $listfilms = $this->listfilm->all();
+
+           return view('layout.backend.listshowform', compact('timeshow', 'rooms', 'listfilms'));
+       } else {
+           return redirect()->back()->with('error', __('not found!'));
        }
     }
 
@@ -108,10 +109,11 @@ class ListShowFilmController extends Controller
      */
 
 
-    public function getTimeShow(){
-        $model = $this->_model->paginate(15);
-        $data['time_show'] = $model;
-        return view('layout.backend.timeshow',$data);
+    public function getTimeShow()
+    {
+        $time_show = $this->model->paginate(Config('setting.paginate'));
+
+        return view('layout.backend.timeshow', compact('time_show'));
     }
 
 
@@ -122,7 +124,7 @@ class ListShowFilmController extends Controller
 
     public function deleteTimeShow($id)
     {
-        $model = $this->_model->find($id);
+        $model = $this->model->findOrFail($id);
         if($model->delete())
         {
             return redirect('admin/time-show')->with('success','delete successful!');

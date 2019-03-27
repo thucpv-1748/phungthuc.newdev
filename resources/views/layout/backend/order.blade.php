@@ -1,9 +1,10 @@
 @extends('layout.backend.admin')
 
-@section('title','List Coupon')
+@section('title', __('List Coupon'))
+
 @section('content')
     <div class="form-store">
-        @if(session()->has('success'))
+        @if (session()->has('success'))
             <div class="alert alert-success">
                 {{ session()->get('success') }}
             </div>
@@ -24,7 +25,7 @@
             @endif
         <div class="header-page">
             <div class="add-store">
-                <a href="{{url('admin/add-order')}}" > <span>Add Order</span></a>
+                <a href="{{url('admin/add-order')}}"><span>{{ __('Add Order') }}</span></a>
             </div>
         </div>
 

@@ -1,12 +1,13 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
+    "/css/backend/room.css": "/css/backend/room.css",
     "/css/backend/login.css": "/css/backend/login.css",
+    "/css/backend/coupon.css": "/css/backend/coupon.css",
     "/css/frontend/custom.css": "/css/frontend/custom.css",
     "/js/backend/dashboard.js": "/js/backend/dashboard.js",
     "/css/backend/dashboard.css": "/css/backend/dashboard.css",
     "/css/backend/styles.css": "/css/backend/styles.css",
-    "/bootstrap-3.3.5": "/bootstrap-3.3.5",
     "/css/backend/user.css": "/css/backend/user.css",
     "/get-tweets1.1.php": "/get-tweets1.1.php"
 }

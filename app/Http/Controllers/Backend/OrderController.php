@@ -4,56 +4,54 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\Order;
+use App\Repositories\Contracts\OrderInterface;
 use Illuminate\Support\Facades\Auth;
-use App\Model\Coupon;
-use App\Model\TimeShow;
-use App\Model\FastFood;
+use App\Repositories\Contracts\CouponInterface;
+use App\Repositories\Contracts\TimeShowInterface;
+use App\Repositories\Contracts\FastFoodInterface;
 
 
 class OrderController extends Controller
 {
-
-
     /**
-     * @var Order
+     * @var OrderInterface
      */
 
-    public $_model;
+    public $model;
 
     /**
-     * @var Coupon
+     * @var CouponInterface
      */
-    public $_coupon;
+    public $coupon;
 
     /**
-     * @var TimeShow
+     * @var TimeShowInterface
      */
-    public $_timeShow;
+    public $timeShow;
 
     /**
-     * @var FastFood
+     * @var FastFoodInterface
      */
-    public $_fastFood;
+    public $fastFood;
 
     /**
      * OrderController constructor.
-     * @param Order $model
-     * @param Coupon $coupon
-     * @param TimeShow $timeShow
-     * @param FastFood $fastFood
+     * @param OrderInterface $model
+     * @param CouponInterface $coupon
+     * @param TimeShowInterface $timeShow
+     * @param FastFoodInterface $fastFood
      */
     public function __construct(
-        Order $model,
-        Coupon $coupon,
-        TimeShow $timeShow,
-        FastFood $fastFood
+        OrderInterface $model,
+        CouponInterface $coupon,
+        TimeShowInterface $timeShow,
+        FastFoodInterface $fastFood
     )
     {
-        $this->_model = $model;
-        $this->_coupon = $coupon;
-        $this->_fastFood = $fastFood;
-        $this->_timeShow = $timeShow;
+        $this->model = $model;
+        $this->coupon = $coupon;
+        $this->fastFood = $fastFood;
+        $this->timeShow = $timeShow;
     }
 
 
@@ -62,10 +60,10 @@ class OrderController extends Controller
      */
     public function addOrder()
     {
-        $data['fastFood'] = $this->_fastFood->all();
-        $data['timeShow'] = $this->_timeShow->all();
-        $data['coupon']  = $this->_coupon->where('status','=','1')->get();
-        return view('layout.backend.orderform',$data);
+        $fastFood = $this->fastFood->all();
+        $timeShow = $this->timeShow->all();
+        $coupon  = $this->coupon->where('status', '=', '1')->get();
+        return view('layout.backend.orderform', compact('fastFood', 'timeShow', 'coupon'));
     }
 
     /**
@@ -73,7 +71,7 @@ class OrderController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function saveOrder(Request $request){
-            $model = $this ->_model;
+            $model = $this ->model;
             $id = $request->id;
             if($id){
                 $model = $model->find($id);
@@ -102,7 +100,7 @@ class OrderController extends Controller
 
     public function ajaxGetCoupon($id)
     {
-       $coupon = $this->_coupon->find($id);
+       $coupon = $this->coupon->find($id);
        if($coupon)
        {
            $data = $coupon->toJson();
@@ -115,7 +113,7 @@ class OrderController extends Controller
 
     public function ajaxGetTimeShow($id)
     {
-        $timeShow = $this->_timeShow->find($id);
+        $timeShow = $this->timeShow->find($id);
         if($timeShow && $timeShow->status == 1)
         {
             $timeShow->room->seat;
@@ -129,12 +127,12 @@ class OrderController extends Controller
 
     public function editOrder($id)
     {
-       $model = $this->_model->find($id);
+       $model = $this->model->find($id);
        if($model){
                 $data['order'] = $model;
-               $data['fastFood'] = $this->_fastFood->all();
-               $data['timeShow'] = $this->_timeShow->all();
-               $data['coupon']  = $this->_coupon->where('status','=','1')->get();
+               $data['fastFood'] = $this->fastFood->all();
+               $data['timeShow'] = $this->timeShow->all();
+               $data['coupon']  = $this->coupon->where('status','=','1')->get();
                 return view('layout.backend.orderform',$data);
             }else{
                 return redirect()->back()->with('error','not found !');
@@ -143,7 +141,7 @@ class OrderController extends Controller
 
     public function getOrder()
     {
-       $model = $this->_model->paginate(15);
+       $model = $this->model->paginate(15);
         $data['order'] = $model;
         return view('layout/backend/order',$data);
 

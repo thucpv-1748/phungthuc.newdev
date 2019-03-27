@@ -14,10 +14,12 @@ let mix = require('laravel-mix');
 mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');
 
+mix.sass('resources/assets/css/backend/room.scss','public/css/backend');
 mix.sass('resources/assets/css/backend/login.scss','public/css/backend');
+mix.sass('resources/assets/css/backend/coupon.scss','public/css/backend');
 mix.copy('resources/assets/css/backend/dashboard.css','public/css/backend');
 mix.copy('resources/assets/css/backend/styles.css','public/css/backend');
-mix.copy('resources/bootstrap-3.3.5/','public/bootstrap-3.3.5/');
+mix.copy('node_modules/bootstrap/','public/bootstrap-3.3.5/');
 mix.copy('resources/assets/css/backend/user.css','public/css/backend');
 mix.js('resources/assets/js/backend/dashboard.js', 'public/js/backend');
 mix.copy('resources/assets/img/','public/img');

@@ -52,4 +52,12 @@ class Order extends Model
     {
         return $this->hasMany('App\Model\FastFood', 'fast_food_ids');
     }
+
+    /**
+     * @param $seat
+     */
+    public function setSeatAttribute($seat)
+    {
+        $this->attributes['seat'] = implode(',', $seat);
+    }
 }

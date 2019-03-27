@@ -4,29 +4,24 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\Coupon;
+use App\Repositories\Contracts\CouponInterface;
 
 class CouponController extends Controller
 {
-    //
-
     /**
-     * @var Coupon
+     * @var CouponInterface 
      */
 
-    protected $_model;
+    protected $model;
 
     /**
      * CouponController constructor.
-     * @param Coupon $model
+     * @param CouponInterface $model
      */
-    public function __construct(Coupon $model)
+    public function __construct(CouponInterface $model)
     {
-        $this->_model = $model;
-
+        $this->model = $model;
     }
-
-
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -34,31 +29,33 @@ class CouponController extends Controller
     {
         return view('layout.backend.couponform');
     }
+    
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function createCoupon(Request $request)
+    {
+        try {
+            $this->model->create($request->all());
 
+            return redirect('admin/coupon')->with('success', __('save successful!'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
 
     /**
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function saveCoupon(Request $request)
+    public function updateCoupon(Request $request)
     {
-        $model = $this->_model;
-        if($request->id){
-            $model =  $model->find($request->id);
-        }
-        $model->name = $request->name;
-        $model->coupon_code = $request->coupon_code;
-        $model->status = $request->status;
-        $model->type = $request->type;
-        $model->percent = ($request->percent)?$request->percent : 0;
-        $model->price = ($request->price)?$request->price : 0;
-        try{
-            if($model->save()){
-                return redirect('admin/coupon')->with('success','save successful!');
-            }else{
-                return redirect()->back()->with('error','error save!');
-            }
-        }catch (\Exception $e){
+        try {
+            $this->model->update($request->id, $request->all());
+
+            return redirect('admin/coupon')->with('success', __('save successful!'));
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
@@ -69,21 +66,22 @@ class CouponController extends Controller
 
     public function getCoupon()
     {
-        $data['coupon'] = $this->_model->paginate(15);
-        return view('layout.backend.coupon',$data);
+        $coupon = $this->model->paginate(config('setting.paginate'));
+
+        return view('layout.backend.coupon', compact('coupon'));
     }
 
     /**
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function editCoupon($id){
-        $model = $this->_model->find($id);
-        if($model){
-            $data['coupon'] = $model;
-            return view('layout.backend.couponform',$data);
-        }else{
-            return redirect()->back()->with('error','not found !');
+    public function editCoupon($id)
+    {
+        $coupon = $this->model->findOrFail($id);
+        if ($coupon) {
+            return view('layout.backend.couponform', compact('coupon'));
+        } else {
+            return redirect()->back()->with('error', __('not found !'));
         }
     }
 
@@ -91,13 +89,13 @@ class CouponController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function deleteCoupon($id){
-        $model = $this->_model->find($id);
-        if($model->delete())
-        {
-            return redirect('admin/coupon')->with('success','delete successful!');
-        }else{
-            return redirect()->back()->with('error','delete save!');
+    public function deleteCoupon($id)
+    {
+        $model = $this->model->findOrFail($id);
+        if ($model->delete()) {
+            return redirect('admin/coupon')->with('success', __('delete successful!'));
+        } else {
+            return redirect()->back()->with('error', __('delete save!'));
         }
     }
 }

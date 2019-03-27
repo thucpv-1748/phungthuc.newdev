@@ -1,18 +1,18 @@
 @extends('layout.backend.admin')
 
-@section('title','User')
+@section('title', __('User'))
 
 @section('head')
     <link href="{{ URL::asset('css/backend/user.css') }}" rel="stylesheet" type="text/css">
 @endsection
 
 @section('content')
-    @if(session()->has('success'))
+    @if (session()->has('success'))
         <div class="alert alert-success">
             {{ session()->get('success') }}
         </div>
     @endif
-    @if(session()->has('error'))
+    @if (session()->has('error'))
         <div class="alert alert-danger">
             {{ session()->get('error') }}
         </div>
@@ -39,7 +39,7 @@
                 <td>{{ __('Edit') }}</td>
                 <td>{{ __('Delete') }}</td>
             </tr>
-             @if (count($users)>0)
+             @if (count($users) > 0 )
                 @foreach ($users as $key => $user)
                      <tr>
                         <td> {{ $user->id }}</td>
@@ -49,8 +49,8 @@
                         <td> {{ $user->phone }}</td>
                         <td> {{ $user->created_at }}</td>
                         <td> {{ $user->updated_at }}</td>
-                        <td><a href="{{ url('admin/edit-user/'.$user->id) }}">{{ __('Edit') }}</a></td>
-                        <td><a href="{{ url('admin/delete-user/'.$user->id) }}">{{ __('Delete') }}</a></td>
+                        <td><a href="{{ url('admin/edit-user/' . $user->id) }}">{{ __('Edit') }}</a></td>
+                        <td><a href="{{ url('admin/delete-user/' . $user->id) }}">{{ __('Delete') }}</a></td>
                     </tr>
                 @endforeach
              @endif

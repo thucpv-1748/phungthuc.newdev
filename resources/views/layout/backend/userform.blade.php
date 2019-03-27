@@ -1,14 +1,14 @@
 @extends('layout.backend.admin')
 
-@section('title','Form user')
+@section('title', __('Form user'))
 
 @section('content')
-    @if(session()->has('success'))
+    @if (session()->has('success'))
         <div class="alert alert-success">
             {{ session()->get('success') }}
         </div>
     @endif
-    @if(session()->has('error'))
+    @if (session()->has('error'))
         <div class="alert alert-danger">
             {{ session()->get('error') }}
         </div>
@@ -31,8 +31,8 @@
             <div class="form-group">
                 <label for="level">{{ __('Role') }}:</label>
                 <select class="form-control" name="role" required>
-                    <option value="" selected="selected" >{{ __('Select') }}</option>
-                    @if($role)
+                    <option value="" selected="selected">{{ __('Select') }}</option>
+                    @if ($role)
                         @foreach($role as $value)
                             <option value="{{ $value->id }}" {{ ( (isset($user)) ? ($user->roles->first()->id == $value->id) ? 'selected="selected"' : '' : '' ) }}>{{ $value->name }}</option>
                         @endforeach

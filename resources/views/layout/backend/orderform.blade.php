@@ -3,7 +3,6 @@
 @section('title','Order')
 
 @section('content')
-
     <div class="form-category">
         <form id="frm-category" name="frm-category" class="frm-category" method="post">
             <div class="form-group">

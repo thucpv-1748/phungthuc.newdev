@@ -3,26 +3,23 @@
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use App\Model\Category;
+use App\Repositories\Contracts\CategoryInterface;
 use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
-    //
-
     /**
-     * @var Category
+     * @var CategoryInterface
      */
-    protected $_model;
+    protected $model;
 
     /**
      * CategoryController constructor.
-     * @param Category $model
+     * @param CategoryInterface $model
      */
-    public function __construct(Category $model)
+    public function __construct(CategoryInterface $model)
     {
-        $this -> _model = $model;
-
+        $this->model = $model;
     }
 
     /**
@@ -30,17 +27,17 @@ class CategoryController extends Controller
      */
     public function getCategory()
     {
-        $data['category'] = $this->_model->paginate(15);
-        return view('layout/backend/category',$data);
+        $category = $this->model->paginate(config('setting.paginate'));
 
+        return view('layout/backend/category', compact('category'));
     }
 
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View\
      */
-    public function getFormCategory(){
-
+    public function getFormCategory()
+    {
         return view('layout/backend/categoryform');
     }
 
@@ -49,26 +46,32 @@ class CategoryController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateCategory(Request $request){
-        $Category = $this->_model;
-        $id = $request->id_category;
-        if($id){
-            $Category = $Category::find($id);
-        }
-        try{
-            $Category->title = $request->name;
-            $Category->description = $request->description;
-            if($Category->save()){
-                return redirect('admin/category')->with('success','save successful!');
-            }else{
-                return redirect()->back()->with('error','save error!');
-            }
+    public function createCategory(Request $request)
+    {
+        try {
+            $this->model->create($request->all());
 
-        }catch(\Exception $e){
+            return redirect('admin/category')->with('success', __('save successful!'));
+        } catch (\Exception $e) {
             // insert query
-        return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage());
         }
+    }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateCategory(Request $request)
+    {
+        try {
+            $this->model->update($request->id, $request->all());
+
+            return redirect('admin/category')->with('success', __('save successful!'));
+        } catch (\Exception $e) {
+            // insert query
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
 
@@ -78,14 +81,9 @@ class CategoryController extends Controller
      */
     public function editCategory($id)
     {
-        $Category = $this->_model;
-        if ($id) {
-            $Category = $Category::find($id)->toArray();
-            $data['category'] = $Category;
-            return view('layout/backend/categoryform', $data);
-        } else {
-            return redirect()->back()->with('error', 'Not found! please check Category!');
-        }
+        $category = $this->model->findOrFail($id);
+
+        return view('layout/backend/categoryform', compact('category'));
     }
 
 
@@ -93,17 +91,15 @@ class CategoryController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function deleteCategory($id){
-            $Category = $this->_model;
-            $Category = $Category::find($id);
-            if ($Category) {
-                $Category->delete();
-                return redirect()->back()->with('success', 'delete successful!');
-            } else {
-                return redirect()->back()->with('error', 'Not found! please check Category!');
-            }
+    public function deleteCategory($id)
+    {
+        $category = $this->model->findOrFail($id);
+        if ($category) {
+            $category->delete();
 
-     }
-
-
+            return redirect()->back()->with('success', __('delete successful!'));
+        } else {
+            return redirect()->back()->with('error', __('Not found! please check Category!'));
+        }
+    }
 }
