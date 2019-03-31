@@ -68,17 +68,17 @@ route::namespace('Backend')->group(function (){
         Route::post('edit-coupon/{id}','CouponController@updateCoupon');
         Route::get('delete-coupon/{id}','CouponController@deleteCoupon');
         Route::get('add-fast-food','FastFoodController@addFastFood');
-        Route::post('add-fast-food','FastFoodController@saveFastFood');
+        Route::post('add-fast-food','FastFoodController@createFastFood');
         Route::get('fast-food','FastFoodController@getFastFood');
         Route::get('edit-fast-food/{id}','FastFoodController@editFastFood');
-        Route::post('edit-fast-food/{id}','FastFoodController@saveFastFood');
+        Route::post('edit-fast-food/{id}','FastFoodController@updateFastFood');
         Route::get('delete-fast-food/{id}','FastFoodController@deleteFastFood');
         Route::get('add-order','OrderController@addOrder');
         Route::get('ajax-coupon/{id}','OrderController@ajaxGetCoupon');
         Route::get('ajax-time-show/{id}','OrderController@ajaxGetTimeShow');
-        Route::post('add-order','OrderController@saveOrder');
+        Route::post('add-order','OrderController@createOrder');
         Route::get('edit-order/{id}','OrderController@editOrder');
-        Route::post('edit-order/{id}','OrderController@saveOrder');
+        Route::post('edit-order/{id}','OrderController@updateOrder');
         Route::get('order','OrderController@getOrder');
         Route::get('add-role','UserController@addRole');
         Route::post('add-role','UserController@createRole');
@@ -102,8 +102,7 @@ route::namespace('Backend')->group(function (){
     //ajax find  in category
     Route::post('get-data','Frontend\FilmController@getData');
     Route::post('check-coupon','Frontend\BookController@getCoupon');
+    Route::get('cinema','Frontend\CinemaController@getAll');
 
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');

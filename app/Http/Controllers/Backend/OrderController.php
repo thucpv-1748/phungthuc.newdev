@@ -63,6 +63,7 @@ class OrderController extends Controller
         $fastFood = $this->fastFood->all();
         $timeShow = $this->timeShow->all();
         $coupon  = $this->coupon->where('status', '=', '1')->get();
+
         return view('layout.backend.orderform', compact('fastFood', 'timeShow', 'coupon'));
     }
 
@@ -70,40 +71,40 @@ class OrderController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function saveOrder(Request $request){
-            $model = $this ->model;
-            $id = $request->id;
-            if($id){
-                $model = $model->find($id);
-            }
-            $model->user_id = Auth::user()->id;
-            $model->time_show_id = $request->time_show_id;
-            $model->coupon_id = $request->coupon_id;
-            $model->fast_food_ids = $request->fast_food_ids;
-            $model->seat = implode(',',$request->seat_ids);
-            $model->status = $request->status;
-            $model->total_price = $request->total_price;
-            $model->sale_price = $request->sale_price;
-            $model->final_price = $request -> final_price;
-            try{
-                if($model->save()){
-                    return redirect('admin/order')->with('success','save successful!');
-                }else{
-                    return redirect()->back()->with('error','error save!');
-                }
-            }catch(\Exception $e){
-                // insert query
-                return redirect()->back()->with('error', $e->getMessage());
-            }
+    public function createOrder(Request $request)
+    {
+        try{
+            $this->model->create($request->all());
+
+            return redirect('admin/order')->with('success','save successful!');
+        }catch(\Exception $e){
+            // insert query
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateOrder(Request $request)
+    {
+        try{
+            $this->model->update($request->id, $request->all());
+
+            return redirect('admin/order')->with('success','save successful!');
+        }catch(\Exception $e){
+            // insert query
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
 
     public function ajaxGetCoupon($id)
     {
-       $coupon = $this->coupon->find($id);
-       if($coupon)
-       {
+       $coupon = $this->coupon->findOrFail($id);
+       if ($coupon) {
            $data = $coupon->toJson();
+
            return response()->json(array('success' => true,'data'=>$data));
        }else{
            return response()->json(array('success' => false));
@@ -113,37 +114,32 @@ class OrderController extends Controller
 
     public function ajaxGetTimeShow($id)
     {
-        $timeShow = $this->timeShow->find($id);
-        if($timeShow && $timeShow->status == 1)
-        {
+        $timeShow = $this->timeShow->findOrFail($id);
+        if ($timeShow && $timeShow->status == 1) {
             $timeShow->room->seat;
             $timeShow->order;
             $time_show = $timeShow->toJson();
-            return response()->json(array('success' => true,'data'=>$time_show));
-        }else{
+
+            return response()->json(array('success' => true, 'data' => $time_show));
+        } else {
             return response()->json(array('success' => false));
         }
     }
 
     public function editOrder($id)
     {
-       $model = $this->model->find($id);
-       if($model){
-                $data['order'] = $model;
-               $data['fastFood'] = $this->fastFood->all();
-               $data['timeShow'] = $this->timeShow->all();
-               $data['coupon']  = $this->coupon->where('status','=','1')->get();
-                return view('layout.backend.orderform',$data);
-            }else{
-                return redirect()->back()->with('error','not found !');
-       }
+        $order = $this->model->findOrFail($id);
+        $fastFood = $this->fastFood->all();
+        $timeShow = $this->timeShow->all();
+        $coupon = $this->coupon->where('status', '=', '1')->get();
+
+        return view('layout.backend.orderform', compact('order', 'fastFood', 'timeShow', 'coupon'));
     }
 
     public function getOrder()
     {
-       $model = $this->model->paginate(15);
+       $model = $this->model->paginate(config('setting.paginate'));
         $data['order'] = $model;
         return view('layout/backend/order',$data);
-
     }
 }

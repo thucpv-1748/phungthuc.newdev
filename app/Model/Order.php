@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Order extends Model
 {
@@ -59,5 +60,13 @@ class Order extends Model
     public function setSeatAttribute($seat)
     {
         $this->attributes['seat'] = implode(',', $seat);
+    }
+
+    /**
+     * @param $user_id
+     */
+    public function setUserId($user_id)
+    {
+        $this->attributes['user_id'] = Auth::id();
     }
 }
