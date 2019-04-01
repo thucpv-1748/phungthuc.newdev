@@ -217,4 +217,9 @@ class BookController extends Controller
 
         return view('layout.frontend.step-final', compact('order', 'sits', 'fastfood'));
     }
+
+    public function getBook()
+    {
+        return view('layout.frontend.book');
+    }
 }

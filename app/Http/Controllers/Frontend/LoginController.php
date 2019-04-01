@@ -98,4 +98,11 @@ class LoginController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
+
+    public function getLogout()
+    {
+        Auth::logout();
+
+        return redirect('/home');
+    }
 }

@@ -1,35 +1,17 @@
 @extends('layout.frontend.frontend_master')
 
-@section('page','book1')
+@section('page', __('step 1'))
 
 @section('head')
-    <!-- jQuery UI --> 
-        <link href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
-        <!-- Swiper slider -->
-        <link href="{{ URL::asset('css/frontend/external/idangerous.swiper.css') }}" rel="stylesheet" />
+    <!-- jQuery UI -->
+    <link href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+    <!-- Swiper slider -->
+    <link href="{{ URL::asset('css/frontend/external/idangerous.swiper.css') }}" rel="stylesheet" />
 @endsection
 
 
 @section('content')
-        <!-- Search bar -->
-        <div class="search-wrapper">
-            <div class="container container--add">
-                <form id='search-form' method='get' class="search">
-                    <input type="text" class="search__field" placeholder="Search">
-                    <select name="sorting_item" id="search-sort" class="search__sort" tabindex="0">
-                        <option value="1" selected='selected'>By title</option>
-                        <option value="2">By year</option>
-                        <option value="3">By producer</option>
-                        <option value="4">By title</option>
-                        <option value="5">By year</option>
-                    </select>
-                    <button type='submit' class="btn btn-md btn--danger search__button">search a movie</button>
-                </form>
-            </div>
-        </div>
-        
         <!-- Main content -->
-
         <section class="container">
             <div class="order-container">
                 <div class="order">
@@ -114,9 +96,9 @@
     <!-- Swiper slider -->
     <script src="{{ URL::asset('js/frontend/external/idangerous.swiper.min.js') }}"></script>
 	<!-- JavaScript-->
-		<script type="text/javascript">
-            $(document).ready(function() {
-                init_BookingOne();
-            });
-		</script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            init_BookingOne();
+        });
+    </script>
 @endsection

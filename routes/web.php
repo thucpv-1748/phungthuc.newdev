@@ -94,6 +94,7 @@ route::namespace('Backend')->group(function (){
     route::namespace('Frontend')->group(function () {
         Route::get('home', 'HomeController@index');
         Route::middleware('CheckLoginUser')->group(function () {
+            Route::get('book', 'BookController@getBook');
             Route::get('step1/{id}', 'BookController@getStep1');
             Route::post('step1/{id}', 'BookController@postStep1');
             Route::get('step2/{id}', 'BookController@getStep2');
@@ -106,6 +107,7 @@ route::namespace('Backend')->group(function (){
         Route::get('login', 'LoginController@getLogin');
         Route::post('login', 'LoginController@postLogin');
         });
+        Route::get('logout', 'LoginController@getLogout');
         Route::get('registration', 'LoginController@getRegistration');
         Route::post('registration', 'LoginController@createUser');
         Route::get('film/{id}', 'FilmController@getFilm');
@@ -115,6 +117,7 @@ route::namespace('Backend')->group(function (){
         Route::post('check-coupon', 'BookController@getCoupon');
         Route::get('cinema', 'CinemaController@getAll');
         Route::get('coming-soon', 'CinemaController@getComingSoon');
+        Route::get('contact', 'CinemaController@getContact');
     });
 
 

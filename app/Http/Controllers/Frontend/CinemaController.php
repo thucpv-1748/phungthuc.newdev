@@ -41,4 +41,9 @@ class CinemaController extends Controller
     {
         return view('layout.frontend.coming-soon');
     }
+
+    public function getContact()
+    {
+        return view('layout.frontend.contact');
+    }
 }

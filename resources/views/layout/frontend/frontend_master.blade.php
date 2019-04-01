@@ -92,15 +92,7 @@
                     </li>
                     <li>
                         <span class="sub-nav-toggle plus"></span>
-                        <a href="news-left.html">News</a>
-                        <ul>
-                            <li class="menu__nav-item"><a href="news-left.html">News (rigth sidebar)</a></li>
-                            <li class="menu__nav-item"><a href="news-right.html">News (left sidebar)</a></li>
-                            <li class="menu__nav-item"><a href="news-full.html">News (full widht)</a></li>
-                            <li class="menu__nav-item"><a href="single-page-left.html">Single post (rigth sidebar)</a></li>
-                            <li class="menu__nav-item"><a href="single-page-right.html">Single post (left sidebar)</a></li>
-                            <li class="menu__nav-item"><a href="single-page-full.html">Single post (full widht)</a></li>
-                        </ul>
+                        <a href="{{ url('/contact') }}">{{ __('Contact')  }}</a>
                     </li>
                     <li>
                         <span class="sub-nav-toggle plus"></span>
@@ -169,7 +161,7 @@
 
                     </div>
                 @else
-                    <a href="#" class="btn btn--sign">{{ __('Sign in') }}</a>
+                    <a href="{{ url('/login') }}" class="btn btn--sign">{{ __('Sign in') }}</a>
                 @endif
                 <a href="#" class="btn btn-md btn--warning btn--book btn-control--home login-window">{{ __('Book a ticket') }}</a>
             </div>
