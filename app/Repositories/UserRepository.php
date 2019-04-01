@@ -24,7 +24,12 @@ class UserRepository extends BaseRepository implements UserInterface
     public function createUser($input)
     {
         $data = $this->model->create($input->only('email', 'password', 'name', 'phone', 'date_of_birth'));
-        $data->roles()->attach(Role::findOrFail($input->role));
+        if ($input->role) {
+            $data->roles()->attach(Role::findOrFail($input->role));
+        } else {
+            $role = Role::where('name', 'user')->first();
+            $data->roles()->attach(Role::findOrFail($role->id));
+        }
 
         return $data;
     }

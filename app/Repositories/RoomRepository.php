@@ -52,14 +52,15 @@ class RoomRepository extends BaseRepository implements RoomInterface
      * @param $roomid
      * @param $input
      */
-    public function saveSeatByRoom($roomid, $input){
+    public function saveSeatByRoom($roomid, $input)
+    {
         $this->seat->where('room_id', $roomid)->delete();
         if ($input) {
-            foreach ($input as $key => $value ) {
+            foreach ($input as $key => $value) {
                 $data = [
-                    "row" => $key,
-                    "col" => $value,
-                    "room_id" => $roomid,
+                    'row' => $key,
+                    'col' => $value,
+                    'room_id' => $roomid,
                 ];
                 $this->seat->create($data);
             }

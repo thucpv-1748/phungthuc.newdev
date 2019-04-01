@@ -1,6 +1,6 @@
 @extends('layout.frontend.frontend_master')
 
-@section('page','book1')
+@section('page', __('book1'))
 
 @section('content')
         
@@ -94,9 +94,16 @@
                 
                 <div class="order">
                     <form id='film-and-time' class="booking-form" method='post' action="{{ url('step3/') }}">
-                        <input type='text' name='choosen_movie' class="choosen-movie" value="" required>
-                        <input type='text' name='choosen_time' class="choosen-time" required>
-                        {{csrf_field()}}
+                        <input type='text' name='time_show_id' class="choosen-time" value="{{ isset($data['time-id']) ? $data['time-id'] : '' }}" required>
+                        <input type='text' name='seat' class="choosen-time" value="{{ isset($data['choosen-sits']) ? $data['choosen-sits'] : '' }}" required>
+                        <input type='text' name='final_price' class="choosen-cost" value="{{ isset($data['choosen-cost']) ? $data['choosen-cost'] : '' }}" required>
+                        <input type='text' name='sale_price' class="sale_price" value="">
+                        <input type='text' name='total_price' class="total_price" value="">
+                        <input type='text' name='user_id' class="user_id" value="{{ Auth::user()->id }}">
+                        <input type='text' hidden="hidden" value="" name="fast_food_ids" class="fastfoods">
+                        <input type='text' hidden="hidden" value="" name="coupon-data" class="coupon-data">
+                        <input type='text' hidden="hidden" value="" name="status" class="status">
+                        {{ csrf_field() }}
                         <div class="booking-pagination">
                             <button type="submit" class="btn btn-md btn--warning btn--wide">purchase</button>
                         </div>
@@ -121,9 +128,6 @@
                     <span class="arrow__info"></span>
                 </a>
         </div>
-        <input hidden="hidden" value="" name="fastfoods" class="fastfoods">
-        <input hidden="hidden" value="" name="coupon-data" class="coupon-data">
-        {{csrf_field()}}
 @endsection
 
 @section('javascript')
@@ -174,17 +178,21 @@
                        id = $(this).data().id;
                    if(quality > 0){
                        fastfoods += id + '-' + quality + ',';
-                       cost = cost + price*quality;
+                       cost = cost + price * quality;
                    }
                });
+               $('.total_price').val(cost);
                if(coupon.length > 0 && coupon_type == '1'){
-                   cost = cost - parseFloat(JSON.parse(coupon).price)
+                   cost = cost - parseFloat(JSON.parse(coupon).price);
+                   $('.sale_price').val(parseFloat(JSON.parse(coupon).price))
                }else if(coupon.length > 0 && coupon_type == '2' ){
-                   cost = cost - (( cost*JSON.parse(coupon).percent)/100)
+                   cost = cost - ((cost * JSON.parse(coupon).percent) / 100);
+                   $('.sale_price').val((cost * JSON.parse(coupon).percent) / 100)
                }
-               (cost < 0)?cost = 0 :cost
+               (cost < 0)?cost = 0 : cost;
                $('.fastfoods').val(fastfoods);
-               $('.book-result .booking-cost').text(cost+',000');
+               $('.book-result .booking-cost').text(cost + ',000');
+               $('.choosen-cost').val(cost);
            }
         });
     </script>

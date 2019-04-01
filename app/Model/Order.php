@@ -59,7 +59,7 @@ class Order extends Model
      */
     public function setSeatAttribute($seat)
     {
-        $this->attributes['seat'] = implode(',', $seat);
+        $this->attributes['seat'] = is_array($seat) ? implode(',', $seat) : $seat;
     }
 
     /**
@@ -68,5 +68,13 @@ class Order extends Model
     public function setUserId($user_id)
     {
         $this->attributes['user_id'] = Auth::id();
+    }
+
+    /**
+     * @param $status
+     */
+    public function setStatus($status)
+    {
+        $this->attributes['status'] = !$status ? 0 : $status;
     }
 }

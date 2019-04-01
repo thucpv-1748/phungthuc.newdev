@@ -44479,6 +44479,17 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/assets/css/backend/order.scss":
+/*!*************************************************!*\
+  !*** ./resources/assets/css/backend/order.scss ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/assets/css/backend/room.scss":
 /*!************************************************!*\
   !*** ./resources/assets/css/backend/room.scss ***!
@@ -44667,9 +44678,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 0:
-/*!*****************************************************************************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/assets/js/app.js ./resources/assets/sass/app.scss ./resources/assets/css/backend/room.scss ./resources/assets/css/backend/login.scss ./resources/assets/css/backend/coupon.scss ./resources/assets/css/frontend/custom.scss ***!
-  \*****************************************************************************************************************************************************************************************************************************************************/
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/assets/js/app.js ./resources/assets/sass/app.scss ./resources/assets/css/backend/room.scss ./resources/assets/css/backend/login.scss ./resources/assets/css/backend/coupon.scss ./resources/assets/css/backend/order.scss ./resources/assets/css/frontend/custom.scss ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -44678,6 +44689,7 @@ __webpack_require__(/*! /opt/lampp/htdocs/phungthuc.newdev/resources/assets/sass
 __webpack_require__(/*! /opt/lampp/htdocs/phungthuc.newdev/resources/assets/css/backend/room.scss */"./resources/assets/css/backend/room.scss");
 __webpack_require__(/*! /opt/lampp/htdocs/phungthuc.newdev/resources/assets/css/backend/login.scss */"./resources/assets/css/backend/login.scss");
 __webpack_require__(/*! /opt/lampp/htdocs/phungthuc.newdev/resources/assets/css/backend/coupon.scss */"./resources/assets/css/backend/coupon.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/phungthuc.newdev/resources/assets/css/backend/order.scss */"./resources/assets/css/backend/order.scss");
 module.exports = __webpack_require__(/*! /opt/lampp/htdocs/phungthuc.newdev/resources/assets/css/frontend/custom.scss */"./resources/assets/css/frontend/custom.scss");
 
 

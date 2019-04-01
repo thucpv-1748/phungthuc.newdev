@@ -8,7 +8,15 @@ use App\Repositories\Contracts\StoreInterface;
 
 class CinemaController extends Controller
 {
+    /**
+     * @var StoreInterface
+     */
     public $store;
+
+    /**
+     * CinemaController constructor.
+     * @param StoreInterface $store
+     */
 
     public function __construct(StoreInterface $store)
     {
@@ -16,10 +24,21 @@ class CinemaController extends Controller
     }
 
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getAll()
     {
        $store = $this->store->all();
 
-       return view('layout.frontend.cinema-list');
+       return view('layout.frontend.cinema-list', compact('store'));
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getComingSoon()
+    {
+        return view('layout.frontend.coming-soon');
     }
 }

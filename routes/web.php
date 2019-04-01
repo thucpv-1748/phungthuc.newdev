@@ -91,18 +91,30 @@ route::namespace('Backend')->group(function (){
 
 
     Auth::routes();
-    Route::get('home','Frontend\HomeController@index');
-    Route::get('step1/{id}','Frontend\BookController@getStep1');
-    Route::post('step1/{id}','Frontend\BookController@postStep1');
-    Route::get('step2/{id}','Frontend\BookController@getStep2');
-    Route::post('step2/{id}','Frontend\BookController@postStep2');
-    Route::get('step3','Frontend\BookController@getStep3');
-    Route::get('film/{id}','Frontend\FilmController@getFilm');
-    Route::get('category/{id}','Frontend\FilmController@getCategory');
-    //ajax find  in category
-    Route::post('get-data','Frontend\FilmController@getData');
-    Route::post('check-coupon','Frontend\BookController@getCoupon');
-    Route::get('cinema','Frontend\CinemaController@getAll');
-
+    route::namespace('Frontend')->group(function () {
+        Route::get('home', 'HomeController@index');
+        Route::middleware('CheckLoginUser')->group(function () {
+            Route::get('step1/{id}', 'BookController@getStep1');
+            Route::post('step1/{id}', 'BookController@postStep1');
+            Route::get('step2/{id}', 'BookController@getStep2');
+            Route::post('step2/{id}', 'BookController@postStep2');
+            Route::get('step3', 'BookController@getStep3');
+            Route::post('step3', 'BookController@createOrder');
+            Route::get('thank-you/{id}', 'BookController@getThankYou');
+        });
+        Route::middleware('LoginUser')->group(function () {
+        Route::get('login', 'LoginController@getLogin');
+        Route::post('login', 'LoginController@postLogin');
+        });
+        Route::get('registration', 'LoginController@getRegistration');
+        Route::post('registration', 'LoginController@createUser');
+        Route::get('film/{id}', 'FilmController@getFilm');
+        Route::get('category/{id}', 'FilmController@getCategory');
+        //ajax find  in category
+        Route::post('get-data', 'FilmController@getData');
+        Route::post('check-coupon', 'BookController@getCoupon');
+        Route::get('cinema', 'CinemaController@getAll');
+        Route::get('coming-soon', 'CinemaController@getComingSoon');
+    });
 
 

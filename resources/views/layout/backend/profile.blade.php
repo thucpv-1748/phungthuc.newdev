@@ -44,7 +44,7 @@
                     <option value="" selected="selected">{{ __('Select') }}</option>
                     @if($role)
                         @foreach($role as $value)
-                            <option value="{{ $value->id }}" {{ (isset($user) ? ($user->roles->first()->id == $value->id) ? 'selected="selected"' : '' : '' ) }}>{{ $value->name }}</option>
+                            <option value="{{ $value->id }}" {{ ( (isset($user)) ? ($user->roles->first()->id == $value->id) ? 'selected="selected"' : '' : '' ) }}>{{ $value->name }}</option>
                         @endforeach
                     @endif
                 </select>
@@ -58,7 +58,7 @@
                 <input type="number" class="form-control" id="phone" name="phone" value="{{ isset($user) ? $user->phone : '' }}">
             </div>
             {{ csrf_field() }}
-            <input hidden="hidden" name="base_url" value="{{ url('/') }}">
+            <input hidden="hidden" name="base_url" value="{{url('/')}}">
             <div class="modal-body">
                 <div class="modal-footer" id="modal_footer">
                     <button type="submit" class="btn btn-default-border-blk" id="submit-btn">{{ __('Save') }}</button>

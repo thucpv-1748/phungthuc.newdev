@@ -1,6 +1,6 @@
 @extends('layout.frontend.frontend_master')
 
-@section('page','Home Page')
+@section('page', __('Home Page'))
 
 @section('class-head','header-wrapper--home')
 
@@ -241,8 +241,8 @@
             <div class="movie-best">
                  <div class="col-sm-10 col-sm-offset-1 movie-best__rating">Today Best choice</div>
                  <div class="col-sm-12 change--col">
-                     @if($best_film)
-                         @foreach($best_film as $film)
+                     @if($bestfilm)
+                         @foreach($bestfilm as $film)
                              <div class="movie-beta__item ">
                                  <img alt='' src="{{ url($film->img) }}">
                                  <span class="best-rate">5.0</span>
@@ -382,9 +382,9 @@
             <div class="col-sm-12">
                 <div class="row">
                     <div class="col-sm-12 col-md-12">
-                    @if($best_film)
+                    @if($bestfilm)
                         @php($x = 0)
-                        @foreach($best_film as $film)
+                        @foreach($bestfilm as $film)
                             @if($x <= 2)
                             <!-- Movie variant with time -->
                                 <div class="movie movie--test movie--test--dark movie--test--left">

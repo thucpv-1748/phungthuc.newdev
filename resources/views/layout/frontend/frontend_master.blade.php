@@ -69,30 +69,11 @@
                 <ul id="navigation">
                     <li>
                         <span class="sub-nav-toggle plus"></span>
-                        <a href="#">Pages</a>
-                        <ul>
-                            <li class="menu__nav-item"><a href="movie-page-left.html">Single movie (rigth sidebar)</a></li>
-                            <li class="menu__nav-item"><a href="movie-page-right.html">Single movie (left sidebar)</a></li>
-                            <li class="menu__nav-item"><a href="movie-page-full.html">Single movie (full widht)</a></li>
-                            <li class="menu__nav-item"><a href="movie-list-left.html">Movies list (rigth sidebar)</a></li>
-                            <li class="menu__nav-item"><a href="movie-list-right.html">Movies list (left sidebar)</a></li>
-                            <li class="menu__nav-item"><a href="movie-list-full.html">Movies list (full widht)</a></li>
-                            <li class="menu__nav-item"><a href="single-cinema.html">Single cinema</a></li>
-                            <li class="menu__nav-item"><a href="cinema-list.html">Cinemas list</a></li>
-                            <li class="menu__nav-item"><a href="trailer.html">Trailers</a></li>
-                            <li class="menu__nav-item"><a href="rates-left.html">Rates (rigth sidebar)</a></li>
-                            <li class="menu__nav-item"><a href="rates-right.html">Rates (left sidebar)</a></li>
-                            <li class="menu__nav-item"><a href="rates-full.html">Rates (full widht)</a></li>
-                            <li class="menu__nav-item"><a href="offers.html">Offers</a></li>
-                            <li class="menu__nav-item"><a href="contact.html">Contact us</a></li>
-                            <li class="menu__nav-item"><a href="404.html">404 error</a></li>
-                            <li class="menu__nav-item"><a href="coming-soon.html">Coming soon</a></li>
-                            <li class="menu__nav-item"><a href="login.html">Login/Registration</a></li>
-                        </ul>
+                        <a href="{{ url('/home') }}">{{ __('Home') }}</a>
                     </li>
                     <li>
                         <span class="sub-nav-toggle plus"></span>
-                        <a href="page-elements.html">Category</a>
+                        <a href="#">{{ __('Category') }}</a>
                         <ul>
                             @if($menu)
                                 @foreach($menu as $value)
@@ -103,23 +84,11 @@
                     </li>
                     <li>
                         <span class="sub-nav-toggle plus"></span>
-                        <a href="page-elements.html">Booking steps</a>
-                        <ul>
-                            <li class="menu__nav-item"><a href="book1.html">Booking step 1</a></li>
-                            <li class="menu__nav-item"><a href="book2.html">Booking step 2</a></li>
-                            <li class="menu__nav-item"><a href="book3-buy.html">Booking step 3 (buy)</a></li>
-                            <li class="menu__nav-item"><a href="book3-reserve.html">Booking step 3 (reserve)</a></li>
-                            <li class="menu__nav-item"><a href="book-final.html">Final ticket view</a></li>
-                        </ul>
+                        <a href="{{ url('/cinema') }}">{{ __('Cinemas') }}</a>
                     </li>
                     <li>
                         <span class="sub-nav-toggle plus"></span>
-                        <a href="gallery-four.html">Gallery</a>
-                        <ul>
-                            <li class="menu__nav-item"><a href="gallery-four.html">4 col gallery</a></li>
-                            <li class="menu__nav-item"><a href="gallery-three.html">3 col gallery</a></li>
-                            <li class="menu__nav-item"><a href="gallery-two.html">2 col gallery</a></li>
-                        </ul>
+                        <a href="{{ url('/coming-soon') }}">{{ __('Comming Soon') }}</a>
                     </li>
                     <li>
                         <span class="sub-nav-toggle plus"></span>
@@ -182,24 +151,27 @@
 
             <!-- Additional header buttons / Auth and direct link to booking-->
             <div class="control-panel">
-                <div class="auth auth--home">
-                    <div class="auth__show">
+                @if (Auth::check())
+                    <div class="auth auth--home">
+                        <div class="auth__show">
                         <span class="auth__image">
                           <img alt="" src="http://placehold.it/31x31">
                         </span>
-                    </div>
-                    <a href="#" class="btn btn--sign btn--singin">
-                        me
-                    </a>
-                    <ul class="auth__function">
-                        <li><a href="#" class="auth__function-item">Watchlist</a></li>
-                        <li><a href="#" class="auth__function-item">Booked tickets</a></li>
-                        <li><a href="#" class="auth__function-item">Discussion</a></li>
-                        <li><a href="#" class="auth__function-item">Settings</a></li>
-                    </ul>
+                        </div>
+                        <a href="#" class="btn btn--sign btn--singin">{{ __('Me') }}</a>
+                        <ul class="auth__function">
+                            <li><a href="#" class="auth__function-item">{{ __('Watchlist') }}</a></li>
+                            <li><a href="#" class="auth__function-item">{{ __('Booked tickets') }}</a></li>
+                            <li><a href="#" class="auth__function-item">{{ __('Discussion') }}</a></li>
+                            <li><a href="#" class="auth__function-item">{{ __('Settings') }}</a></li>
+                            <li><a href="{{ url('/logout') }}" class="auth__function-item">{{ __('Logout') }}</a></li>
+                        </ul>
 
-                </div>
-                <a href="#" class="btn btn-md btn--warning btn--book btn-control--home login-window">Book a ticket</a>
+                    </div>
+                @else
+                    <a href="#" class="btn btn--sign">{{ __('Sign in') }}</a>
+                @endif
+                <a href="#" class="btn btn-md btn--warning btn--book btn-control--home login-window">{{ __('Book a ticket') }}</a>
             </div>
 
         </div>

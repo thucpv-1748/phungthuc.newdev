@@ -12,7 +12,7 @@
             </div>
             <div class="form-group">
                 <label for="name">{{ __('Description') }}:</label>
-                <textarea type="text" class="form-control" name="description" rows="10" required>{{ isset($category['description']) ? $category['description'] : '' }}</textarea>
+                <textarea type="text" class="form-control" name="description" rows="10">{{ isset($category['description']) ? $category['description'] : '' }}</textarea>
             </div>
             {{ csrf_field() }}
             <input hidden="hidden" name="base_url" value="{{ url('/') }}">

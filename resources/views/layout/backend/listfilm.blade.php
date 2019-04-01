@@ -58,8 +58,8 @@
                             <td>{{ $value->description }}</td>
                             <td>{{ $value->subtitle }}</td>
                             <td>{{ $value->language }}</td>
-                            <td>{{ $value->time }}</td>
-{{--                            <td>{{ Config('status.' . $value->status) }}</td>--}}
+                            <td>{{ $value->time}}</td>
+                            <td>{{ Config('Film.' . $value->status) }}</td>
                             <td>{{ $value->category->title }}</td>
                             <td>{{ $value->fist_show }}</td>
                             <td>{{ $value->director }}</td>

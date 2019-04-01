@@ -24,9 +24,9 @@ $( document ).ready(function() {
     });
 
 
-    var max_fields      = 10; //maximum input boxes allowed
-    var wrapper   		= $('.form-room .frm-room .row-form'); //Fields wrapper
-    var add_button      = $('.add_field_button'); //Add button ID
+    var max_fields = 15; //maximum input boxes allowed
+    var wrapper = $('.form-room .frm-room .row-form'); //Fields wrapper
+    var add_button = $('.add_field_button'); //Add button ID
     var x = $('.row-form .form-group').length; //initlal text box count
     $(add_button).click(function(e) {
         //on add input button click

@@ -4,31 +4,41 @@ namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\Film;
-use App\Model\Category;
+use App\Repositories\Contracts\FilmInterface;
+use App\Repositories\Contracts\CategoryInterface;
 
 
 
 class HomeController extends Controller
 {
+    /**
+     * @var FilmInterface
+     */
+    public $film;
 
-    public $_film;
+    /**
+     * @var CategoryInterface
+     */
+    public $category;
 
-    public $_category;
-
-    public function __construct
-    (
-        Film $film,
-        Category $category
-    )
+    /**
+     * HomeController constructor.
+     * @param FilmInterface $film
+     * @param CategoryInterface $category
+     */
+    public function __construct(FilmInterface $film, CategoryInterface $category)
     {
-        $this->_film = $film;
-        $this->_category = $category;
+        $this->film = $film;
+        $this->category = $category;
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
-        $data['best_film'] = $this->_film->where('status','1')->take(6)->get();
-        return view('layout.frontend.index',$data);
+        $bestfilm = $this->film->where('status','1')->take(6)->get();
+
+        return view('layout.frontend.index', compact('bestfilm'));
     }
 }

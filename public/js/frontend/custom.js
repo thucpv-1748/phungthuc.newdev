@@ -629,11 +629,11 @@
             //data element init
             var chooseSits = '';
             $('.sits-area .checked-place .choosen-place').each(function () {
-                chooseSits += ', ' + $(this).attr('data-place');
+                chooseSits += $(this).attr('data-place') + ',';
             });
 
             //data element set
-            sits.val(chooseSits.substr(2));
+            sits.val(chooseSits);
         });
 
         //--- Step for data  ---//

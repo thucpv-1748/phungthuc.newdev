@@ -161,7 +161,7 @@
 
         <div class="clearfix"></div>
         <form id='film-and-time' class="booking2-form" method='post' action="{{ url('/step2/'.$time_show->id) }}">
-            <input type='hidden' name='price' class="price"  value="{{ ($time_show->sale_price)? $time_show->sale_price : $time_show->price }}" >
+            <input type='hidden' name='price' class="price"  value="{{ ($time_show->sale_price) ? $time_show->sale_price : $time_show->price }}" >
             <input type='hidden' name='choosen-cost' class="choosen-cost" >
             <input type='hidden' name='choosen-sits' class="choosen-sits" required>
             <input type='hidden' name='time-id' class="time-id" value="{{ $time_show->id }}">

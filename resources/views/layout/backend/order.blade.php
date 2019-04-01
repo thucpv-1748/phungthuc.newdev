@@ -56,7 +56,7 @@
                         <tr>
                             <td>{{ $value->id }}</td>
                             <td>{{ $value->user->name }}</td>
-                            <td>{{ $value->coupon->name }}</td>
+                            <td>{{ isset($value->coupon) ? $value->coupon->name : '' }}</td>
                             <td>{{ $value->timeShow->time_show }}</td>
                             <td>{{ $value->timeShow->film->title }}</td>
                             <td>{{ $value->fast_food_ids }}</td>

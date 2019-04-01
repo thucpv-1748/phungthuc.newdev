@@ -9,9 +9,8 @@ use App\Repositories\Contracts\CouponInterface;
 class CouponController extends Controller
 {
     /**
-     * @var CouponInterface 
+     * @var CouponInterface
      */
-
     protected $model;
 
     /**

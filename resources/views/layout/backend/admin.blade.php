@@ -6,13 +6,9 @@
     @yield('head')
     <link href="{{ URL::asset('css/backend/dashboard.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ URL::asset('bootstrap-3.3.5/dist/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
-{{--    <link rel="stylesheet" href="{{ URL::asset('fontawesome/css/all.css') }}">--}}
+    <link rel="stylesheet" href="{{ URL::asset('fontawesome/css/all.css') }}">
     <script src="{{ URL::asset('js/backend/dashboard.js') }}"></script>
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
-    <link type="text/css" rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-    {{ Html::script('messages.js') }}
 </head>
 <body>
 <div class="header">
@@ -49,11 +45,10 @@
         <li><a href="{{ url('admin/category') }}"><i class="fa fa-server"></i><span>{{ __('Category') }}</span></a></li>
         <li><a href="{{ url('admin/time-show') }}"><i class="fa fa-calendar"></i><span>{{ __('Show times') }}</span></a></li>
         <li><a href="{{ url('admin/list-film') }}"><i class="fa fa-th-list"></i><span>{{ __('Film') }}</span></a></li>
-        <li><a href="{{ url('admin/store') }}"><i class="fa fa-store"></i><span>{{ __('Store') }}</span></a></li>
-        <li><a href="{{ url('admin/room') }}"><i class="fa fa-person"></i><span>{{ __('Room') }}</span></a></li>
+        <li><a href="{{ url('admin/store') }}"><i class="fa fa-clinic-medical"></i><span>{{ __('Store') }}</span></a></li>
+        <li><a href="{{ url('admin/room') }}"><i class="fa fa-person-booth"></i><span>{{ __('Room') }}</span></a></li>
         <li><a href="{{ url('admin/fast-food') }}"><i class="fa fa-utensils"></i><span>{{ __('Fast Food') }}</span></a></li>
         <li><a href="{{ url('admin/order') }}"><i class="fa fa-cart-plus"></i><span>{{ __('Order') }}</span></a></li>
-        <li><a href="{{ url('admin/coupon') }}"><i class="fa fa-ticket"></i><span>{{ __('Coupon') }}</span></a></li>
         <li><a href="#"><i class="fa fa-comments"></i><span>{{ __('Messages') }}</span></a></li>
         <li><a href="{{ url('admin/role') }}"><i class="fa fa-ruler"></i><span>{{ __('Roles') }}</span></a></li>
         <li><a href="{{ url('admin/users/') }}"><i class="fa fa-user"></i></i><span>{{ __('Users') }}</span></a></li>

@@ -7,7 +7,6 @@
         <link href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
         <!-- Swiper slider -->
         <link href="{{ URL::asset('css/frontend/external/idangerous.swiper.css') }}" rel="stylesheet" />
-
 @endsection
 
 
@@ -92,7 +91,7 @@
         <form id='film-and-time' class="booking-form" method='post' action="{{ url('step1/'.$film->id) }}">
             <input type='text' name='choosen_movie' class="choosen-movie" value="{{ $film->id }}" required>
             <input type='text' name='choosen_time' class="choosen-time" required>
-            {{csrf_field()}}
+            {{ csrf_field() }}
             <div class="booking-pagination">
                     <button href="#" class="booking-pagination__prev hide--arrow">
                         <span class="arrow__text arrow--prev"></span>

@@ -13084,7 +13084,7 @@ $(document).ready(function () {
   $('#menu-action').hover(function () {
     $('.sidebar').toggleClass('hovered');
   });
-  var max_fields = 10; //maximum input boxes allowed
+  var max_fields = 15; //maximum input boxes allowed
 
   var wrapper = $('.form-room .frm-room .row-form'); //Fields wrapper
 

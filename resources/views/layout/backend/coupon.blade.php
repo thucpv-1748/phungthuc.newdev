@@ -50,8 +50,8 @@
                             <td>{{ $value->id }}</td>
                             <td>{{ $value->name }}</td>
                             <td>{{ $value->coupon_code }}</td>
-                            <td>{{ Config('status.' . $value->status) }}</td>
-                            <td>{{ Config('setting.coupon.' . $value->type) }}</td>
+                            <td>{{ config('status.' . $value->status) }}</td>
+                            <td>{{ config('setting.coupon.' . $value->type) }}</td>
                             <td>{{ $value->price }}</td>
                             <td>{{ $value->percent }}</td>
                             <td><a class="show-btn" href="{{ url('admin/edit-coupon/' . $value->id) }}">{{ __('Edit') }}</a></td>
