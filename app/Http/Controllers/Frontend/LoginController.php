@@ -23,6 +23,7 @@ class LoginController extends Controller
     /**
      * LoginController constructor.
      * @param UserInterface $user
+     * @param RoleInterface $role
      */
 
     public function __construct(UserInterface $user, RoleInterface $role)

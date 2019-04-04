@@ -10,7 +10,6 @@ use App\Repositories\Contracts\CouponInterface;
 use App\Repositories\Contracts\TimeShowInterface;
 use App\Repositories\Contracts\FastFoodInterface;
 
-
 class OrderController extends Controller
 {
     /**
@@ -46,8 +45,7 @@ class OrderController extends Controller
         CouponInterface $coupon,
         TimeShowInterface $timeShow,
         FastFoodInterface $fastFood
-    )
-    {
+    ) {
         $this->model = $model;
         $this->coupon = $coupon;
         $this->fastFood = $fastFood;
@@ -62,7 +60,7 @@ class OrderController extends Controller
     {
         $fastFood = $this->fastFood->all();
         $timeShow = $this->timeShow->all();
-        $coupon  = $this->coupon->where('status', '=', '1')->get();
+        $coupon = $this->coupon->where('status', '=', '1')->get();
 
         return view('layout.backend.orderform', compact('fastFood', 'timeShow', 'coupon'));
     }
@@ -73,11 +71,11 @@ class OrderController extends Controller
      */
     public function createOrder(Request $request)
     {
-        try{
+        try {
             $this->model->create($request->all());
 
-            return redirect('admin/order')->with('success','save successful!');
-        }catch(\Exception $e){
+            return redirect('admin/order')->with('success', __('save successful!'));
+        } catch (\Exception $e) {
             // insert query
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -88,44 +86,56 @@ class OrderController extends Controller
      */
     public function updateOrder(Request $request)
     {
-        try{
+        try {
             $this->model->update($request->id, $request->all());
 
-            return redirect('admin/order')->with('success','save successful!');
-        }catch(\Exception $e){
+            return redirect('admin/order')->with('success', __('save successful!'));
+        } catch (\Exception $e) {
             // insert query
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
 
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function ajaxGetCoupon($id)
     {
-       $coupon = $this->coupon->findOrFail($id);
-       if ($coupon) {
-           $data = $coupon->toJson();
+        $coupon = $this->coupon->findOrFail($id);
+        if ($coupon) {
+            $data = $coupon->toJson();
 
-           return response()->json(array('success' => true,'data'=>$data));
-       }else{
-           return response()->json(array('success' => false));
-       }
+            return response()->json(['success' => true, 'data' => $data]);
+        } else {
+            return response()->json(['success' => false]);
+        }
     }
 
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function ajaxGetTimeShow($id)
     {
         $timeShow = $this->timeShow->findOrFail($id);
         if ($timeShow && $timeShow->status == 1) {
             $timeShow->room->seat;
             $timeShow->order;
-            $time_show = $timeShow->toJson();
+            $timeShow = $timeShow->toJson();
 
-            return response()->json(array('success' => true, 'data' => $time_show));
+            return response()->json(['success' => true, 'data' => $timeShow]);
         } else {
-            return response()->json(array('success' => false));
+            return response()->json(['success' => false]);
         }
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View\
+     */
     public function editOrder($id)
     {
         $order = $this->model->findOrFail($id);
@@ -136,10 +146,13 @@ class OrderController extends Controller
         return view('layout.backend.orderform', compact('order', 'fastFood', 'timeShow', 'coupon'));
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getOrder()
     {
-       $model = $this->model->paginate(config('setting.paginate'));
-        $data['order'] = $model;
-        return view('layout/backend/order',$data);
+        $order = $this->model->paginate(config('setting.paginate'));
+
+        return view('layout/backend/order', compact('order'));
     }
 }

@@ -359,3 +359,6 @@ ul.nav.pull-right.top-menu>li>a:hover{
 .dropdown{
   height: 50px;
 }
+.dashboard .row{
+  margin-left: unset;
+}

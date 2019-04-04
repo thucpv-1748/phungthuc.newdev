@@ -1,5 +1,5 @@
-@if( $film = $category->getFilm->sortByDesc($sortby) )
-    @php( ($sortby == 'title')? $film = $category->getFilm->sortBy($sortby):'')
+@if ($film = $category->getFilm->sortByDesc($sortby) )
+    @php( ($sortby == 'title') ? $film = $category->getFilm->sortBy($sortby) : '' )
     <!-- Movie preview item -->
     @foreach($film as $value )
         <div class="movie movie--preview movie--full">
@@ -42,7 +42,7 @@
             <div class="clearfix"></div>
             <!-- Time table (choose film start time)-->
             <div class="time-select">
-                @if($data = $value->timeShow->where('time_show', '>=', date('Y-m-d', strtotime($date)))->where('time_show', '<',  date('Y-m-d', strtotime($date.'+1 day')))->groupBy('room_id'))
+                @if($data = $value->timeShow->where('time_show', '>=', date('Y-m-d', strtotime($date)))->where('time_show', '<',  date('Y-m-d', strtotime($date . '+1 day')))->groupBy('room_id'))
                     @foreach($data as $key => $times)
                         <div class="time-select__group">
                             <div class="col-sm-3">

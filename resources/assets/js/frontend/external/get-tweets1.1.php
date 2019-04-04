@@ -19,3 +19,4 @@ $tweets = $connection->get("https://api.twitter.com/1.1/statuses/user_timeline.j
  
 echo json_encode($tweets);
 ?>
+

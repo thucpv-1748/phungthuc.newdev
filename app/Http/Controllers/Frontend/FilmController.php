@@ -4,76 +4,95 @@ namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\Film;
-use App\Model\Room;
-use App\Model\Category;
+use App\Repositories\Contracts\FilmInterface;
+use App\Repositories\Contracts\RoomInterface;
+use App\Repositories\Contracts\CategoryInterface;
 
 class FilmController extends Controller
 {
 
-    public $_film;
+    /**
+     * @var FilmInterface
+     */
+    public $film;
 
-    public $_room;
+    /**
+     * @var RoomInterface
+     */
+    public $room;
 
-    public $_category;
 
-    public function __construct
-    (
-        Film $film,
-        Room $room,
-        Category $category
+    /**
+     * @var CategoryInterface \
+     */
+    public $category;
 
-    )
+
+    /**
+     * FilmController constructor.
+     * @param FilmInterface $film
+     * @param RoomInterface $room
+     * @param CategoryInterface $category
+     */
+    public function __construct(FilmInterface $film, RoomInterface $room, CategoryInterface $category)
     {
-        $this->_film = $film;
-        $this->_room = $room;
-        $this->_category = $category;
+        $this->film = $film;
+        $this->room = $room;
+        $this->category = $category;
     }
 
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function getFilm($id)
     {
-        $film = $this->_film ->find($id);
-        if ($film)
-        {
-             $data['film'] = $film;
-             $data['room'] = $this->_room;
-             return view('layout.frontend.filmdetails',$data);
+        $film = $this->film ->find($id);
+        if ($film) {
+             $room = $this->room;
+
+             return view('layout.frontend.filmdetails', compact('film', 'room'));
         }else{
-             return Redirect()->back()->with('error','not found!');
+             return Redirect()->back()->with('error', __('not found!'));
         }
 
     }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
 
     public function getCategory($id)
     {
-        $category = $this->_category->find($id);
-        if ($category)
-        {
-            $data['category'] = $category;
-            $data['room'] = $this->_room;
-            return view('layout.frontend.category',$data);
+        $category = $this->category->findOrFail($id);
+        if ($category) {
+            $room = $this->room;
+
+            return view('layout.frontend.category', compact('category', 'room'));
         }else{
-            return Redirect()->back()->with('error','not found!');
+            return Redirect()->back()->with('error', __('not found!'));
         }
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Throwable
+     */
 
     public function getData(Request $request)
     {
         $id = $request->id;
         $date = $request->date;
-        $category = $this->_category->find($id);
+        $category = $this->category->findOrFail($id);
         $sortby = $request->sortby;
-        if ($category)
-        {
-            $data['category'] = $category;
-            $data['room'] = $this->_room;
-            $data['date'] = $date;
-            $data['sortby'] = $sortby;
-            $returnHTML = view('layout.frontend.subtemplate.selecttime',$data)->render();
+        if ($category) {
+            $room = $this->room;
+            $returnHTML = view('layout.frontend.subtemplate.selecttime', compact('date', 'category', 'sortby', 'room'))->render();
 
-            return response()->json(array('success' => true, 'html'=>$returnHTML));
+            return response()->json(array('success' => true, 'html' => $returnHTML));
 
         }else{
             return response()->json(array('success' => false));

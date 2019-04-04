@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ URL::asset('fontawesome/css/all.css') }}">
     <script src="{{ URL::asset('js/backend/dashboard.js') }}"></script>
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
+    {{ Html::script('messages.js') }}
 </head>
 <body>
 <div class="header">

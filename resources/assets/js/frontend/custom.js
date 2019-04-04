@@ -405,54 +405,6 @@
         });
 
         $('.swiper-slide-active').css({'marginLeft': '-2px'});
-        //media swipe visible slide
-        //Onload detect
-        // if ($(window).width() > 1930) {
-        //     mySwiper.params.slidesPerView = 13;
-        //     mySwiper.resizeFix();
-        // } else if ($(window).width() > 993 & $(window).width() < 1199) {
-        //     mySwiper.params.slidesPerView = 6;
-        //     mySwiper.resizeFix();
-        // } else if ($(window).width() > 768 & $(window).width() < 992) {
-        //     mySwiper.params.slidesPerView = 5;
-        //     mySwiper.resizeFix();
-        // } else if ($(window).width() < 767 & $(window).width() > 481) {
-        //     mySwiper.params.slidesPerView = 4;
-        //     mySwiper.resizeFix();
-        //
-        // } else if ($(window).width() < 480) {
-        //     mySwiper.params.slidesPerView = 2;
-        //     mySwiper.resizeFix();
-        // } else {
-        //     mySwiper.params.slidesPerView = 10;
-        //     mySwiper.resizeFix();
-        // }
-
-        //Resize detect
-        // $(window).resize(function () {
-        //     if ($(window).width() > 1930) {
-        //         mySwiper.params.slidesPerView = 13;
-        //         mySwiper.reInit();
-        //     }
-        //
-        //     if ($(window).width() > 993 & $(window).width() < 1199) {
-        //         mySwiper.params.slidesPerView = 6;
-        //         mySwiper.reInit();
-        //     } else if ($(window).width() > 768 & $(window).width() < 992) {
-        //         mySwiper.params.slidesPerView = 5;
-        //         mySwiper.reInit();
-        //     } else if ($(window).width() < 767 & $(window).width() > 481) {
-        //         mySwiper.params.slidesPerView = 4;
-        //         mySwiper.reInit();
-        //
-        //     } else if ($(window).width() < 480) {
-        //         mySwiper.params.slidesPerView = 2;
-        //         mySwiper.reInit();
-        //     } else {
-        //         mySwiper.params.slidesPerView = 10;
-        //         mySwiper.reInit();
-        //     }
-        // });
 
         //4. Dropdown init
         //select
@@ -492,11 +444,9 @@
             //data element init
             var chooseFilm = $(this).parent().attr('data-film');
             $('.choose-indector--film').find('.choosen-area').text(chooseFilm);
-
             //data element set
             movie.val(chooseFilm);
-
-        })
+        });
 
         //choose time
         $('.time-select__item').click(function () {

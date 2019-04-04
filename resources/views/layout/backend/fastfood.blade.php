@@ -42,8 +42,8 @@
                     <td>{{ __('Edit') }}</td>
                     <td>{{ __('Delete') }}</td>
                 </tr>
-                @if ($fast_food)
-                    @foreach ($fast_food as $key => $value)
+                @if ($fastFood)
+                    @foreach ($fastFood as $key => $value)
                         <tr>
                             <td>{{ $value->id }}</td>
                             <td>{{ $value->name }}</td>
@@ -55,7 +55,7 @@
                     @endforeach
                 @endif
             </table>
-            {{ $fast_food->links() }}
+            {{ $fastFood->links() }}
         </div>
     </div>
 @endsection

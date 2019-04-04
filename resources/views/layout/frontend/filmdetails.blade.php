@@ -1,6 +1,6 @@
 @extends('layout.frontend.frontend_master')
 
-@section('page','Film page')
+@section('page', __('Film page'))
 
 @section('head')
     <!-- jQuery UI -->
@@ -19,26 +19,26 @@
     <section class="container container-film">
         <div class="col-sm-12">
             <div class="movie">
-                <h2 class="page-heading">{{ @$film->title }}</h2>
+                <h2 class="page-heading">{{ $film->title }}</h2>
 
                 <div class="movie__info">
                     <div class="col-sm-4 col-md-3 movie-mobile">
                         <div class="movie__images">
                             <span class="movie__rating">5.0</span>
-                            <img alt='' src="{{ url($film->img) }}">
+                            <img alt='' src="{{ url::asset($film->img) }}">
                         </div>
                         <div class="movie__rate">{{ __('Your vote:') }} <div id='score' class="score"></div></div>
                     </div>
 
                     <div class="col-sm-8 col-md-9">
-                        <p class="movie__time"> {{  @$film->time }}</p>
+                        <p class="movie__time"> {{ $film->time }}</p>
 
-                        <p class="movie__option"><strong>{{ __('language') }}: </strong><a href="#">{{ @$film->language }}</a></p>
+                        <p class="movie__option"><strong>{{ __('language') }}: </strong><a href="#">{{ $film->language }}</a></p>
                         <p class="movie__option"><strong>{{ __('Year') }}: </strong><a href="#">{{ date('Y', strtotime($film->fist_show)) }}</a></p>
-                        <p class="movie__option"><strong>{{ __('Category') }}: </strong><a href="{{ url('category/'.@$film->category->id) }}">{{ @$film->category->title }}</a></p>
+                        <p class="movie__option"><strong>{{ __('Category') }}: </strong><a href="{{ url('category/'.$film->category->id) }}">{{ $film->category->title }}</a></p>
                         <p class="movie__option"><strong>{{ __('Release date') }}: </strong>{{ date('d-M-Y', strtotime($film->fist_show)) }}</p>
-                        <p class="movie__option"><strong>{{ __('Director') }}: </strong><a href="#">{{ @$film->director }}</a></p>
-                        <p class="movie__option"><strong>{{ __('Actors') }}: </strong><a href="#"> {{ @$film->actor }}</a></p>
+                        <p class="movie__option"><strong>{{ __('Director') }}: </strong><a href="#">{{ $film->director }}</a></p>
+                        <p class="movie__option"><strong>{{ __('Actors') }}: </strong><a href="#">{{ $film->actor }}</a></p>
 
                         <a href="#" class="comment-link">{{ __('Comments:') }}:  15</a>
 
@@ -76,74 +76,66 @@
                         <div class="swiper-wrapper">
                             <!--First Slide-->
                             <div class="swiper-slide media-video">
-                                <a href='{{ URL::asset('video/y2mate.com - marvel_studios_avengers_endgame_official_trailer_TcMBFSGVi1c_1080p.mp4')  }}' class="movie__media-item ">
-                                    <img alt='' src="{{ URL::asset('img/avengers-character-poster-banner.jpeg') }}">
+                                <a href='https://www.youtube.com/watch?v=Y5AehBA3IsE' class="movie__media-item ">
+                                    <img alt='' src="http://amovie.gozha.net/images/movie/movie-img1.jpg">
                                 </a>
                             </div>
 
                             <!--Second Slide-->
                             <div class="swiper-slide media-video">
-                                <a href='{{ URL::asset('video/y2mate.com - marvel_studios_avengers_endgame_official_trailer_TcMBFSGVi1c_1080p.mp4')  }}' class="movie__media-item">
-                                    <img alt='' src="{{ URL::asset('img/avengers-character-poster-banner.jpeg') }}">
+                                <a href='https://www.youtube.com/watch?v=Kb3ykVYvT4U' class="movie__media-item">
+                                    <img alt='' src="http://amovie.gozha.net/images/gallery/large/item-7.jpg">
                                 </a>
                             </div>
 
                             <!--Third Slide-->
                             <div class="swiper-slide media-photo">
-                                <a href='{{ URL::asset('img/avengers-character-poster-banner.jpeg') }}' class="movie__media-item">
-                                    <img alt='' src="{{ URL::asset('img/avengers-character-poster-banner.jpeg') }}">
+                                <a href='http://amovie.gozha.net/images/gallery/large/item-7.jpg' class="movie__media-item">
+                                    <img alt='' src="http://amovie.gozha.net/images/gallery/large/item-7.jpg">
                                 </a>
                             </div>
 
                             <!--Four Slide-->
                             <div class="swiper-slide media-photo">
-                                <a href='{{ URL::asset('img/avengers-character-poster-banner.jpeg') }}' class="movie__media-item">
-                                    <img alt='' src="{{ URL::asset('img/avengers-character-poster-banner.jpeg') }}">
+                                <a href='http://amovie.gozha.net/images/gallery/large/item-15.jpg' class="movie__media-item">
+                                    <img alt='' src="http://amovie.gozha.net/images/gallery/large/item-15.jpg">
                                 </a>
                             </div>
 
                             <!--Slide-->
                             <div class="swiper-slide media-photo">
-                                <a href='{{ URL::asset('img/avengers-character-poster-banner.jpeg') }}' class="movie__media-item">
-                                    <img alt='' src="{{ URL::asset('img/avengers-character-poster-banner.jpeg') }}">
+                                <a href='http://amovie.gozha.net/images/movie/movie-img6.jpg' class="movie__media-item">
+                                    <img alt='' src="http://amovie.gozha.net/images/movie/movie-img6.jpg">
                                 </a>
                             </div>
 
                             <!--Slide-->
                             <div class="swiper-slide media-photo">
-                                <a href='{{ URL::asset('img/avengers-character-poster-banner.jpeg') }}' class="movie__media-item">
-                                    <img alt='' src="{{ URL::asset('img/avengers-character-poster-banner.jpeg') }}">
+                                <a href='http://amovie.gozha.net/images/movie/movie-img2.jpg' class="movie__media-item">
+                                    <img alt='' src="http://amovie.gozha.net/images/movie/movie-img2.jpg">
                                 </a>
                             </div>
 
                             <!--First Slide-->
                             <div class="swiper-slide media-video">
-                                <a href='{{ URL::asset('video/y2mate.com - marvel_studios_avengers_endgame_official_trailer_TcMBFSGVi1c_1080p.mp4')  }}' class="movie__media-item ">
-                                    <img alt='' src="{{ URL::asset('img/avengers-character-poster-banner.jpeg') }}">
+                                <a href='https://www.youtube.com/watch?v=Kb3ykVYvT4U' class="movie__media-item ">
+                                    <img alt='' src="http://amovie.gozha.net/images/movie/movie-img2.jpg">
                                 </a>
                             </div>
 
                             <!--Second Slide-->
                             <div class="swiper-slide media-video">
-                                <a href='{{ URL::asset('video/y2mate.com - marvel_studios_avengers_endgame_official_trailer_TcMBFSGVi1c_1080p.mp4')  }}' class="movie__media-item">
-                                    <img alt='' src="{{ URL::asset('img/avengers-character-poster-banner.jpeg') }}">
+                                <a href='https://www.youtube.com/watch?v=Kb3ykVYvT4U' class="movie__media-item">
+                                    <img alt='' src="http://amovie.gozha.net/images/movie/movie-img2.jpg">
                                 </a>
                             </div>
 
                             <!--Slide-->
                             <div class="swiper-slide media-photo">
-                                <a href='https://www.google.com/imgres?imgurl=https%3A%2F%2Ftrainghiemso.vn%2Fwp-content%2Fuploads%2F2017%2F12%2Fthu-thach-than-chet-poster-560x800.jpg&imgrefurl=https%3A%2F%2Ftrainghiemso.vn%2Ftrailer-phim-thu-thach-chet-giua-hai-gioi%2F&docid=hbIKG3przoQ6RM&tbnid=YEc1IqrhjkxwyM%3A&vet=10ahUKEwjv5vDxhJDhAhUMU7wKHWcuDz4QMwhhKBowGg..i&w=560&h=800&bih=640&biw=1301&q=anh%20trailer%20film%20400x240&ved=0ahUKEwjv5vDxhJDhAhUMU7wKHWcuDz4QMwhhKBowGg&iact=mrc&uact=8' class="movie__media-item">
-                                    <img alt='' src="https://www.google.com/imgres?imgurl=https%3A%2F%2Ftrainghiemso.vn%2Fwp-content%2Fuploads%2F2017%2F12%2Fthu-thach-than-chet-poster-560x800.jpg&imgrefurl=https%3A%2F%2Ftrainghiemso.vn%2Ftrailer-phim-thu-thach-chet-giua-hai-gioi%2F&docid=hbIKG3przoQ6RM&tbnid=YEc1IqrhjkxwyM%3A&vet=10ahUKEwjv5vDxhJDhAhUMU7wKHWcuDz4QMwhhKBowGg..i&w=560&h=800&bih=640&biw=1301&q=anh%20trailer%20film%20400x240&ved=0ahUKEwjv5vDxhJDhAhUMU7wKHWcuDz4QMwhhKBowGg&iact=mrc&uact=8">
+                                <a href='http://amovie.gozha.net/images/movie/movie-img2.jpg' class="movie__media-item">
+                                    <img alt='' src="http://amovie.gozha.net/images/movie/movie-img2.jpg">
                                 </a>
                             </div>
-
-                            <!--Slide-->
-                            <div class="swiper-slide media-photo">
-                                <a href='https://www.google.com/imgres?imgurl=https%3A%2F%2Ftrainghiemso.vn%2Fwp-content%2Fuploads%2F2017%2F12%2Fthu-thach-than-chet-poster-560x800.jpg&imgrefurl=https%3A%2F%2Ftrainghiemso.vn%2Ftrailer-phim-thu-thach-chet-giua-hai-gioi%2F&docid=hbIKG3przoQ6RM&tbnid=YEc1IqrhjkxwyM%3A&vet=10ahUKEwjv5vDxhJDhAhUMU7wKHWcuDz4QMwhhKBowGg..i&w=560&h=800&bih=640&biw=1301&q=anh%20trailer%20film%20400x240&ved=0ahUKEwjv5vDxhJDhAhUMU7wKHWcuDz4QMwhhKBowGg&iact=mrc&uact=8' class="movie__media-item">
-                                    <img alt='' src="https://www.google.com/imgres?imgurl=https%3A%2F%2Ftrainghiemso.vn%2Fwp-content%2Fuploads%2F2017%2F12%2Fthu-thach-than-chet-poster-560x800.jpg&imgrefurl=https%3A%2F%2Ftrainghiemso.vn%2Ftrailer-phim-thu-thach-chet-giua-hai-gioi%2F&docid=hbIKG3przoQ6RM&tbnid=YEc1IqrhjkxwyM%3A&vet=10ahUKEwjv5vDxhJDhAhUMU7wKHWcuDz4QMwhhKBowGg..i&w=560&h=800&bih=640&biw=1301&q=anh%20trailer%20film%20400x240&ved=0ahUKEwjv5vDxhJDhAhUMU7wKHWcuDz4QMwhhKBowGg&iact=mrc&uact=8">
-                                </a>
-                            </div>
-
                         </div>
                     </div>
 
@@ -163,8 +155,8 @@
 
                 <div class="clearfix"></div>
 
-                <div class="time-select">
-                    @if($data = $film->timeShow->where('time_show', '>=', now()->format('d-m-Y'))->where('time_show', '<', now()->modify('+1 day'))->groupBy('room_id'))
+                <div class="time-select data-time">
+                    @if($data = $film->timeShow->where('time_show', '>=', now()->format('Y-m-d'))->where('time_show', '<', now()->modify('+1 day'))->groupBy('room_id'))
                         @foreach($data as $key => $value)
                             <div class="time-select__group">
                                 <div class="col-sm-3">
@@ -172,7 +164,7 @@
                                 </div>
                                 <ul class="col-sm-6 items-wrap">
                                     @foreach($value as $time )
-                                        <li class="time-select__item" data-time='{{ @$time->id }}'>{{ date('H:i', strtotime($time->time_show)) }}</li>
+                                        <li class="time-select__item" data-time='{{ $time->id }}'>{{ date('H:i', strtotime($time->time_show)) }}</li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -276,6 +268,7 @@
     </section>
 
     <div class="clearfix"></div>
+    {{ csrf_field() }}
 @endsection
 
 
@@ -296,12 +289,17 @@
     <!-- Share buttons -->
     <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-525fd5e9061e7ef0"></script>
+    <script src="{{ URL::asset('js/frontend/getTime.js') }}"></script>
     <!-- JavaScript-->
     <script type="text/javascript">
         $(document).ready(function() {
             window.APP_URL = '{!! json_encode(url('/')) !!}';
             init_MoviePage();
             init_MoviePageFull();
+            var id = '{{ $film->id }}';
+            var url = '{!! url('/get-time-date/') !!}';
+            var _token = $('input[name="_token"]').val();
+            getTimeBydate(id, url, _token);
         });
     </script>
 @endsection

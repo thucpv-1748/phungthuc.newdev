@@ -130,42 +130,13 @@
     <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-525fd5e9061e7ef0"></script>
     <!-- JavaScript-->
+    <script src="{{ URL::asset('js/frontend/category.js') }}"></script>
+
     <script type="text/javascript">
         $(document).ready(function() {
             init_MovieList();
-
-            $('.time-show').on('change',function () {
-                getdata();
-            });
-
-            $('.tags-area .item-wrap').on('click',function () {
-                $('.sort-by').val($(this).find('.item-active').data().filter);
-                getdata();
-            });
-
-            function getdata() {
-                var id = $('.category-id').val();
-                var _token = $('input[name="_token"]').val();
-                var  url = '{!! url('/get-data') !!}';
-                var date =  $('.time-show').val();
-                var sortby = $('.sort-by').val();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': _token
-                    }
-                });
-                $.ajax({
-                    type:'POST',
-                    url:url,
-                    data:{id:id, date:date, sortby:sortby},
-                    success:function(data) {
-                        if(data.success) {
-                            $('.list-film').html(data.html);
-                            init_MovieList();
-                        }
-                    }
-                });
-            }
+            var  url = '{!! url('/get-data') !!}';
+            category(url);
         });
     </script>
 @endsection

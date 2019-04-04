@@ -31,11 +31,7 @@ class ListShowFilmController extends Controller
      * @param FilmInterface $listfilm
      * @param RoomInterface $room
      */
-    public function __construct(
-        TimeShowInterface $model,
-        FilmInterface $listfilm,
-        RoomInterface $room
-    )
+    public function __construct(TimeShowInterface $model, FilmInterface $listfilm, RoomInterface $room)
     {
         $this->model = $model;
         $this->listfilm = $listfilm;
@@ -48,11 +44,11 @@ class ListShowFilmController extends Controller
      */
     public function createListShowFilm(Request $request)
     {
-        try{
+        try {
             $this->model->create($request->all());
 
             return redirect('admin/time-show')->with('success', __('save successful!'));
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
@@ -63,11 +59,11 @@ class ListShowFilmController extends Controller
      */
     public function updateListShowFilm(Request $request)
     {
-        try{
+        try {
             $this->model->update($request->id, $request->all());
 
             return redirect('admin/time-show')->with('success', __('save successful!'));
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
@@ -92,16 +88,16 @@ class ListShowFilmController extends Controller
 
     public function editTimeShow($id)
     {
-       $model = $this->model->findOrFail($id);
-       if ($model) {
-           $timeshow = $model;
-           $rooms = $this->room->all();
-           $listfilms = $this->listfilm->all();
+        $model = $this->model->findOrFail($id);
+        if ($model) {
+            $timeshow = $model;
+            $rooms = $this->room->all();
+            $listfilms = $this->listfilm->all();
 
-           return view('layout.backend.listshowform', compact('timeshow', 'rooms', 'listfilms'));
-       } else {
-           return redirect()->back()->with('error', __('not found!'));
-       }
+            return view('layout.backend.listshowform', compact('timeshow', 'rooms', 'listfilms'));
+        } else {
+            return redirect()->back()->with('error', __('not found!'));
+        }
     }
 
     /**
@@ -111,9 +107,9 @@ class ListShowFilmController extends Controller
 
     public function getTimeShow()
     {
-        $time_show = $this->model->paginate(Config('setting.paginate'));
+        $timeShow = $this->model->paginate(Config('setting.paginate'));
 
-        return view('layout.backend.timeshow', compact('time_show'));
+        return view('layout.backend.timeshow', compact('timeShow'));
     }
 
 
@@ -125,11 +121,10 @@ class ListShowFilmController extends Controller
     public function deleteTimeShow($id)
     {
         $model = $this->model->findOrFail($id);
-        if($model->delete())
-        {
-            return redirect('admin/time-show')->with('success','delete successful!');
-        }else{
-            return redirect()->back()->with('error','not found!');
+        if ($model->delete()) {
+            return redirect('admin/time-show')->with('success', __('delete successful!'));
+        } else {
+            return redirect()->back()->with('error', __('not found!'));
         }
     }
 }

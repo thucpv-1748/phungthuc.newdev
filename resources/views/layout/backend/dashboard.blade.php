@@ -1,10 +1,11 @@
 @extends('layout.backend.admin')
 
-
-@section('title','Dashboard')
+@section('title', __('Dashboard'))
 
 @section('head')
     <link href="{{ URL::asset('css/backend/styles.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ URL::asset('css/backend/dashboard.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ URL::asset('css/backend/mini-event-calendar.css') }}" rel="stylesheet" type="text/css">
 @endsection
 
 @section('content')
@@ -13,7 +14,7 @@
             {{ session()->get('success') }}
         </div>
     @endif
-    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="col-sm-12 col-sm-offset-3 col-lg-12 col-lg-offset-2 main dashboard">
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">{{ __('Dashboard') }}</h1>
@@ -84,8 +85,35 @@
             </div><!--/.col-->
         </div><!--/.row-->
     </div>
-    <script type="text/javascript">
-        $(document).ready(function() {
+    <script src="{{ URL::asset('jquery/dist/jquery.slim.min.js') }}"></script>
+    <script src="{{ URL::asset('js/backend/mini-event-calendar.js') }}"></script>
+    <script>
+        var sampleEvents = [
+            {
+                title: "Soulful sundays bay area",
+                date: new Date().setDate(new Date().getDate() - 7), // last week
+                link: "#"
+            },
+            {
+                title: "London Comicon",
+                date: new Date().getTime(), // today
+                link: "#"
+            },
+            {
+                title: "Youth Athletic Camp",
+                date: new Date().setDate(new Date().getDate() + 31), // next month
+                link: "#"
+            }
+        ];
+
+        $("#calendar").MEC({
+            events: sampleEvents
+        });
+
+        $("#calendar").MEC({
+            events: sampleEvents,
+            from_monday: true
         });
     </script>
+
 @endsection

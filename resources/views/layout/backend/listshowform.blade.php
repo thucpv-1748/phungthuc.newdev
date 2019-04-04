@@ -1,5 +1,7 @@
 @extends('layout.backend.admin')
-@section('title','Form Time Show')
+
+@section('title', __('Form Time Show'))
+
 @section('content')
     <div class="form-category">
         <form id="frm-category" name="frm-category" class="frm-category" method="post" enctype="multipart/form-data">
@@ -8,8 +10,8 @@
                 <label for="name">{{ __('Status') }}:</label>
                 <select class="form-control" required="required" name="status">
                     <option value="" hidden>{{ __('Select') }}</option>
-                    @if (Config('status'))
-                        @foreach (Config('status') as $key => $value)
+                    @if (config('status'))
+                        @foreach (config('status') as $key => $value)
                             <option value="{{ $key }}" {{ isset($timeshow['status']) ? $timeshow['status'] == $key ? 'selected ="selected"' : '' : '' }}>{{ $value }}</option>
                         @endforeach
                     @endif

@@ -38,6 +38,7 @@ class FastFoodController extends Controller
     {
         try {
             $this->model->create($request->all());
+
             return redirect('admin/fast-food')->with('success', __('save successful!'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
@@ -63,9 +64,9 @@ class FastFoodController extends Controller
      */
     public function getFastFood()
     {
-        $fast_food = $this ->model->paginate(config('setting.paginate'));
+        $fastFood = $this ->model->paginate(config('setting.paginate'));
 
-        return view('layout.backend.fastfood', compact('fast_food'));
+        return view('layout.backend.fastfood', compact('fastFood'));
     }
 
     /**

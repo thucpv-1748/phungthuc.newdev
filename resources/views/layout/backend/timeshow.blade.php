@@ -46,14 +46,14 @@
                     <td>{{ __('Edit') }}</td>
                     <td>{{ __('Delete') }}</td>
                 </tr>
-                @if ($time_show)
-                    @foreach ($time_show as $key => $value)
+                @if ($timeShow)
+                    @foreach ($timeShow as $key => $value)
                         <tr>
                             <td>{{ $value->id }}</td>
                             <td><img src="{{ url($value->film->img) }}" width="50px"></td>
                             <td>{{ $value->film->title }}</td>
                             <td>{{ $value->room->name }}</td>
-                            <td>{{ Config('status.' . $value->status) }}</td>
+                            <td>{{ config('status.' . $value->status) }}</td>
                             <td>{{ strftime('%Y-%m-%dT%H:%M:%S', strtotime($value->time_show)) }}</td>
                             <td>{{ $value->sale_price }}</td>
                             <td>{{ $value->price }}</td>
@@ -63,7 +63,7 @@
                     @endforeach
                 @endif
             </table>
-            {{ $time_show->links() }}
+            {{ $timeShow->links() }}
         </div>
     </div>
 @endsection

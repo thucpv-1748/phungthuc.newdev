@@ -60,7 +60,7 @@
                             <td>{{ $value->timeShow->time_show }}</td>
                             <td>{{ $value->timeShow->film->title }}</td>
                             <td>{{ $value->fast_food_ids }}</td>
-                            <td>{{ config('status.'.$value->status) }}</td>
+                            <td>{{ config('status.' . $value->status) }}</td>
                             <td>{{ $value->seat }}</td>
                             <td>{{ $value->total_price }}</td>
                             <td>{{ $value->sale_price }}</td>
