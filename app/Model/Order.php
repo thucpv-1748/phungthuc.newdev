@@ -65,7 +65,7 @@ class Order extends Model
     /**
      * @param $user_id
      */
-    public function setUserId($user_id)
+    public function setUserId($userid)
     {
         $this->attributes['user_id'] = Auth::id();
     }

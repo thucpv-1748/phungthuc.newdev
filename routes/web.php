@@ -15,7 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 route::namespace('Backend')->group(function (){
     Route::get('admin/login','LoginController@getLogin')->middleware('CheckLogin');
     Route::post('admin/login','LoginController@postLogin');
@@ -118,6 +117,6 @@ route::namespace('Backend')->group(function (){
         Route::get('cinema', 'CinemaController@getAll');
         Route::get('coming-soon', 'CinemaController@getComingSoon');
         Route::get('contact', 'CinemaController@getContact');
+        Route::post('get-time-date', 'BookController@getTimeByDate');
+        Route::post('post-comment', 'FilmController@createComment');
     });
-
-

@@ -8,7 +8,6 @@ use App\Repositories\Contracts\FilmInterface;
 use App\Repositories\Contracts\CategoryInterface;
 use App\Repositories\Contracts\StoreInterface;
 
-
 class HomeController extends Controller
 {
     /**
@@ -45,7 +44,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $bestfilm = $this->film->where('status','1')->take(6)->get();
+        $bestfilm = $this->film->where('status', '1')->take(6)->get();
         $cinema = $this->store->all();
         $category = $this->category->all();
 

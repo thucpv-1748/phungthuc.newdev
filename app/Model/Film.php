@@ -44,4 +44,12 @@ class Film extends Model
     {
         return $this->hasMany('App\Model\TimeShow');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comment()
+    {
+        return $this->hasMany('App\Model\Comment');
+    }
 }

@@ -3,12 +3,11 @@
 @section('page', __('book3'))
 
 @section('content')
-        
         <!-- Main content -->
         <section class="container container-step3">
             <div class="order-container">
                 <div class="order">
-                    <img class="order__images" alt="" src="{{ url::asset('images/tickets.png') }}">
+                    <img class="order__images" alt="" src="{{ asset(config('asset.tickets')) }}">
                     <p class="order__title">{{ __('Book a ticket') }}<br><span class="order__descript">{{ __('and have fun movie time') }}</span></p>
                 </div>
             </div>
@@ -56,25 +55,25 @@
                     <h2 class="page-heading">{{ __('Choose payment method') }}</h2>
                     <div class="payment">
                         <a href="#" class="payment__item">
-                            <img alt="" src="{{ url::asset('images/payment/pay1.png') }}">
+                            <img alt="" src="{{ asset(config('asset.payment') . 'pay1.png') }}">
                         </a>
                         <a href="#" class="payment__item">
-                            <img alt="" src="{{ url::asset('images/payment/pay2.png') }}">
+                            <img alt="" src="{{ asset(config('asset.payment') . 'pay2.png') }}">
                         </a>
                         <a href="#" class="payment__item">
-                            <img alt="" src="{{ url::asset('images/payment/pay3.png') }}">
+                            <img alt="" src="{{ asset(config('asset.payment') . 'pay3.png') }}">
                         </a>
                         <a href="#" class="payment__item">
-                            <img alt="" src="{{ url::asset('images/payment/pay4.png') }}">
+                            <img alt="" src="{{ asset(config('asset.payment') . 'pay4.png') }}">
                         </a>
                         <a href="#" class="payment__item">
-                            <img alt="" src="{{ url::asset('images/payment/pay5.png') }}">
+                            <img alt="" src="{{ asset(config('asset.payment') . 'pay5.png') }}">
                         </a>
                         <a href="#" class="payment__item">
-                            <img alt="" src="{{ url::asset('images/payment/pay6.png') }}">
+                            <img alt="" src="{{ asset(config('asset.payment') . 'pay6.png') }}">
                         </a>
                         <a href="#" class="payment__item">
-                            <img alt="" src="{{ url::asset('images/payment/pay7.png') }}">
+                            <img alt="" src="{{ asset(config('asset.payment') . 'pay7.png') }}">
                         </a>
                     </div>
 
@@ -93,7 +92,7 @@
                 </div>
                 
                 <div class="order">
-                    <form id='film-and-time' class="booking-form" method='post' action="{{ url('step3/') }}">
+                    <form id="film-and-time" class="booking-form" method="post" action="{{ url('step3/') }}">
                         <input type="text" name="time_show_id" class="choosen-time" value="{{ isset($data['time-id']) ? $data['time-id'] : '' }}" required>
                         <input type="text" name="seat" class="choosen-time" value="{{ isset($data['choosen-sits']) ? $data['choosen-sits'] : '' }}" required>
                         <input type="text" name="final_price" class="choosen-cost" value="{{ isset($data['choosen-cost']) ? $data['choosen-cost'] : '' }}" required>

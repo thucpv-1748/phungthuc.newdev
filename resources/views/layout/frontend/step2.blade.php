@@ -25,7 +25,7 @@
             <section class="container">
                 <div class="order-container">
                     <div class="order">
-                        <img class="order__images" alt='' src=" {{ url::asset('images/tickets.png')  }}">
+                        <img class="order__images" alt='' src=" {{ asset(config('asset.tickets')) }}">
                         <p class="order__title">{{ __('Book a ticket') }}<br><span class="order__descript">{{ __('and have fun movie time') }}</span></p>
                         <div class="order__control">
                             <a href="#" class="order__control-btn active">{{ __('Purchase') }}</a>
@@ -62,7 +62,7 @@
                             @php ($seat = $timeshow->room->seat)
                             <aside class="sits__line">
                                 @if ($rows = count($seat->toArray()))
-                                    @for($i = 0 ; $i < $rows ; $i++ )
+                                    @for ($i = 0 ; $i < $rows ; $i++ )
                                          <span class="sits__indecator">{{ Config('nameRow.'.$i) }}</span>
                                     @endfor
                                 @endif
@@ -72,7 +72,7 @@
                                     @foreach ($seat as $key => $row)
                                          <div class="sits__row">
                                              @for ($i = 1 ; $i <= $row->col ;$i++ )
-                                                 <span class="sits__place sits-price--cheap {{ (in_array($key . '-'. $i, $seatids)) ? 'sits-state--not' : '' }}" data-place='{{ $key . '-' . $i }}' data-price='{{ $price  }}' >{{ Config('nameRow.' . $key) . $i }}</span>
+                                                 <span class="sits__place sits-price--cheap {{ (in_array($key . '-' . $i, $seatids)) ? 'sits-state--not' : '' }}" data-place='{{ $key . '-' . $i }}' data-price='{{ $price  }}' >{{ Config('nameRow.' . $key) . $i }}</span>
                                              @endfor
                                         </div>
                                     @endforeach
@@ -143,7 +143,7 @@
                                 <div class="checked-result">$0</div>
                         </aside>
 
-                        <img alt="" src="{{ url::asset('images/components/sits_mobile.png') }}">
+                        <img alt="" src="{{ asset(config('asset.sits_mobile')) }}">
                     </div>
                 </div>
 
@@ -152,12 +152,12 @@
          </div>
 
         <div class="clearfix"></div>
-        <form id='film-and-time' class="booking2-form" method='post' action="{{ url('/step2/' . $timeshow->id) }}">
-            <input type='hidden' name='price' class="price"  value="{{ ($timeshow->sale_price) ? $timeshow->sale_price : $timeshow->price }}" >
-            <input type='hidden' name='choosen-cost' class="choosen-cost" >
-            <input type='hidden' name='choosen-sits' class="choosen-sits" required>
-            <input type='hidden' name='time-id' class="time-id" value="{{ $timeshow->id }}">
-            {{csrf_field()}}
+        <form id="film-and-time" class="booking2-form" method="post" action="{{ url('/step2/' . $timeshow->id) }}">
+            <input type="hidden" name="price" class="price"  value="{{ ($timeshow->sale_price) ? $timeshow->sale_price : $timeshow->price }}">
+            <input type="hidden" name="choosen-cost" class="choosen-cost">
+            <input type="hidden" name="choosen-sits" class="choosen-sits" required>
+            <input type="hidden" name="time-id" class="time-id" value="{{ $timeshow->id }}">
+            {{ csrf_field() }}
             <div class="booking-pagination booking-pagination--margin">
                 <button onclick="location.href='{{ url('step1/' . $timeshow->film->id) }}'" class="booking-pagination__prev">
                     <span class="arrow__text arrow--prev">{{ __('prev step') }}</span>
