@@ -6,5 +6,6 @@ return [
     'coupon' => [
         '1' => 'Price',
         '2' => 'Percent',
-    ]
+    ],
+    'item_home' => 6,
 ];

@@ -44,10 +44,33 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $bestfilm = $this->film->where('status', '1')->take(6)->get();
+        $bestfilm = $this->film->where('status', '1')->take(config('setting.item_home'))->get();
         $cinema = $this->store->all();
         $category = $this->category->all();
 
         return view('layout.frontend.index', compact('bestfilm', 'cinema', 'category'));
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Throwable
+     */
+
+    public function ajaxFilter(Request $request)
+    {
+        $type = $request->data_fill;
+        $returnHTML = '';
+        switch ($type) {
+            case 'film-category':
+                $category = $this->category->where('title', 'LIKE', "%".$request->value."%")->get();
+                $returnHTML = view('layout.frontend.subtemplate.subfilter', compact( 'category' , 'type'))->render();
+                break;
+            case 'film':
+                $film = $this->film->where('title', 'LIKE', "%".$request->value."%")->get();
+                $returnHTML = view('layout.frontend.subtemplate.subfilter', compact( 'film' , 'type'))->render();
+                break;
+        }
+        return response()->json(array('success' => true, 'html' => $returnHTML));
     }
 }

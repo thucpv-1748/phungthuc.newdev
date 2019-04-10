@@ -13,7 +13,7 @@
                     <div class="col-xs-6 col-sm-3 cinema-item">
                         <div class="cinema">
                             <a href="#" class="cinema__images">
-                                <img alt="" src="{{ asset('/img/hallway.jpg') }}" width="525px" height="300px">
+                                <img alt="" src="{{ asset(config('asset.img') . 'hallway.jpg') }}">
                                 <span class="cinema-rating">5.0</span>
                             </a>
                             <a href="#" class="cinema-title">{{ $value->name }}</a>

@@ -75,63 +75,63 @@
                             <!--First Slide-->
                             <div class="swiper-slide media-video">
                                 <a href='https://www.youtube.com/watch?v=Y5AehBA3IsE' class="movie__media-item ">
-                                    <img alt='' src="http://amovie.gozha.net/images/movie/movie-img1.jpg">
+                                    <img alt="" src="http://amovie.gozha.net/images/movie/movie-img1.jpg">
                                 </a>
                             </div>
 
                             <!--Second Slide-->
                             <div class="swiper-slide media-video">
                                 <a href='https://www.youtube.com/watch?v=Kb3ykVYvT4U' class="movie__media-item">
-                                    <img alt='' src="http://amovie.gozha.net/images/gallery/large/item-7.jpg">
+                                    <img alt="" src="http://amovie.gozha.net/images/gallery/large/item-7.jpg">
                                 </a>
                             </div>
 
                             <!--Third Slide-->
                             <div class="swiper-slide media-photo">
                                 <a href='http://amovie.gozha.net/images/gallery/large/item-7.jpg' class="movie__media-item">
-                                    <img alt='' src="http://amovie.gozha.net/images/gallery/large/item-7.jpg">
+                                    <img alt="" src="http://amovie.gozha.net/images/gallery/large/item-7.jpg">
                                 </a>
                             </div>
 
                             <!--Four Slide-->
                             <div class="swiper-slide media-photo">
                                 <a href='http://amovie.gozha.net/images/gallery/large/item-15.jpg' class="movie__media-item">
-                                    <img alt='' src="http://amovie.gozha.net/images/gallery/large/item-15.jpg">
+                                    <img alt="" src="http://amovie.gozha.net/images/gallery/large/item-15.jpg">
                                 </a>
                             </div>
 
                             <!--Slide-->
                             <div class="swiper-slide media-photo">
                                 <a href='http://amovie.gozha.net/images/movie/movie-img6.jpg' class="movie__media-item">
-                                    <img alt='' src="http://amovie.gozha.net/images/movie/movie-img6.jpg">
+                                    <img alt="" src="http://amovie.gozha.net/images/movie/movie-img6.jpg">
                                 </a>
                             </div>
 
                             <!--Slide-->
                             <div class="swiper-slide media-photo">
                                 <a href='http://amovie.gozha.net/images/movie/movie-img2.jpg' class="movie__media-item">
-                                    <img alt='' src="http://amovie.gozha.net/images/movie/movie-img2.jpg">
+                                    <img alt="" src="http://amovie.gozha.net/images/movie/movie-img2.jpg">
                                 </a>
                             </div>
 
                             <!--First Slide-->
                             <div class="swiper-slide media-video">
                                 <a href='https://www.youtube.com/watch?v=Kb3ykVYvT4U' class="movie__media-item ">
-                                    <img alt='' src="http://amovie.gozha.net/images/movie/movie-img2.jpg">
+                                    <img alt="" src="http://amovie.gozha.net/images/movie/movie-img2.jpg">
                                 </a>
                             </div>
 
                             <!--Second Slide-->
                             <div class="swiper-slide media-video">
                                 <a href='https://www.youtube.com/watch?v=Kb3ykVYvT4U' class="movie__media-item">
-                                    <img alt='' src="http://amovie.gozha.net/images/movie/movie-img2.jpg">
+                                    <img alt="" src="http://amovie.gozha.net/images/movie/movie-img2.jpg">
                                 </a>
                             </div>
 
                             <!--Slide-->
                             <div class="swiper-slide media-photo">
                                 <a href='http://amovie.gozha.net/images/movie/movie-img2.jpg' class="movie__media-item">
-                                    <img alt='' src="http://amovie.gozha.net/images/movie/movie-img2.jpg">
+                                    <img alt="" src="http://amovie.gozha.net/images/movie/movie-img2.jpg">
                                 </a>
                             </div>
                         </div>
@@ -146,7 +146,7 @@
 
                 <div class="datepicker">
                     <span class="datepicker__marker"><i class="fa fa-calendar"></i>{{ __('Date') }}</span>
-                    <input type="text" id="datepicker" value='{{ now()->format('d-m-Y') }}' class="datepicker__input time-show">
+                    <input type="text" id="datepicker" value="{{ now()->format('d-m-Y') }}" class="datepicker__input time-show">
                 </div>
 
                 <a href="#" id="map-switch" class="watchlist watchlist--map watchlist--map-full"><span class="show-map">{{ __('Show cinemas on map') }}</span><span  class="show-time">{{ __('Show cinema time table') }}</span></a>
@@ -162,7 +162,7 @@
                                 </div>
                                 <ul class="col-sm-6 items-wrap">
                                     @foreach ($value as $time)
-                                        <li class="time-select__item" data-time='{{ $time->id }}'>{{ date('H:i', strtotime($time->time_show)) }}</li>
+                                        <li class="time-select__item" data-time="{{ $time->id }}">{{ date('H:i', strtotime($time->time_show)) }}</li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -193,9 +193,9 @@
                                 @if ($x < 5)
                                 <div class="comment">
                                     <div class="comment__images">
-                                        <img alt='' src="http://placehold.it/50x50">
+                                        <img alt="" src="http://placehold.it/50x50">
                                     </div>
-                                    <a href='#' class="comment__author"><span class="social-used"></span>{{ $value->user->name }}</a>
+                                    <a href="#" class="comment__author"><span class="social-used"></span>{{ $value->user->name }}</a>
                                     <p class="comment__date">{{ $value->created_at }}</p>
                                     <p class="comment__message">{{ $value->description }}</p>
                                 </div>
@@ -205,9 +205,9 @@
                                     @endif
                                         <div class="comment">
                                             <div class="comment__images">
-                                                <img alt='' src="http://placehold.it/50x50">
+                                                <img alt="" src="http://placehold.it/50x50">
                                             </div>
-                                            <a href='#' class="comment__author"><span class="social-used"></span>{{ $value->user->name }}</a>
+                                            <a href="#" class="comment__author"><span class="social-used"></span>{{ $value->user->name }}</a>
                                             <p class="comment__date">{{ $value->created_at }}</p>
                                             <p class="comment__message">{{ $value->description }}</p>
                                         </div>
@@ -234,7 +234,7 @@
 
 @section('javascript')
     <!-- jQuery UI -->
-    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <link href="{{ URL::asset('jquery-ui/external/jquery-1.10.2/jquery.js') }}" rel="stylesheet"/>
     <!-- Magnific-popup -->
     <script src="{{ URL::asset('js/frontend/external/jquery.magnific-popup.min.js') }}"></script>
 
@@ -250,6 +250,7 @@
     <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-525fd5e9061e7ef0"></script>
     <script src="{{ URL::asset('js/frontend/getTime.js') }}"></script>
+    <script src="{{ URL::asset('js/frontend/comment.js') }}"></script>
     <!-- JavaScript-->
     <script type="text/javascript">
         $(document).ready(function() {
@@ -260,33 +261,7 @@
             var url = '{!! url('/get-time-date/') !!}';
             var _token = $('input[name="_token"]').val();
             getTimeBydate(id, url, _token);
-            
-            $('.btn-post-comment').on('click', function () {
-                var film_id = $('#comment-form .film_id').val();
-                var description = $('#comment-form .description').val();
-                var parent = $('#comment-form .parent').val();
-                var _token = $('input[name="_token"]').val();
-                var url = $('#comment-form').attr('action');
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN' : _token
-                    }
-                });
-                $.ajax({
-                    type : 'POST',
-                    url : url,
-                    data : {film_id:film_id, description:description, parent:parent},
-                    success:function(data) {
-                        if (data.success) {
-                            $('.comment-wrapper .comment-sets').html(data.html);
-                        } else {
-                            $('.comment-wrapper .comment-sets').html('');
-                        }
-                    }
-                });
-
-            })
+            comment();
         });
     </script>
 @endsection
-

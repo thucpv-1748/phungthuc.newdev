@@ -5,4 +5,6 @@ return [
     'tickets' => 'images/tickets.png',
     'payment' => 'images/payment/',
     'images' => 'images/',
+    'img' => 'img/',
+    'video' => 'video/',
 ];

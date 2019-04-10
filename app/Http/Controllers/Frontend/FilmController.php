@@ -11,7 +11,6 @@ use App\Repositories\Contracts\CommentInterface;
 
 class FilmController extends Controller
 {
-
     /**
      * @var FilmInterface
      */
@@ -29,6 +28,9 @@ class FilmController extends Controller
     public $category;
 
 
+    /**
+     * @var CommentInterface
+     */
     public $comment;
 
 
@@ -105,6 +107,11 @@ class FilmController extends Controller
     }
 
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Throwable
+     */
     public function createComment(Request $request)
     {
         try {

@@ -16,13 +16,13 @@
     <div class="contact-form-wrapper">
         <div class="container">
             <div class="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-                <form id='contact-form' class="form row" method='post' novalidate="" action="">
+                <form id='contact-form' class="form row" method="post" novalidate="" action="">
                     <p class="form__title">{{ __('Drop us a line') }}</p>
                     <div class="col-sm-6">
-                        <input type='text' placeholder='{{ __('Your name') }}' name='user-name' class="form__name">
+                        <input type="text" placeholder="{{ __('Your name') }}" name="user-name" class="form__name">
                     </div>
                     <div class="col-sm-6">
-                        <input type='email' placeholder='{{ __('Your email') }}' name='user-email' class="form__mail">
+                        <input type="email" placeholder="{{ __('Your email') }}" name="user-email" class="form__mail">
                     </div>
                     <div class="col-sm-12">
                         <textarea placeholder="{{ __('Your message') }}" name="user-message" class="form__message"></textarea>
@@ -39,7 +39,7 @@
         </div>
     </section>
 
-    <div id='location-map' class="map"></div>
+    <div id="location-map" class="map"></div>
 
     <div class="clearfix"></div>
 @endsection

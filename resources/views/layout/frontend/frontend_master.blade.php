@@ -40,6 +40,7 @@
     <!-- Modernizr -->
     <script src="{{ URL::asset('js/frontend/external/modernizr.custom.js') }}"></script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
     <script src="{{ URL::asset('html5shiv/dist/html5shiv.js') }}"></script>
     <script src="{{ URL::asset('respond.js/src/respond.js') }}"></script>
     {{ Html::script('messages.js') }}

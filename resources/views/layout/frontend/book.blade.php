@@ -4,9 +4,9 @@
 
 @section('head')
     <!-- jQuery UI -->
-    <link href="{{ URL::asset('jquery-ui-themes/themes/smoothness/jquery-ui.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('jquery-ui-themes/themes/smoothness/jquery-ui.css') }}" rel="stylesheet"/>
     <!-- Swiper slider -->
-    <link href="{{ URL::asset('css/frontend/external/idangerous.swiper.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('css/frontend/external/idangerous.swiper.css') }}" rel="stylesheet"/>
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
     <section class="container">
         <div class="order-container">
             <div class="order">
-                <img class="order__images" alt="" src="{{ url::asset('images/tickets.png') }}">
+                <img class="order__images" alt="" src="{{ asset(config('asset.tickets') }}">
                 <p class="order__title">{{ __('Book a ticket') }}<br><span class="order__descript">{{ __('and have fun movie time') }}</span></p>
                 <div class="order__control">
                     <a href="#" class="order__control-btn active">{{ __('Purchase') }}</a>
@@ -35,7 +35,7 @@
                     @foreach ($film as $value)
                         <div class="swiper-slide" data-film="{{ $value->title }}" data-id="{{ $value->id }}">
                             <div class="film-images">
-                                <img alt="" src="{{ url($value->img) }}" width="380px" height="200px">
+                                <img alt="" src="{{ url($value->img) }}">
                             </div>
                             <p class="choose-film__title">{{ $value->title }}</p>
                         </div>

@@ -119,4 +119,5 @@ route::namespace('Backend')->group(function (){
         Route::get('contact', 'CinemaController@getContact');
         Route::post('get-time-date', 'BookController@getTimeByDate');
         Route::post('post-comment', 'FilmController@createComment');
+         Route::post('ajax-filter', 'HomeController@ajaxFilter');
     });
