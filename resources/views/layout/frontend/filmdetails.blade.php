@@ -4,12 +4,14 @@
 
 @section('head')
     <!-- jQuery UI -->
-    <link href="{{ URL::asset('jquery-ui-themes/themes/smoothness/jquery-ui.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('jquery-ui-themes/themes/smoothness/jquery-ui.css') }}" rel="stylesheet"/>
     <!-- Swiper slider -->
-    <link href="{{ URL::asset('css/frontend/external/idangerous.swiper.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('css/frontend/external/idangerous.swiper.css') }}" rel="stylesheet"/>
 
     <!-- Magnific-popup -->
-    <link href="{{ URL::asset('css/frontend/external/magnific-popup.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('css/frontend/external/magnific-popup.css') }}" rel="stylesheet"/>
+
+    <link href="{{ URL::asset('css/frontend/film.css') }}" rel="stylesheet"/>
 @endsection
 
 @section('content')
@@ -74,64 +76,64 @@
                         <div class="swiper-wrapper">
                             <!--First Slide-->
                             <div class="swiper-slide media-video">
-                                <a href='https://www.youtube.com/watch?v=Y5AehBA3IsE' class="movie__media-item ">
-                                    <img alt="" src="http://amovie.gozha.net/images/movie/movie-img1.jpg">
+                                <a href="{{ config('asset.video1') }}" class="movie__media-item ">
+                                    <img alt="" src="{{ config('asset.img1') }}">
                                 </a>
                             </div>
 
                             <!--Second Slide-->
                             <div class="swiper-slide media-video">
-                                <a href='https://www.youtube.com/watch?v=Kb3ykVYvT4U' class="movie__media-item">
-                                    <img alt="" src="http://amovie.gozha.net/images/gallery/large/item-7.jpg">
+                                <a href="{{ config('asset.video7') }}" class="movie__media-item">
+                                    <img alt="" src="{{ config('asset.item7') }}">
                                 </a>
                             </div>
 
                             <!--Third Slide-->
                             <div class="swiper-slide media-photo">
-                                <a href='http://amovie.gozha.net/images/gallery/large/item-7.jpg' class="movie__media-item">
-                                    <img alt="" src="http://amovie.gozha.net/images/gallery/large/item-7.jpg">
+                                <a href="{{ config('asset.item7') }}" class="movie__media-item">
+                                    <img alt="" src="{{ config('asset.item7') }}">
                                 </a>
                             </div>
 
                             <!--Four Slide-->
                             <div class="swiper-slide media-photo">
-                                <a href='http://amovie.gozha.net/images/gallery/large/item-15.jpg' class="movie__media-item">
-                                    <img alt="" src="http://amovie.gozha.net/images/gallery/large/item-15.jpg">
+                                <a href="{{ config('asset.item15') }}" class="movie__media-item">
+                                    <img alt="" src="{{ config('asset.item15') }}"">
                                 </a>
                             </div>
 
                             <!--Slide-->
                             <div class="swiper-slide media-photo">
-                                <a href='http://amovie.gozha.net/images/movie/movie-img6.jpg' class="movie__media-item">
-                                    <img alt="" src="http://amovie.gozha.net/images/movie/movie-img6.jpg">
+                                <a href="{{ config('asset.item6') }}" class="movie__media-item">
+                                    <img alt="" src="{{ config('asset.item6') }}">
                                 </a>
                             </div>
 
                             <!--Slide-->
                             <div class="swiper-slide media-photo">
-                                <a href='http://amovie.gozha.net/images/movie/movie-img2.jpg' class="movie__media-item">
-                                    <img alt="" src="http://amovie.gozha.net/images/movie/movie-img2.jpg">
+                                <a href="{{ config('asset.item2') }}" class="movie__media-item">
+                                    <img alt="" src="{{ config('asset.item2') }}">
                                 </a>
                             </div>
 
                             <!--First Slide-->
                             <div class="swiper-slide media-video">
-                                <a href='https://www.youtube.com/watch?v=Kb3ykVYvT4U' class="movie__media-item ">
-                                    <img alt="" src="http://amovie.gozha.net/images/movie/movie-img2.jpg">
+                                <a href="{{ config('asset.video7') }}" class="movie__media-item ">
+                                    <img alt="" src="{{ config('asset.item2') }}">
                                 </a>
                             </div>
 
                             <!--Second Slide-->
                             <div class="swiper-slide media-video">
-                                <a href='https://www.youtube.com/watch?v=Kb3ykVYvT4U' class="movie__media-item">
-                                    <img alt="" src="http://amovie.gozha.net/images/movie/movie-img2.jpg">
+                                <a href="{{ config('asset.video1') }}" class="movie__media-item">
+                                    <img alt="" src="{{ config('asset.img1') }}">
                                 </a>
                             </div>
 
                             <!--Slide-->
                             <div class="swiper-slide media-photo">
-                                <a href='http://amovie.gozha.net/images/movie/movie-img2.jpg' class="movie__media-item">
-                                    <img alt="" src="http://amovie.gozha.net/images/movie/movie-img2.jpg">
+                                <a href="{{ config('asset.item2') }}" class="movie__media-item">
+                                    <img alt="" src="{{ config('asset.item2') }}">
                                 </a>
                             </div>
                         </div>
@@ -193,7 +195,7 @@
                                 @if ($x < 5)
                                 <div class="comment">
                                     <div class="comment__images">
-                                        <img alt="" src="http://placehold.it/50x50">
+                                        <img alt="" src="{{ asset(config('asset.img') . 'avatar.png') }}">
                                     </div>
                                     <a href="#" class="comment__author"><span class="social-used"></span>{{ $value->user->name }}</a>
                                     <p class="comment__date">{{ $value->created_at }}</p>
@@ -205,7 +207,7 @@
                                     @endif
                                         <div class="comment">
                                             <div class="comment__images">
-                                                <img alt="" src="http://placehold.it/50x50">
+                                                <img alt="" src="{{ asset(config('asset.img') . 'avatar.png') }}">
                                             </div>
                                             <a href="#" class="comment__author"><span class="social-used"></span>{{ $value->user->name }}</a>
                                             <p class="comment__date">{{ $value->created_at }}</p>
@@ -234,7 +236,9 @@
 
 @section('javascript')
     <!-- jQuery UI -->
-    <link href="{{ URL::asset('jquery-ui/external/jquery-1.10.2/jquery.js') }}" rel="stylesheet"/>
+    <script src="{{ config('asset.jquery') }}"></script>
+
+    <script href="{{ URL::asset('jquery-ui/external/jquery-1.10.2/jquery.js') }}"></script>
     <!-- Magnific-popup -->
     <script src="{{ URL::asset('js/frontend/external/jquery.magnific-popup.min.js') }}"></script>
 

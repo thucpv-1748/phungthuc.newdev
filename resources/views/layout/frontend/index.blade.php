@@ -261,10 +261,6 @@
         <div class="col-sm-12">
             <div class="mega-select-present mega-select-top mega-select--full">
                 <div class="mega-select-marker">
-                    <div class="marker-indecator film director">
-                        <p class="select-marker"><span>{{ __('find your ') }}</span> <br>{{ __('Film') }}</p>
-                    </div>
-
                     <div class="marker-indecator cinema">
                         <p class="select-marker"><span>{{ __('find your ') }}</span> <br>{{ __('cinema') }}</p>
                     </div>
@@ -277,37 +273,33 @@
                         <p class="select-marker"><span>{{ __('like particular stars') }}</span> <br>{{ __('find them') }}</p>
                     </div>
 
+                    <div class="marker-indecator director">
+                        <p class="select-marker"><span>{{ __('admire personalities - find ') }}</span> <br>{{ __('by director') }}</p>
+                    </div>
                 </div>
 
                 <div class="mega-select pull-right">
                     <span class="mega-select__point">{{ __('Search by') }}</span>
                     <ul class="mega-select__sort">
-                        <li class="filter-wrap"><a href="#" class="mega-select__filter filter--active" data-filter='film'>{{ __('Film') }}</a></li>
+                        <li class="filter-wrap"><a href="#" class="mega-select__filter filter--active" data-filter='cinema'>{{ __('Cinema') }}</a></li>
                         <li class="filter-wrap"><a href="#" class="mega-select__filter" data-filter='film-category'>{{ __('Category') }}</a></li>
-                        <li class="filter-wrap"><a href="#" class="mega-select__filter" data-filter='actors'>{{ __('Actors') }}</a></li>
                     </ul>
 
                     <input name="search-input" type='text' class="select__field">
 
                     <div class="select__btn">
-                        <a href="#" class="btn btn-md btn--danger film">{{ __('find ') }}<span class="hidden-exrtasm">{{ __('Film') }}</span></a>
+                        <a href="#" class="btn btn-md btn--danger location">{{ __('find ') }}<span class="hidden-exrtasm">{{ __('your city') }}</span></a>
                         <a href="#" class="btn btn-md btn--danger cinema">{{ __('find ') }}<span class="hidden-exrtasm">{{ __('suitable cimema') }}</span></a>
                         <a href="#" class="btn btn-md btn--danger film-category">{{ __('find ') }}<span class="hidden-exrtasm">{{ __('best category') }}</span></a>
                         <a href="#" class="btn btn-md btn--danger actors">{{ __('find ') }}<span class="hidden-exrtasm">{{ __('talented actors') }}</span></a>
+                        <a href="#" class="btn btn-md btn--danger director">{{ __('find ') }}<span class="hidden-exrtasm">{{ __('favorite director') }}</span></a>
                     </div>
 
                     <div class="select__dropdowns">
-                        <ul class="select__group film">
-                            @if ($bestfilm)
-                                @foreach ($bestfilm as $value)
-                                    <li class="select__variant" data-value="{{ $value->title }}"><a href="{{ url('/film/' . $value->id) }}">{{ $value->title }}</a></li>
-                                @endforeach
-                            @endif
-                        </ul>
                         <ul class="select__group cinema">
                             @if ($cinema)
                                 @foreach ($cinema as $value)
-                                    <li class="select__variant" data-value="{{ $value->name }}"><a href="#">{{ $value->name }}</a></li>
+                                    <li class="select__variant" data-value='{{ $value->name }}'>{{ $value->name }}</li>
                                 @endforeach
                             @endif
                         </ul>
@@ -315,8 +307,7 @@
                         <ul class="select__group film-category">
                             @if ($category)
                                 @foreach ($category as $value)
-                                    <li class="select__variant" data-value="{{ $value->title }}"><a href="{{ url('/category/' . $value->id) }}">{{ $value->title }}</a></li>
-                                @endforeach
+                                    <li class="select__variant" data-value="{{ $value->title }}">{{ $value->title }}</li>                                      @endforeach
                             @endif
                         </ul>
 
@@ -447,8 +438,7 @@
                 </div>
             </div>
         </div>
-        <input type="hidden" value="{{ url('/') }}" class="base-url">
-        {{ csrf_field() }}
+
     </section>
 @endsection
 
@@ -456,28 +446,6 @@
 <script type="text/javascript">
     $(document).ready(function() {
         init_Home();
-
-        $('.select__field').keyup(function () {
-            var base_url = $('.base-url').val();
-            var _token = $('input[name="_token"]').val();
-            var value = $(this).val();
-            var data_fill = $('.mega-select__sort .filter-wrap .filter--active').attr('data-filter');
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN' : _token
-                }
-            });
-            $.ajax({
-                type : 'POST',
-                url : base_url + '/ajax-filter',
-                data : {value:value, data_fill:data_fill},
-                success:function(data) {
-                    if (data.success) {
-                        $('.select__group.' + data_fill).html(data.html);
-                    }
-                }
-            });
-        });
     });
 </script>
 @endsection

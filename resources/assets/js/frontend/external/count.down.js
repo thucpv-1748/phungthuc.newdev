@@ -10,7 +10,6 @@ function countDown(dateOfB, dateOfE){
     var maxDate = Date.parse(dateOfEnd) - Date.parse(dateOfBeginning),
         curDate =Date.parse(dateOfEnd) - new Date();
 
-
     var $s = $(".second"),
         $m = $(".minute"),
         $h = $(".hour"),
@@ -19,8 +18,6 @@ function countDown(dateOfB, dateOfE){
         $mSpan = $m.parent().find('span'),
         $hSpan = $h.parent().find('span'),
         $daySpan = $day.parent().find('span');
-
-
 
     function clock() {
 
@@ -48,5 +45,4 @@ function countDown(dateOfB, dateOfE){
     if (Modernizr.canvas) {
         $(".knob").knob();
     }
-
 }

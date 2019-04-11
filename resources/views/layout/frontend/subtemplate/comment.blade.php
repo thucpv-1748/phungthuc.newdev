@@ -4,7 +4,7 @@
         @if ($x < 5)
             <div class="comment">
                 <div class="comment__images">
-                    <img alt='' src="http://placehold.it/50x50">
+                    <img alt='' src="{{ asset(config('asset.img') . 'avatar.png') }}">
                 </div>
                 <a href='#' class="comment__author"><span class="social-used"></span>{{ $value->user->name }}</a>
                 <p class="comment__date">{{ $value->created_at }}</p>
