@@ -86,3 +86,15 @@
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
+.movie-best .movie-beta__info {
+  width: 100%;
+}
+
+.mega-select .select__group .select__variant a {
+  color: #b4b1b2;
+}
+
+.mega-select .select__group .select__variant:hover a {
+  color: #ffffff;
+}
+

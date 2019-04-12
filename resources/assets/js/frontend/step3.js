@@ -20,13 +20,13 @@ function step3(url, cost)
             url:url,
             data:{code:code},
             success:function(data) {
-                if(data.success) {
+                if (data.success) {
                     $('.coupon-data').data('type', data.data.type);
                     $('.coupon-data').val(JSON.stringify(data.data));
                     calculate(cost);
                     $('.form-coupon .alert-coupon').html('<div class="alert alert-success">\n' + data.data.name +
                         '                        </div>');
-                }else {
+                } else {
                     $('.form-coupon .alert-coupon').html('<div class="alert alert-danger">Error! </div>');
                 }
             }

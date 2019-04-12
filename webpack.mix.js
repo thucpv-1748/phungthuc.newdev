@@ -22,8 +22,12 @@ mix.copy('resources/assets/css/backend/dashboard.css','public/css/backend');
 mix.copy('resources/assets/css/backend/styles.css','public/css/backend');
 mix.copy('node_modules/bootstrap/','public/bootstrap-3.3.5/');
 mix.copy('resources/assets/css/backend/user.css','public/css/backend');
+mix.copy('resources/assets/css/backend/mini-event-calendar.css','public/css/backend');
 mix.js('resources/assets/js/backend/dashboard.js', 'public/js/backend');
 mix.js('resources/assets/js/backend/coupon.js', 'public/js/backend');
+mix.js('resources/assets/js/backend/order.js', 'public/js/backend');
+mix.js('resources/assets/js/backend/mini-event-calendar.js', 'public/js/backend');
+
 mix.copy('resources/assets/img/','public/img');
 mix.copy('resources/assets/js/frontend/','public/js/frontend/');
 mix.copy('resources/assets/css/frontend/','public/css/frontend/');
@@ -37,3 +41,5 @@ mix.copy('resources/assets/images/rate/','public/film/images/rate/');
 mix.sass('resources/assets/css/frontend/custom.scss','public/css/frontend/custom.css');
 mix.copy('resources/assets/images/rate/','public/category/images/rate/');
 mix.copy('node_modules/jquery/','public/js/jquery/');
+mix.copy('node_modules/@fortawesome/fontawesome-free/','public/fontawesome/');
+mix.copy('node_modules/jquery/','public/jquery/');

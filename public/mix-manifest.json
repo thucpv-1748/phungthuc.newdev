@@ -8,8 +8,11 @@
     "/css/frontend/custom.css": "/css/frontend/custom.css",
     "/js/backend/coupon.js": "/js/backend/coupon.js",
     "/js/backend/dashboard.js": "/js/backend/dashboard.js",
+    "/js/backend/mini-event-calendar.js": "/js/backend/mini-event-calendar.js",
+    "/js/backend/order.js": "/js/backend/order.js",
     "/css/backend/dashboard.css": "/css/backend/dashboard.css",
     "/css/backend/styles.css": "/css/backend/styles.css",
     "/css/backend/user.css": "/css/backend/user.css",
+    "/css/backend/mini-event-calendar.css": "/css/backend/mini-event-calendar.css",
     "/get-tweets1.1.php": "/get-tweets1.1.php"
 }

@@ -52,4 +52,12 @@ class Film extends Model
     {
         return $this->hasMany('App\Model\Comment');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function rate()
+    {
+        return $this->hasMany('App\Model\Rate');
+    }
 }

@@ -237,15 +237,15 @@
                 @if ($bestfilm)
                     @foreach ($bestfilm as $film)
                         <div class="movie-beta__item ">
-                            <img alt="" src="{{ url::asset($film->img) }}">
-                            <span class="best-rate">5.0</span>
+                            <img alt="" src="{{ asset($film->img) }}">
+                            <span class="best-rate">{{ round($rate->countRate($film->id), 1) }}</span>
 
                             <ul class="movie-beta__info">
-                                <li><span class="best-voted">{{ __('71 people voted today') }}</span></li>
+                                <li><span class="best-voted">{{ count($film->rate) . __(' people voted') }}</span></li>
                                 <li>
                                     <p class="movie__time">{{ $film->time }} min</p>
                                     <p>{{ $film->director }} </p>
-                                    <p>{{ __('38 comments') }}</p>
+                                    <p>{{ count($film->comment) .  __(' comments') }}</p>
                                 </li>
                                 <li class="last-block">
                                     <a href="{{ url('film/' . $film->id) }}" class="slide__link">{{ __('more') }}</a>
@@ -261,6 +261,10 @@
         <div class="col-sm-12">
             <div class="mega-select-present mega-select-top mega-select--full">
                 <div class="mega-select-marker">
+                    <div class="marker-indecator film director">
+                        <p class="select-marker"><span>{{ __('find your ') }}</span> <br>{{ __('Film') }}</p>
+                    </div>
+
                     <div class="marker-indecator cinema">
                         <p class="select-marker"><span>{{ __('find your ') }}</span> <br>{{ __('cinema') }}</p>
                     </div>
@@ -273,33 +277,36 @@
                         <p class="select-marker"><span>{{ __('like particular stars') }}</span> <br>{{ __('find them') }}</p>
                     </div>
 
-                    <div class="marker-indecator director">
-                        <p class="select-marker"><span>{{ __('admire personalities - find ') }}</span> <br>{{ __('by director') }}</p>
-                    </div>
                 </div>
 
                 <div class="mega-select pull-right">
                     <span class="mega-select__point">{{ __('Search by') }}</span>
                     <ul class="mega-select__sort">
-                        <li class="filter-wrap"><a href="#" class="mega-select__filter filter--active" data-filter='cinema'>{{ __('Cinema') }}</a></li>
+                        <li class="filter-wrap"><a href="#" class="mega-select__filter filter--active" data-filter='film'>{{ __('Film') }}</a></li>
                         <li class="filter-wrap"><a href="#" class="mega-select__filter" data-filter='film-category'>{{ __('Category') }}</a></li>
                     </ul>
 
                     <input name="search-input" type='text' class="select__field">
 
                     <div class="select__btn">
-                        <a href="#" class="btn btn-md btn--danger location">{{ __('find ') }}<span class="hidden-exrtasm">{{ __('your city') }}</span></a>
+                        <a href="#" class="btn btn-md btn--danger film">{{ __('find ') }}<span class="hidden-exrtasm">{{ __('Film') }}</span></a>
                         <a href="#" class="btn btn-md btn--danger cinema">{{ __('find ') }}<span class="hidden-exrtasm">{{ __('suitable cimema') }}</span></a>
                         <a href="#" class="btn btn-md btn--danger film-category">{{ __('find ') }}<span class="hidden-exrtasm">{{ __('best category') }}</span></a>
                         <a href="#" class="btn btn-md btn--danger actors">{{ __('find ') }}<span class="hidden-exrtasm">{{ __('talented actors') }}</span></a>
-                        <a href="#" class="btn btn-md btn--danger director">{{ __('find ') }}<span class="hidden-exrtasm">{{ __('favorite director') }}</span></a>
                     </div>
 
                     <div class="select__dropdowns">
+                        <ul class="select__group film">
+                            @if ($bestfilm)
+                                @foreach ($bestfilm as $value)
+                                    <li class="select__variant" data-value="{{ $value->title }}"><a href="{{ url('/film/' . $value->id) }}">{{ $value->title }}</a></li>
+                                @endforeach
+                            @endif
+                        </ul>
                         <ul class="select__group cinema">
                             @if ($cinema)
                                 @foreach ($cinema as $value)
-                                    <li class="select__variant" data-value='{{ $value->name }}'>{{ $value->name }}</li>
+                                    <li class="select__variant" data-value="{{ $value->name }}"><a href="#">{{ $value->name }}</a></li>
                                 @endforeach
                             @endif
                         </ul>
@@ -307,7 +314,8 @@
                         <ul class="select__group film-category">
                             @if ($category)
                                 @foreach ($category as $value)
-                                    <li class="select__variant" data-value="{{ $value->title }}">{{ $value->title }}</li>                                      @endforeach
+                                    <li class="select__variant" data-value="{{ $value->title }}"><a href="{{ url('/category/' . $value->id) }}">{{ $value->title }}</a></li>
+                                @endforeach
                             @endif
                         </ul>
 
@@ -336,7 +344,7 @@
                             <div class="movie movie--test movie--test--dark movie--test--left">
                                 <div class="movie__images">
                                     <a href="{{ url('film/' . $film->id) }}" class="movie-beta__link">
-                                        <img alt="" src="{{ url::asset($film->img) }}">
+                                        <img alt="" src="{{ asset($film->img) }}">
                                     </a>
                                 </div>
 
@@ -348,8 +356,8 @@
                                     <p class="movie__option"><a href="#">{{ __('Sci-Fi') }}</a> | <a href="#">{{ __('Thriller') }}</a> | <a href="#">{{ __('Drama') }}</a></p>
 
                                     <div class="movie__rate">
-                                        <div class="score"></div>
-                                        <span class="movie__rating">4.1</span>
+                                        <div class="score" data-id="{{ $film->id }}" data-rate="{{ Auth::check() ? $film->rate()->where('user_id', Auth::user()->id)->exists() ? $film->rate->first()->rate : '' : '' }}"></div>
+                                        <span class="movie__rating">{{ round($rate->countRate($film->id), 1) }}</span>
                                     </div>
                                 </div>
 
@@ -360,7 +368,7 @@
                             <div class="movie movie--test movie--test--light movie--test--right">
                                 <div class="movie__images">
                                     <a href="{{ url('film/' . $film->id) }}" class="movie-beta__link">
-                                        <img alt="" src="{{ url::asset($film->img) }}">
+                                        <img alt="" src="{{ asset($film->img) }}">
                                     </a>
                                 </div>
 
@@ -372,8 +380,8 @@
                                     <p class="movie__option"><a href="#">{{ __('Action') }}</a> | <a href="#">{{ __('Adventure') }}</a> | <a href="#">{{ __('Sci-Fi') }}</a></p>
 
                                     <div class="movie__rate">
-                                        <div class="score"></div>
-                                        <span class="movie__rating">4.9</span>
+                                        <div class="score" data-id="{{ $film->id }}" data-rate="{{ Auth::check() ? $film->rate()->where('user_id', Auth::user()->id)->exists() ? $film->rate->first()->rate : '' : '' }}"></div>
+                                        <span class="movie__rating">{{ round($rate->countRate($film->id), 1) }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -438,14 +446,33 @@
                 </div>
             </div>
         </div>
-
+        <input type="hidden" value="{{ url('/') }}" class="base-url">
+        {{ csrf_field() }}
     </section>
 @endsection
 
 @section('javascript')
-<script type="text/javascript">
+    <script src="{{ URL::asset('js/frontend/filter.js') }}"></script>
+    <script src="{{ URL::asset('js/frontend/rate.js') }}"></script>
+
+    <script type="text/javascript">
     $(document).ready(function() {
         init_Home();
+        fillter();
+        var login = '{!! Auth::Check() ? 1 : null  !!}';
+        rate(login);
+
+        $.each($('.score'), function( index, value ) {
+            var rate =$(this).attr('data-rate');
+            if (rate > 0) {
+                $.each($(this).find('img'), function( index, value ) {
+                    if (index < rate) {
+                        $(this).attr('src', 'images/rate/star-on.svg')
+                    }
+                });
+                $(this).find('input').val(rate);
+            }
+        });
     });
 </script>
 @endsection

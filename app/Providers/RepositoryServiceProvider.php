@@ -23,7 +23,7 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $name = ['\User', '\Role', '\Category', '\Coupon', '\FastFood', '\Film', '\Order', '\Seat', '\Store', '\TimeShow', '\Room', '\Comment'];
+        $name = ['\User', '\Role', '\Category', '\Coupon', '\FastFood', '\Film', '\Order', '\Seat', '\Store', '\TimeShow', '\Room', '\Comment', '\Rate'];
         foreach ($name as $value) {
             $this->app->singleton(
                 'App\Repositories\Contracts'.$value.'Interface',

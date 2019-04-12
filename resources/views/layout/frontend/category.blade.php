@@ -40,7 +40,7 @@
                                 <img alt="" src="{{ url($value->img) }}">
                             </div>
                             <div class="movie__feature">
-                                <a href="#" class="movie__feature-item movie__feature--comment">123</a>
+                                <a href="#" class="movie__feature-item movie__feature--comment">{{ count($value->comment) }}</a>
                                 <a href="#" class="movie__feature-item movie__feature--video">7</a>
                                 <a href="#" class="movie__feature-item movie__feature--photo">352</a>
                             </div>

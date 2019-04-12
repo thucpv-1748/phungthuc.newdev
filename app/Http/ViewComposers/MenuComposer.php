@@ -28,6 +28,6 @@ class MenuComposer
      */
     public function compose(View $view)
     {
-        $view->with('menu',$this->_category->all());
+        $view->with('menu', $this->_category->all());
     }
 }

@@ -86,7 +86,7 @@
         </div><!--/.row-->
     </div>
     <script src="{{ URL::asset('jquery/dist/jquery.slim.min.js') }}"></script>
-    <script src="{{ URL::asset('js/backend/mini-event-calendar.js') }}"></script>
+    <script src="{{ URL::asset('js/backend/event-calendar/dist/event-calendar.min.js') }}"></script>
     <script>
         var sampleEvents = [
             {
